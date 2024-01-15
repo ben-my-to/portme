@@ -1,7 +1,4 @@
-A personal portfolio website.
-
-<img src="/images/me.png"></img>
-![me](../static/images/me.png)
+My Personal Portfolio Website.
 
 ---
 
