@@ -1,10 +1,13 @@
 A personal portfolio website.
 
+<img src="/images/me.png"></img>
+![me](../static/images/me.png)
+
 ---
 
 ## About Me
 
-Jason Duong received his **Bachelor of Science, Computer Science** degree from California State University, Fullerton 2023. His research interests are Machine Learning, Distributed Algorithms, and Theoretical Computer Science.
+Jason Duong received his __Bachelor of Science, Computer Science__ degree from California State University, Fullerton 2023. His research interests are _Machine Learning_, _Distributed Algorithms_, and _Theoretical Computer Science_.
 
 ---
 
@@ -35,4 +38,4 @@ GPA: 3.86/4.00
 
 ## Languages
 
-- English, Vietnamese *(elementary proficiency)*
+- English, Vietnamese _(elementary proficiency)_
