@@ -2,12 +2,13 @@ baseURL = "https://michaelneuper.github.io/hugo-texify3/"
 disqusShortname = ""
 enableGitInfo = true
 enableRobotsTXT = true
+enableEmoji = true
 hasCJKLanguage = true
 languageCode = "en"
 paginate = 5
 rssLimit = 10
 theme = "hugo-texify3"
-title = "TeXify3"
+title = "Jason Duong"
 
 [author]
 name = "Jason Duong"
@@ -24,7 +25,7 @@ footnote = """
 Powered by  <a class=link href=https://gohugo.io target=_blank rel=noopener>Hugo</a> | 
 Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_blank rel=noopener>TeXify3</a>
 """
-customCSS = []
+customCSS = ["css/styles.css"]
 customJS = []
 dateFormat = "2 January 2006"
 emphasisWithDots = true
@@ -37,28 +38,44 @@ numberedSubtitles = true
 [params.commentEngine]
 code = """
 <script src="https://giscus.app/client.js"
-      data-repo="michaelneuper/hugo-texify3"
-      data-repo-id="R_kgDOIjPNaQ"
-      data-category="General"
-      data-category-id="DIC_kwDOIjPNac4CaklA"
-      data-mapping="pathname"
-      data-strict="0"
-      data-reactions-enabled="1"
-      data-emit-metadata="0"
-      data-input-position="top"
-      data-theme=""
-      data-lang="en"
-      data-loading="lazy"
-      crossorigin="anonymous"
-      async>
+        data-repo="ben-my-to/website"
+        data-repo-id="R_kgDOLFMzrA"
+        data-category="General"
+        data-category-id="DIC_kwDOLFMzrM4CccUb"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
 </script>
 """
 
 [params.buymeacoffee]
 code = """
+<script async data-name="BMC-Widget" 
+        data-cfasync="false" 
+        src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" 
+        data-id="mytoebenc" 
+        data-description="" 
+        data-message="Thank you for visiting, please support me with a cawfee!"
+        data-color="#d79921" 
+        data-position="Right" 
+        data-x_margin="18" 
+        data-y_margin="18"
+        crossorigin="anonymous">
+</script>
 """
 
 [params.sharingbuttons]
 facebook = true
+twitter = false
 email = true
 linkedin = true
+reddit = false
+whatsapp = false
+hackernews = false
+telegram = false

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Figma on Jason Duong</title>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/figma/</link>
+    <description>Recent content in Figma on Jason Duong</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
+    <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
+    <lastBuildDate>Sat, 09 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/figma/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An Algorithm Vizualizer</title>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+      <author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <description>&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

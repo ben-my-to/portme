@@ -59,8 +59,6 @@ The **Parallel Decision Tree** algorithm aims to _reduce_ the time taken by a gr
 
 A terminated routine call results in a sub-tree on a particular path from the root, and the _local_ communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.
 
----
-
 ### Mathematical Modelling
 
 A cyclic distribution function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as
@@ -85,7 +83,7 @@ As the decision tree grows deeper, overfitting becomes evident because predictio
 
 [^4]: Figure 3 illustrates decision boundaries for different values of the `max_depth` hyperparameter on the iris dataset provided by _scikit-learn_. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.
 
-<!-- {{ $image := resources.Get "images/iris_decision_tree.png" }} -->
+![Decision Boundaries Example](../../static/images/iris_decision_tree.png)
 
 Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., `max_depth`, `min_samples_split`). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.
 

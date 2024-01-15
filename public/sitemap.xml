@@ -2,64 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/categories/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/mermaid/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/decision-trees/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/mermaid-diagrams/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/distributed-algorithms/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/machine-learning/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/categories/syntax/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/tags/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/css/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/html/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/markdown/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/figma/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/markdown-syntax/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/game-development/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/categories/themes/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/git/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/privacy/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/jira/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/rich-content/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/shortcodes/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/placeholder-text/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/text/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/math-typesetting/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/emoji/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/posts/emoji-support/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/turing-machines/</loc>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/</loc>
-    <lastmod>2024-01-15T09:47:06-08:00</lastmod>
+    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/</loc>
   </url>
 </urlset>

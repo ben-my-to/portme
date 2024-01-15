@@ -13,8 +13,6 @@ tags: [
 
 [^1]: Figure 1 provides an online demonstration of the computations performed by the Larks Ant starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press the `[h]` to stop/run the demo. Press `[a/d]` to increase/decrease the speed by a factor of 10. Note that since $T$ is finite, the Larks Ant will wrap around when necessary to prevent overflow. The script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/).
 
-<script src="../../static/js/ant.js"></script>
-
 ## Introduction
 
 Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where
@@ -34,7 +32,8 @@ Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, 
   4. Moves to coordinate $\begin{bmatrix}i&j\end{bmatrix}\leftarrow\begin{bmatrix}i&j\end{bmatrix}+\alpha\mathbf{v}$.
 
 where $\alpha\in\mathbb{N}_+$ is the grid scale.
-</div>
+
+---
 
 Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume _without loss of generality_, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as
 

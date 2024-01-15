@@ -1,500 +1,237 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on TeXify3</title>
+    <title>Posts on Jason Duong</title>
     <link>https://michaelneuper.github.io/hugo-texify3/posts/</link>
-    <description>Recent content in Posts on TeXify3</description>
+    <description>Recent content in Posts on Jason Duong</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>michael@michaelneuper.com (Michael Neuper)</managingEditor>
-    <webMaster>michael@michaelneuper.com (Michael Neuper)</webMaster>
-    <lastBuildDate>Fri, 10 Nov 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/posts/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
+    <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
+    <lastBuildDate>Tue, 16 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mermaid Diagrams</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/mermaid-diagrams/</link>
-      <pubDate>Fri, 10 Nov 2023 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/mermaid-diagrams/</guid>
-      <description>&lt;h2 id=&#34;flowchart&#34;&gt;Flowchart&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;graph LR;
-    A[Hard edge] --&gt;|Link text| B(Round edge)
-    B --&gt; C{Decision}
-    C --&gt;|One| D[Result one]
-    C --&gt;|Two| E[Result two]
-&lt;/div&gt;
-
-&lt;h2 id=&#34;sequence-digram&#34;&gt;Sequence Digram&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice-&gt;&gt;John: Hello John, how are you?
-    loop Healthcheck
-        John-&gt;John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts &lt;br/&gt;prevail...
-    John--&gt;Alice: Great!
-    John-&gt;Bob: How about you?
-    Bob--&gt;John: Jolly good!
-&lt;/div&gt;
-
-&lt;h2 id=&#34;gantt&#34;&gt;Gantt&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;gantt
-dateFormat  YYYY-MM-DD
-title Adding GANTT diagram to mermaid
-excludes weekdays 2014-01-10
-
-section A section
-Completed task            :done,    des1, 2014-01-06,2014-01-08
-Active task               :active,  des2, 2014-01-09, 3d
-Future task               :         des3, after des2, 5d
-Future task2              :         des4, after des3, 5d
-&lt;/div&gt;
-
-&lt;h2 id=&#34;class-diagram&#34;&gt;Class Diagram&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;classDiagram
-    Animal &lt;|-- Duck
-    Animal &lt;|-- Fish
-    Animal &lt;|-- Zebra
-    Animal : +int age
-    Animal : +String gender
-    Animal: +isMammal()
-    Animal: +mate()
-    class Duck{
-        +String beakColor
-        +swim()
-        +quack()
-    }
-    class Fish{
-        -int sizeInFeet
-        -canEat()
-    }
-    class Zebra{
-        +bool is_wild
-        +run()
-    }
-&lt;/div&gt;
-
-&lt;h2 id=&#34;state-diagram&#34;&gt;State Diagram&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;stateDiagram-v2
-    [*] --&gt; Still
-    Still --&gt; [*]
-    Still --&gt; Moving
-    Moving --&gt; Still
-    Moving --&gt; Crash
-    Crash --&gt; [*]
-&lt;/div&gt;
-
-&lt;h2 id=&#34;git-graph&#34;&gt;Git Graph&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;gitGraph
-    commit
-    commit
-    branch develop
-    checkout develop
-    commit
-    commit
-    checkout main
-    merge develop
-    commit
-    commit
-&lt;/div&gt;
-
-&lt;h2 id=&#34;entity-relationship-diagram&#34;&gt;Entity Relationship Diagram&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-&lt;/div&gt;
-
-&lt;h2 id=&#34;user-journey&#34;&gt;User Journey&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;journey
-    title My working day
-    section Go to work
-      Make tea: 5: Me
-      Go upstairs: 3: Me
-      Do work: 1: Me, Cat
-    section Go home
-      Go downstairs: 5: Me
-      Sit down: 5: Me
-&lt;/div&gt;
-
-&lt;h2 id=&#34;pie-chart&#34;&gt;Pie Chart&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;pie
-    &#34;Dogs&#34; : 386
-    &#34;Cats&#34; : 85
-    &#34;Rats&#34; : 15
-&lt;/div&gt;
-
-&lt;h2 id=&#34;requirement-diagram&#34;&gt;Requirement Diagram&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;requirementDiagram
-
-requirement test_req {
-id: 1
-text: the test text.
-risk: high
-verifymethod: test
-}
-
-element test_entity {
-type: simulation
-}
-
-test_entity - satisfies -&gt; test_req
-&lt;/div&gt;
-
-</description>
-    </item>
-    
-    <item>
-      <title>Markdown Syntax Guide</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/markdown-syntax/</link>
-      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/markdown-syntax/</guid>
-      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
-&lt;h2 id=&#34;headings&#34;&gt;Headings&lt;/h2&gt;
-&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent five levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is for Title. &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest. With &lt;code&gt;numberedSubtitles&lt;/code&gt; param enabled, items will be numbered&lt;/p&gt;
-&lt;h3 id=&#34;h3&#34;&gt;H3&lt;/h3&gt;
-&lt;h3 id=&#34;h3-1&#34;&gt;H3&lt;/h3&gt;
-&lt;h4 id=&#34;h4&#34;&gt;H4&lt;/h4&gt;
-&lt;h5 id=&#34;h5&#34;&gt;H5&lt;/h5&gt;
-&lt;h5 id=&#34;h5-1&#34;&gt;H5&lt;/h5&gt;
-&lt;h6 id=&#34;h6&#34;&gt;H6&lt;/h6&gt;
-&lt;h3 id=&#34;h3-2&#34;&gt;H3&lt;/h3&gt;
-&lt;h3 id=&#34;h3-3&#34;&gt;H3&lt;/h3&gt;
-&lt;h4 id=&#34;h4-1&#34;&gt;H4&lt;/h4&gt;
-&lt;h4 id=&#34;h4-2&#34;&gt;H4&lt;/h4&gt;
-&lt;h2 id=&#34;paragraph&#34;&gt;Paragraph&lt;/h2&gt;
-&lt;p&gt;Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.&lt;/p&gt;
-&lt;p&gt;Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.&lt;/p&gt;
-&lt;h2 id=&#34;blockquotes&#34;&gt;Blockquotes&lt;/h2&gt;
-&lt;p&gt;The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a &lt;code&gt;footer&lt;/code&gt; or &lt;code&gt;cite&lt;/code&gt; element, and optionally with in-line changes such as annotations and abbreviations.&lt;/p&gt;
-&lt;h3 id=&#34;blockquote-without-attribution&#34;&gt;Blockquote without attribution&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Tiam, ad mint andaepu dandae nostion secatur sequo quae.
-&lt;strong&gt;Note&lt;/strong&gt; that you can use &lt;em&gt;Markdown syntax&lt;/em&gt; within a blockquote.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt; that you can put a blockquote inside a blockquote&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;h3 id=&#34;blockquote-with-attribution&#34;&gt;Blockquote with attribution&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;!-- raw HTML omitted --&gt;
-— Rob Pike&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&#34;tables&#34;&gt;Tables&lt;/h2&gt;
-&lt;p&gt;Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports them out-of-the-box.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;Age&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Bob&lt;/td&gt;
-&lt;td&gt;27&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Alice&lt;/td&gt;
-&lt;td&gt;23&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;inline-markdown-within-tables&#34;&gt;Inline Markdown within tables&lt;/h3&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Italics&lt;/th&gt;
-&lt;th&gt;Bold&lt;/th&gt;
-&lt;th&gt;Code&lt;/th&gt;
-&lt;th&gt;Strikethrough&lt;/th&gt;
-&lt;th&gt;Underline&lt;/th&gt;
-&lt;th&gt;Highlight&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;em&gt;italics&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;&lt;del&gt;strikethrough&lt;/del&gt;&lt;/td&gt;
-&lt;td&gt;&lt;!-- raw HTML omitted --&gt;underline&lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
-&lt;td&gt;&lt;!-- raw HTML omitted --&gt;highlight&lt;!-- raw HTML omitted --&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;code-blocks&#34;&gt;Code Blocks&lt;/h2&gt;
-&lt;h3 id=&#34;code-block-with-backticks&#34;&gt;Code block with backticks&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;meta&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;Example HTML5 Document&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;Test&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;code-block-indented-with-four-spaces&#34;&gt;Code block indented with four spaces&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-  &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
-  &amp;lt;title&amp;gt;Example HTML5 Document&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-  &amp;lt;p&amp;gt;Test&amp;lt;/p&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;code-block-with-hugos-internal-highlight-shortcode&#34;&gt;Code block with Hugo&amp;rsquo;s internal highlight shortcode&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;lang&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;meta&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;charset&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;Example HTML5 Document&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;head&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;Test&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;p&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;body&lt;/span&gt;&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&amp;lt;/&lt;span style=&#34;color:#f92672&#34;&gt;html&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;list-types&#34;&gt;List Types&lt;/h2&gt;
-&lt;h3 id=&#34;ordered-list&#34;&gt;Ordered List&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;Item 1
-&lt;ol&gt;
-&lt;li&gt;Sub-item 1.1&lt;/li&gt;
-&lt;li&gt;Sub-item 1.2&lt;/li&gt;
-&lt;li&gt;Sub-item 1.3&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;Item 2&lt;/li&gt;
-&lt;li&gt;Item 3&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;unordered-list&#34;&gt;Unordered List&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Fruit
-&lt;ul&gt;
-&lt;li&gt;Apple&lt;/li&gt;
-&lt;li&gt;Orange&lt;/li&gt;
-&lt;li&gt;Banana&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Dairy
-&lt;ul&gt;
-&lt;li&gt;Milk&lt;/li&gt;
-&lt;li&gt;Cheese&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;checklist&#34;&gt;Checklist&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Item 1&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Item 2
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Sub-item 2.1&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Sub-item 2.2&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Item 3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;definition-list&#34;&gt;Definition List&lt;/h3&gt;
-&lt;dl&gt;
-&lt;dt&gt;First Term&lt;/dt&gt;
-&lt;dd&gt;This is the definition of the first term.&lt;/dd&gt;
-&lt;dt&gt;Second Term&lt;/dt&gt;
-&lt;dd&gt;This is one definition of the second term.&lt;/dd&gt;
-&lt;dd&gt;This is another definition of the second term.&lt;/dd&gt;
-&lt;/dl&gt;
-&lt;h2 id=&#34;symbols&#34;&gt;Symbols&lt;/h2&gt;
-&lt;p&gt;You can use the HTML entity for whatever symbol you want to use. For example, if you want to display the copyright sign (©), you can copy and paste the HTML entity for copyright &lt;code&gt;(&amp;amp;copy;)&lt;/code&gt; into your Markdown document.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Copyright (©) — &amp;amp;copy;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Registered trademark (®) — &amp;amp;reg;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Trademark (™) — &amp;amp;trade;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Euro (€) — &amp;amp;euro;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Left arrow (←) — &amp;amp;larr;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Up arrow (↑) — &amp;amp;uarr;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Right arrow (→) — &amp;amp;rarr;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Down arrow (↓) — &amp;amp;darr;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Degree (°) — &amp;amp;#176;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Pi (π) — &amp;amp;#960;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;For a complete list of available HTML entities, refer to Wikipedia’s page on &lt;a href=&#34;https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references&#34;&gt;HTML entities&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;other-elements--abbr-sub-sup-kbd-mark&#34;&gt;Other Elements — abbr, sub, sup, kbd, mark&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;GIF&lt;!-- raw HTML omitted --&gt; is a bitmap image format.&lt;/p&gt;
-&lt;p&gt;H&lt;!-- raw HTML omitted --&gt;2&lt;!-- raw HTML omitted --&gt;O&lt;/p&gt;
-&lt;p&gt;X&lt;!-- raw HTML omitted --&gt;n&lt;!-- raw HTML omitted --&gt; + Y&lt;!-- raw HTML omitted --&gt;n&lt;!-- raw HTML omitted --&gt; = Z&lt;!-- raw HTML omitted --&gt;n&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;Press &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;CTRL&lt;!-- raw HTML omitted --&gt;+&lt;!-- raw HTML omitted --&gt;ALT&lt;!-- raw HTML omitted --&gt;+&lt;!-- raw HTML omitted --&gt;Delete&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt; to end the session.&lt;/p&gt;
-&lt;p&gt;Most &lt;!-- raw HTML omitted --&gt;salamanders&lt;!-- raw HTML omitted --&gt; are nocturnal, and hunt for insects, worms, and other small creatures.&lt;/p&gt;
+      <title>A Parallel Decision Tree Classifier</title>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate>
+      <author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
+      <description>&lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Generate New Training Data&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;$\text{Train/Test Accuracy}$ = &lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(&lt;strong&gt;split features&lt;/strong&gt; &amp;ndash; the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes &lt;em&gt;(multi-classification)&lt;/em&gt;. Given some observed data, examples of classification-type problems is: whether an incoming patient has cancer, an email is spam or not, or a fruit is an apple, banana, or orange.&lt;/p&gt;
+&lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt; algorithm aims to &lt;em&gt;reduce&lt;/em&gt; the time taken by a greedy search across all feature. It schedules processes in a cyclic distribution&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;; distributing processes in a &lt;em&gt;cyclical&lt;/em&gt; manner, roughly evenly across levels of a split feature. Processes in each sub-communicator concurrently participate in calculating the split feature and await completion at their original &lt;em&gt;(parent)&lt;/em&gt; communicator for all other processes in that communicator. Let $k$ be the total number of processes and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processes, and at least $[1\ldots n)$ processes. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i^m = \lfloor i/n \rfloor$.&lt;/p&gt;
+&lt;p&gt;A terminated routine call results in a sub-tree on a particular path from the root, and the &lt;em&gt;local&lt;/em&gt; communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.&lt;/p&gt;
+&lt;h3 id=&#34;mathematical-modelling&#34;&gt;Mathematical Modelling&lt;/h3&gt;
+&lt;p&gt;A cyclic distribution function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as&lt;/p&gt;
+&lt;p&gt;$$
+\begin{equation}
+f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
+\begin{cases}
+\emptyset &amp;amp; k=1 \\
+\bigcup_{j\in\left[n\right]}f_{mn+j+1}(p_i\mapsto\lfloor i/n \rfloor : i\bmod n=j) &amp;amp; \text{otherwise}.
+\end{cases}
+\end{equation}
+$$&lt;/p&gt;
+&lt;p&gt;for some initial natural numbers $k\ge n\ge 2$ and $m$.&lt;/p&gt;
+&lt;h2 id=&#34;model-evaluation-and-analysis&#34;&gt;Model Evaluation and Analysis&lt;/h2&gt;
+&lt;h3 id=&#34;decision-boundaries-varying-values-for-the-max_depth-hyperparameter&#34;&gt;Decision Boundaries varying values for the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter&lt;/h3&gt;
+&lt;p&gt;As the decision tree grows deeper, overfitting becomes evident because predictions rely on increasingly smaller regions of the feature space. In a way, the decision tree model tends to bias toward &lt;em&gt;singleton nodes&lt;/em&gt;, potentially resulting in mispredictions, especially when dealing with noisy data&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundaries Example&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt;). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.&lt;/p&gt;
+&lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
+&lt;p&gt;Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;The above quote is excerpted from Rob Pike&amp;rsquo;s &lt;a href=&#34;https://www.youtube.com/watch?v=PAAkCSZUG1c&#34;&gt;talk&lt;/a&gt; during Gopherfest, November 18, 2015.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 1 provides an online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/knn/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;Information gain quantifies the increase in confidence about the response variable after querying some feature. A higher value for information gain implies a greater likelihood of achieving purer splits &lt;em&gt;(no uncertainty on a prediction)&lt;/em&gt;.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor&amp;rsquo;s identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:4&#34;&gt;
+&lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
-      <title>Rich Content</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/rich-content/</link>
-      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/rich-content/</guid>
-      <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugos-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;
+      <title>An Algorithm Vizualizer</title>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+      <author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <description>&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Blackjack Game</title>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
+      <author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players competes against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
+&lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The dealer deals cards to the players from their left to their right. Each player receives one card face up. The dealer deals themself a face-up card and then deals another card to each player. Finally, the dealer deals one face-down card to themself.&lt;/p&gt;
+&lt;p&gt;Once the cards are dealt, each player has a turn. Starting with the first player, the player must first decide if she would like to &lt;em&gt;double down&lt;/em&gt; or &lt;em&gt;split&lt;/em&gt; her hand. If the dealer&amp;rsquo;s face-up card has a value of 10 or higher, then the player may also buy &lt;em&gt;insurance&lt;/em&gt; as a side bet. Some versions of Blackjack allow a player to &lt;em&gt;surrender&lt;/em&gt;, however, our version will not have this rule.&lt;/p&gt;
+&lt;p&gt;Once those initial decisions are made, the player chooses to &lt;em&gt;hit&lt;/em&gt;, take a card, or &lt;em&gt;stand&lt;/em&gt;, to end their turn. The player attempts to reach a sum as close as possible to 21. The sum is calculated by converting the &lt;em&gt;rank&lt;/em&gt; of a card to a numerical value. Number cards (2, 3, 4, 5, 6, 7, 8, 9) have a value equal to their rank. Court cards (Jack, Queen, King) have a value equal to 10. Aces can have a value of 1 or 11; whichever is most advantageous to the player. A special case is a &lt;em&gt;blackjack&lt;/em&gt; or &lt;em&gt;a natural&lt;/em&gt; where a player or dealer has an Ace and a card that has a value of 10 such as a 10, Jack, Queen, or King. The suit of a card (Clubs, Hearts, Spades, Diamonds) does not matter in this game.&lt;/p&gt;
+&lt;p&gt;A player wins when their hand has a higher value than the dealer&amp;rsquo;s yet is not greater than 21. Players that pass 21 are &lt;em&gt;busted&lt;/em&gt; which means they lose their bet regardless of what the dealer does.&lt;/p&gt;
+&lt;p&gt;When a player and the dealer have the same value for their respective hands, then this is a &lt;em&gt;push&lt;/em&gt;. A &lt;em&gt;push&lt;/em&gt; means that no one wins and the player does not lose her wager.&lt;/p&gt;
+&lt;p&gt;The dealer is always last to play. The dealer begins by turning over the face-down card and deciding to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. Unlike the players, the dealer must &lt;em&gt;hit&lt;/em&gt; if their hand value is less than 17. If the value of their hand is 17 or greater, then the dealer &lt;em&gt;stands&lt;/em&gt;. If all the players have already &lt;em&gt;busted&lt;/em&gt; the dealer &lt;em&gt;stands&lt;/em&gt; thus removing the chance that the dealer may &lt;em&gt;bust&lt;/em&gt; as well.&lt;/p&gt;
+&lt;p&gt;The side bets that are available to a player are &lt;em&gt;insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt;. A player may wish to buy &lt;em&gt;insurance&lt;/em&gt; when the dealer appears to have &lt;em&gt;blackjack&lt;/em&gt;. In other words, if the dealer has an Ace, 10, Jack, Queen, or King face up, the player can place a side bet, typically called &lt;em&gt;buying insurance&lt;/em&gt;, on the chance that the dealer has blackjack. If the dealer has blackjack and the player does not have blackjack or 21, then the player loses their initial bet yet wins the &lt;em&gt;insurance&lt;/em&gt; bet. The &lt;em&gt;insurance&lt;/em&gt; wager is a separate wager which means the wagered money is kept track of independently.&lt;/p&gt;
+&lt;p&gt;The player may choose to &lt;em&gt;double down&lt;/em&gt; at the start of their turn. To &lt;em&gt;double down&lt;/em&gt;, the player doubles her bet on her cards and takes one additional card before ending her turn. For example, if the player has a 4 of Diamonds and a King of Hearts, then she may double down believing that she only wants one additional card and that will be enough to beat the dealer. If she is dealt a 7, she has 21. Otherwise, any card less than an 8 will keep her in the game. Should the dealer lose then the player earns winnings on her initial wager and her &lt;em&gt;double-down&lt;/em&gt; bet. The &lt;em&gt;double-down&lt;/em&gt; bet must be equal to the player&amp;rsquo;s initial wager.&lt;/p&gt;
+&lt;p&gt;A player may also choose to &lt;em&gt;split&lt;/em&gt;. A player may be dealt two cards with identical rank, for example, two Kings or two 6s. When this occurs, the player may choose to &lt;em&gt;split&lt;/em&gt; which means the player splits the two cards into two independent hands.&lt;/p&gt;
+&lt;p&gt;Can a player buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt;, and &lt;em&gt;double down&lt;/em&gt; in one game? Yes, this is possible. Consider the scenario where the dealer has an Ace showing and the player has two Aces. The player may choose to buy &lt;em&gt;insurance&lt;/em&gt;, next &lt;em&gt;split&lt;/em&gt; her hand, and then decide to &lt;em&gt;double down&lt;/em&gt; on one or both of the hands derived from the &lt;em&gt;split&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;All bets are &lt;em&gt;two-to-one&lt;/em&gt; payout. In other words, if a player wagers $5 and wins, then the casino pays the player $5 and the player keeps the original wager thus pocketing a total of $10.&lt;/p&gt;
+&lt;p&gt;In our game, the dealer shall be played by a game AI. All players start with $10,000.00 in their bank balance. The minimum bet is $1 and the maximum bet is the player&amp;rsquo;s bank balance. When a player goes broke (loses all of her money), then the player is offered $10,000.00 from an anonymous donor.&lt;/p&gt;
+&lt;p&gt;The player can exit the game and restart the game and have the same bank balance when the game is restarted. This means that players must use a unique identifier to start the game which can be a name, handle, email address, etc. The identifier is used to track the player&amp;rsquo;s progress such that their bank balance from previous games can be reused.&lt;/p&gt;
+&lt;h2 id=&#34;rules&#34;&gt;Rules&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;At least one player is playing the game and at most four.&lt;/li&gt;
+&lt;li&gt;To start the game, a player can enter the numbers 1 through 4 to establish how many players there are.&lt;/li&gt;
+&lt;li&gt;All players start with $10,000.00 in their bank balance.&lt;/li&gt;
+&lt;li&gt;The dealer is always a computer AI and has unlimited funds.&lt;/li&gt;
+&lt;li&gt;The game is turn-based.&lt;/li&gt;
+&lt;li&gt;All players have a name, including the &lt;em&gt;computer AI&lt;/em&gt;. Players&amp;rsquo; names may be used as unique identifiers or additional information can be gathered.&lt;/li&gt;
+&lt;li&gt;Unique identifiers are used to serialize the game state to a file so that a player can have their bank balance upon return to the game.&lt;/li&gt;
+&lt;li&gt;The game is played with 8 decks of cards. The cards are typical cards with the ranks Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, and the suits Clubs, Hearts, Spades,  and Diamonds. There are no jokers.&lt;/li&gt;
+&lt;li&gt;The value of the cards is the rank of the card except for Ace, Jack, Queen, and King. An Ace&amp;rsquo;s value is either 1 or 11 depending on what is most advantageous to the hand in question. Jacks, Queens, and Kings have a value of 10.&lt;/li&gt;
+&lt;li&gt;Before playing, the cards must be shuffled and cut.&lt;/li&gt;
+&lt;li&gt;A cut card is placed randomly between the 60th and 80th card from the bottom of the deck.&lt;/li&gt;
+&lt;li&gt;The players play in the order their names are entered when the program starts. The dealer always goes last.&lt;/li&gt;
+&lt;li&gt;Once each player has had a turn in ascending order, the turn returns to the first player. (The process is a circular queue.)&lt;/li&gt;
+&lt;li&gt;The game is made up of many games. The players continue playing games of blackjack. At the end of every game, the game prompts the first player if they would like to play again. An answer of &lt;em&gt;yes&lt;/em&gt; means the dealer will deal cards out to the same players who played previously. With multiple players, should one choose to leave then the first player must answer &lt;em&gt;no&lt;/em&gt; to end the game and exit the program.&lt;/li&gt;
+&lt;li&gt;At the start of every game, before cards are dealt, each player must place a wager. A wager can be at least $1 and at most their bank balance.&lt;/li&gt;
+&lt;li&gt;A player may not wager more money than she has in her bank balance.&lt;/li&gt;
+&lt;li&gt;The cards are dealt one by one, starting with the first player and ending with the dealer.&lt;/li&gt;
+&lt;li&gt;The dealer&amp;rsquo;s second card is kept hidden from the players all other cards are dealt face up.&lt;/li&gt;
+&lt;li&gt;At the beginning of every turn, the game displays what cards the current player is holding and what face-up card the dealer has shown.&lt;/li&gt;
+&lt;li&gt;Whenever a card is dealt, it is printed or shown to the players before taking any other action.&lt;/li&gt;
+&lt;li&gt;When it is the dealer&amp;rsquo;s turn, the dealer must turn over (print or show) the face-down card before taking any other action.&lt;/li&gt;
+&lt;li&gt;All bets pay out 2 to 1.&lt;/li&gt;
+&lt;li&gt;When a player&amp;rsquo;s turn begins, they have the option to buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt; (if possible), or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;A player may not &lt;em&gt;surrender&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;An &lt;em&gt;insurance&lt;/em&gt; bet is a &lt;em&gt;side bet&lt;/em&gt; and is a separate wager. If a player chooses to buy &lt;em&gt;insurance&lt;/em&gt; then they may wager a minimum of $1 to a maximum of their bank balance minus what they have wagered on their hand.&lt;/li&gt;
+&lt;li&gt;The player must decide to &lt;em&gt;split&lt;/em&gt; before deciding if she wants to buy &lt;em&gt;insurance&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;A player may only &lt;em&gt;split&lt;/em&gt; once per game. This means a player&amp;rsquo;s single hand can only double.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt; is per hand, not per player.&lt;/li&gt;
+&lt;li&gt;The player may &lt;em&gt;split&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
+&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; when her turn starts and never later.&lt;/li&gt;
+&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
+&lt;li&gt;A player is prompted to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt; unless they are &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt;. If they have &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt; then a message is shown stating that they have &lt;em&gt;busted&lt;/em&gt; or reached &lt;em&gt;21&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;The dealer must &lt;em&gt;hit&lt;/em&gt; on a hand that is less than 17. The dealer must &lt;em&gt;stand&lt;/em&gt; on a hand that is 17 or greater.&lt;/li&gt;
+&lt;li&gt;The dealer only &lt;em&gt;hits&lt;/em&gt; if there are players who are not &lt;em&gt;busted&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;No one wins or loses when there is a &lt;em&gt;push&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;A dealer does not place bets which means the dealer does not buy &lt;em&gt;insurance&lt;/em&gt; or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;A dealer may not &lt;em&gt;split&lt;/em&gt; their hand.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;youtube-privacy-enhanced-shortcode&#34;&gt;YouTube Privacy Enhanced Shortcode&lt;/h2&gt;
-
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/ZJthWmvUzzc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;p&gt;To summarize the order of gameplay operations:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If needed, cards are shuffled and cut, and a cut card is placed in a position between the 60th and 80th cards from the bottom.&lt;/li&gt;
+&lt;li&gt;For each player, a wager is entered before the cards are dealt.&lt;/li&gt;
+&lt;li&gt;Cards are dealt one at a time starting with the first player, continuing through to the last player, and ending on the dealer. This is done twice such that each player and the dealer have two cards. The dealer&amp;rsquo;s last card is kept face down until it is the dealer&amp;rsquo;s turn.&lt;/li&gt;
+&lt;li&gt;If the dealer has a card valued at 10 or greater showing, then each player offers to purchase &lt;em&gt;insurance&lt;/em&gt; as a side bet.&lt;/li&gt;
+&lt;li&gt;For each player, begin their turn.
+&lt;ol&gt;
+&lt;li&gt;If the player has two cards of identical rank, offer to &lt;em&gt;split&lt;/em&gt; the hand. If the hand is &lt;em&gt;split&lt;/em&gt;, then convert the single hand to two hands dealing one additional card per hand. The player must double her wager.&lt;/li&gt;
+&lt;li&gt;For each hand, offer to &lt;em&gt;double down&lt;/em&gt;. For each &lt;em&gt;double-down&lt;/em&gt; wager, the player&amp;rsquo;s wager is doubled.&lt;/li&gt;
+&lt;li&gt;While the player&amp;rsquo;s hand is less than 21 or is not busted, offer the player to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. When the player &lt;em&gt;hits&lt;/em&gt; deal an additional card. If the player &lt;em&gt;stands&lt;/em&gt;, then the player&amp;rsquo;s turn concludes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;The dealer plays last. If there exists a player who is not busted, then the dealer must play their hand according to the rules. Otherwise, the dealer stands.&lt;/li&gt;
+&lt;li&gt;For each player, determine if the player has won, lost, or &lt;em&gt;pushed&lt;/em&gt;. Update all the players&amp;rsquo; balances to reflect the outcome of the game.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Larks Ant</title>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</link>
+      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
+      <author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
+      <description>&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
+&lt;p&gt;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.$$
+$$\Sigma\in(\text{Black, Blue, Yellow, Red}).$$
+$$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
+&lt;p&gt;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, $\mathcal{A}(0)$ has an initial state $q_0=\text{Normal}$, is located at color cell $T_{ij}$ for some initial $i,j\in\mathbb{Z}$ and is oriented at $\mathbf{v}=\begin{bmatrix}0 &amp;amp; 1\end{bmatrix}$, the north direction. Then, at every time step $t&amp;gt;0$, the cellular automaton $\mathcal{A}(t)$ computes as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/li&gt;
+&lt;li&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; $\theta=0\implies R=\mathbb{I}$.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/li&gt;
+&lt;li&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;where $\alpha\in\mathbb{N}_+$ is the grid scale.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;stateDiagram-v2
+    state if_state &lt;&lt;choice&gt;&gt;
+    [*] --&gt; Normal
+    Normal --&gt; Normal: Black,0,Left or Blue|Red,1,Right
+    Normal --&gt; Countdown : Yellow,2,Straight
+    Countdown --&gt; if_state
+    if_state --&gt; Countdown: if counter &gt; 0
+    if_state --&gt; Normal: if counter &lt;= 0
+    note right of if_state : Straight, counter = counter - 1
 &lt;/div&gt;
 
-&lt;!-- raw HTML omitted --&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;twitter-simple-shortcode&#34;&gt;Twitter Simple Shortcode&lt;/h2&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Owl bet you&amp;#39;ll lose this staring contest 🦉 &lt;a href=&#34;https://t.co/eJh4f2zncC&#34;&gt;pic.twitter.com/eJh4f2zncC&lt;/a&gt;&lt;/p&gt;&amp;mdash; San Diego Zoo Wildlife Alliance (@sandiegozoo) &lt;a href=&#34;https://twitter.com/sandiegozoo/status/1453110110599868418?ref_src=twsrc%5Etfw&#34;&gt;October 26, 2021&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-
-
-&lt;!-- raw HTML omitted --&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;vimeo-simple-shortcode&#34;&gt;Vimeo Simple Shortcode&lt;/h2&gt;
-
-
-
-
-
-
-&lt;style&gt;
-.__h_video {
-   position: relative;
-   padding-bottom: 56.23%;
-   height: 0;
-   overflow: hidden;
-   width: 100%;
-   background: #000;
-}
-.__h_video img {
-   width: 100%;
-   height: auto;
-   color: #000;
-}
-.__h_video .play {
-   height: 72px;
-   width: 72px;
-   left: 50%;
-   top: 50%;
-   margin-left: -36px;
-   margin-top: -36px;
-   position: absolute;
-   cursor: pointer;
-}
-&lt;/style&gt;
-
-
-&lt;div class=&#34;s_video_simple __h_video&#34;&gt;
-&lt;a href=&#34;https://vimeo.com/4.8912912e&amp;#43;07&#34; rel=&#34;noopener&#34; target=&#34;_blank&#34;&gt;
-
-
-&lt;img src=&#34;https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640&#34; srcset=&#34;https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640 1x, https://i.vimeocdn.com/video/337401969-979f0cc9f55fdf305fb8984e90d92639ec9d7ecc4c9dfbc6536e28edb43784ce-d_640 2x&#34; alt=&#34;Sing Jan Swing - Kinetic Type&#34;&gt;
-&lt;div class=&#34;play&#34;&gt;&lt;svg version=&#34;1&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 61 61&#34;&gt;&lt;circle cx=&#34;30.5&#34; cy=&#34;30.5&#34; r=&#34;30.5&#34; opacity=&#34;.8&#34; fill=&#34;#000&#34;&gt;&lt;/circle&gt;&lt;path d=&#34;M25.3 19.2c-2.1-1.2-3.8-.2-3.8 2.2v18.1c0 2.4 1.7 3.4 3.8 2.2l16.6-9.1c2.1-1.2 2.1-3.2 0-4.4l-16.6-9z&#34; fill=&#34;#fff&#34;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/div&gt;&lt;/a&gt;&lt;/div&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;mermaid&#34;&gt;Mermaid&lt;/h2&gt;
-&lt;div class=&#34;mermaid&#34;&gt;sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice-&gt;&gt;John: Hello John, how are you?
-    loop Healthcheck
-        John-&gt;&gt;John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts &lt;br/&gt;prevail!
-    John--&gt;&gt;Alice: Great!
-    John-&gt;&gt;Bob: How about you?
-    Bob--&gt;&gt;John: Jolly good!
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Placeholder Text</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/placeholder-text/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/placeholder-text/</guid>
-      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
-&lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
+&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
+&lt;p&gt;We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Exierant elisi ambit vivere dedere&lt;/li&gt;
-&lt;li&gt;Duce pollice&lt;/li&gt;
-&lt;li&gt;Eris modo&lt;/li&gt;
-&lt;li&gt;Spargitque ferrea quos palude&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Rursus nulli murmur; hastile inridet ut ab gravi sententia! Nomine potitus silentia flumen, sustinet placuit petis in dilapsa erat sunt. Atria tractus malis.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Comas hunc haec pietate fetum procerum dixit&lt;/li&gt;
-&lt;li&gt;Post torum vates letum Tiresia&lt;/li&gt;
-&lt;li&gt;Flumen querellas&lt;/li&gt;
-&lt;li&gt;Arcanaque montibus omnes&lt;/li&gt;
-&lt;li&gt;Quidem et&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;vagus-elidunt&#34;&gt;Vagus elidunt&lt;/h2&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Canons_of_page_construction#Van_de_Graaf_canon&#34;&gt;The Van de Graaf Canon&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;mane-refeci-capiebant-unda-mulcebat&#34;&gt;Mane refeci capiebant unda mulcebat&lt;/h3&gt;
-&lt;p&gt;Victa caducifer, malo vulnere contra dicere aurato, ludit regale, voca! Retorsit colit est profanae esse virescere furit nec; iaculi matertera et visa est, viribus. Divesque creatis, tecta novat collumque vulnus est, parvas. &lt;strong&gt;Faces illo pepulere&lt;/strong&gt; tempus adest. Tendit flamma, ab opes virum sustinet, sidus sequendo urbis.&lt;/p&gt;
-&lt;p&gt;Iubar proles corpore raptos vero auctor imperium; sed et huic: manus caeli Lelegas tu lux. Verbis obstitit intus oblectamina fixis linguisque ausus sperare Echionides cornuaque tenent clausit possit. Omnia putatur. Praeteritae refert ausus; ferebant e primus lora nutat, vici quae mea ipse. Et iter nil spectatae vulnus haerentia iuste et exercebat, sui et.&lt;/p&gt;
-&lt;p&gt;Eurytus Hector, materna ipsumque ut Politen, nec, nate, ignari, vernum cohaesit sequitur. Vel &lt;strong&gt;mitis temploque&lt;/strong&gt; vocatus, inque alis, &lt;em&gt;oculos nomen&lt;/em&gt; non silvis corpore coniunx ne displicet illa. Crescunt non unus, vidit visa quantum inmiti flumina mortis facto sic: undique a alios vincula sunt iactata abdita! Suspenderat ego fuit tendit: luna, ante urbem Propoetides &lt;strong&gt;parte&lt;/strong&gt;.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Math Typesetting</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/math-typesetting/</link>
-      <pubDate>Fri, 08 Feb 2019 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/math-typesetting/</guid>
-      <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
-&lt;p&gt;In this example we will be using &lt;a href=&#34;https://katex.org/&#34;&gt;$\KaTeX$&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Create a partial under &lt;code&gt;/layouts/partials/math.html&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Within this partial reference the &lt;a href=&#34;https://katex.org/docs/autorender.html&#34;&gt;Auto-render Extension&lt;/a&gt; or host these scripts locally.&lt;/li&gt;
-&lt;li&gt;Include the partial in your templates like so:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; or .Params.math .Site.Params.math &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; partial &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;math.html&amp;#34;&lt;/span&gt; . &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;{{&lt;/span&gt; end &lt;span style=&#34;color:#f92672&#34;&gt;}}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;To enable $\KaTeX$ globally set the parameter &lt;code&gt;math&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in a project&amp;rsquo;s configuration&lt;/li&gt;
-&lt;li&gt;To enable $\KaTeX$ on a per page basis include the parameter &lt;code&gt;math: true&lt;/code&gt; in content files&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Use the online reference of &lt;a href=&#34;https://katex.org/docs/supported.html&#34;&gt;Supported $\TeX$ Functions&lt;/a&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;Block math:
+&lt;li&gt;
+&lt;p&gt;Sets ($\text{Normal}$, $0$, $\text{Left})\leftarrow\delta_{\mathcal{A}}(\text{Normal},\text{Black})$ and $\text{counter}\leftarrow 0$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Changes orientation:
 $$
-\mathcal L_{\mathcal T}(\vec{\lambda})
-= \sum_{(\mathbf{x},\mathbf{s})\in \mathcal T}
-\log P(\mathbf{s}\mid\mathbf{x}) - \sum_{i=1}^m
-\frac{\lambda_i^2}{2\sigma^2}
-$$&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Emoji Support</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/emoji-support/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      <author>michael@michaelneuper.com (Michael Neuper)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/emoji-support/</guid>
-      <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
-&lt;p&gt;The &lt;a href=&#34;https://gohugo.io/functions/emojify/&#34;&gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;&gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;To enable emoji globally, set &lt;code&gt;enableEmoji&lt;/code&gt; to &lt;code&gt;true&lt;/code&gt; in your site&amp;rsquo;s &lt;a href=&#34;https://gohugo.io/getting-started/configuration/&#34;&gt;configuration&lt;/a&gt; and then you can type emoji shorthand codes directly in content files; e.g.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;The &lt;a href=&#34;http://www.emoji-cheat-sheet.com/&#34;&gt;Emoji cheat sheet&lt;/a&gt; is a useful reference for emoji shorthand codes.&lt;/p&gt;
+\mathbf{v}\leftarrow\begin{bmatrix}\cos\left(\frac{\pi}{2}\right) &amp;amp; -\sin\left(\frac{\pi}{2}\right) \\ \sin\left(\frac{\pi}{2}\right) &amp;amp; \cos\left(\frac{\pi}{2}\right)\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix}=\begin{bmatrix}0 &amp;amp; -1 \\ 1 &amp;amp; 0\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix}=\begin{bmatrix}(0)\cdot(0)+(-1)\cdot(1) \\ (1)\cdot(0)+(0)\cdot(1)\end{bmatrix}=\begin{bmatrix}-1 \\ 0\end{bmatrix}.
+$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Increments the cell color $c\leftarrow((0)+1)\bmod (4)=1$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&amp;amp;200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&amp;amp;0\end{bmatrix}=\begin{bmatrix}390&amp;amp;200\end{bmatrix}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;strong&gt;N.B.&lt;/strong&gt; The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;emoji&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;font-family&lt;/span&gt;: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;Figure 1 provides an online demonstration of the computations performed by the Larks Ant starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press the &lt;code&gt;[h]&lt;/code&gt; to stop/run the demo. Press &lt;code&gt;[a/d]&lt;/code&gt; to increase/decrease the speed by a factor of 10. Note that since $T$ is finite, the Larks Ant will wrap around when necessary to prevent overflow. The script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>
