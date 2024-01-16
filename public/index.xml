@@ -14,7 +14,8 @@
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
-      <description>&lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
 &lt;input type=&#34;range&#34; id=&#34;range&#34; min=&#34;0&#34; max=&#34;10&#34; value=&#34;10&#34; oninput=&#34;update_max_depth(this.value);&#34;&gt;
 max_depth = &lt;output id=&#34;slider1-value&#34;&gt;&lt;/output&gt;
@@ -30,12 +31,12 @@ n_classes = &lt;output id=&#34;slider3-value&#34;&gt;&lt;/output&gt;
     &lt;figurecaption&gt;Fig. 1: Decision Tree Classifier Demo&lt;/figurecaption&gt;
 &lt;/figure&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(&lt;strong&gt;split features&lt;/strong&gt; &amp;ndash; the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(&lt;strong&gt;split features&lt;/strong&gt; &amp;ndash; the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes &lt;em&gt;(multi-classification)&lt;/em&gt;. Given some observed data, examples of classification-type problems is: whether an incoming patient has cancer, an email is spam or not, or a fruit is an apple, banana, or orange.&lt;/p&gt;
 &lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
 &lt;p&gt;The &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt; algorithm aims to reduce the time taken by a greedy search across all feature. It schedules processes in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;; distributing processes in a cyclical manner, roughly evenly across levels of a split feature. Processes in each sub-communicator concurrently participate in calculating the split feature and await completion at their original &lt;em&gt;(parent)&lt;/em&gt; communicator for all other processes in that communicator. Let $k$ be the total number of processes and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processes, and at least $[1\ldots n)$ processes. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i^m = \lfloor i/n \rfloor$.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
-  &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png&#34; alt=&#34;Cyclic Distribution Example&#34; style=&#34;width:35%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
+  &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png&#34; alt=&#34;Cyclic Distribution Example&#34; style=&#34;width:40%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 2: Cyclic Distribution Example&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h3 id=&#34;mathematical-modelling&#34;&gt;Mathematical Modelling&lt;/h3&gt;
@@ -55,7 +56,7 @@ $$&lt;/p&gt;
 &lt;p&gt;As the decision tree grows deeper, overfitting becomes evident because predictions rely on increasingly smaller regions of the feature space. In a way, the decision tree model tends to bias toward &lt;em&gt;singleton nodes&lt;/em&gt;, potentially resulting in mispredictions, especially when dealing with noisy data&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt;). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
-&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundary Example&#34; style=&#34;width:60%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundary Example&#34; style=&#34;width:70%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 3: Decision Boundary Example&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
@@ -70,7 +71,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Information gain quantifies the increase in confidence about the response variable after querying some feature. A higher value for information gain implies a greater likelihood of achieving purer splits &lt;em&gt;(no uncertainty on a prediction)&lt;/em&gt;.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor&amp;rsquo;s identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers. A terminated routine call results in a sub-tree on a particular path from the root, and the &lt;em&gt;local&lt;/em&gt; communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor&amp;rsquo;s identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34;&gt;
 &lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
@@ -86,22 +87,24 @@ $$&lt;/p&gt;
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
-      <description>&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/duong-jason/binary-bros&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
 &lt;iframe style=&#34;border: 1px solid rgba(0, 0, 0, 0.1);&#34; width=&#34;800&#34; height=&#34;450&#34; src=&#34;https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Ffile%2FqihsKn3iY99zQqTtMatn8Z%2FLanding-Page%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DsFSbak2BwHFp1aCv-1&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Blackjack Game</title>
+      <title>Blackjack Game Simulator</title>
       <link>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</link>
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
-      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
 &lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;The dealer deals cards to the players from their left to their right. Each player receives one card face up. The dealer deals themself a face-up card and then deals another card to each player. Finally, the dealer deals one face-down card to themself.&lt;/p&gt;
@@ -183,7 +186,8 @@ $$&lt;/p&gt;
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
-      <description>&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-335/tree/main/Project%201&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt;
 &lt;p&gt;$q_t$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
 $T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;

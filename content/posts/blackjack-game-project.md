@@ -1,8 +1,8 @@
 ---
 author: "Jason Duong"
-title: "Blackjack Game"
+title: "Blackjack Game Simulator"
 date: "2022-04-09"
-description: "A Blackjack simulation on the command-line interface."
+description: "A Blackjack game simulator on the command-line interface."
 tags: [
     "Python",
     "Black",
@@ -13,6 +13,8 @@ categories: [
     "Object-Oriented Programming",
 ]
 ---
+
+[Source Code](https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack)
 
 ## Introduction
 
