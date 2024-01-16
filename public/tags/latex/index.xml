@@ -32,7 +32,6 @@ n_classes = &lt;output id=&#34;slider3-value&#34;&gt;&lt;/output&gt;
     &lt;figurecaption&gt;Fig. 1: Decision Tree Classifier Demo&lt;/figurecaption&gt;
 &lt;/figure&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;
-// MODIFIED FROM: http://vision.stanford.edu/teaching/cs231n-demos/knn/knn.js
 
 document.getElementById(&#34;slider1-value&#34;).innerHTML = document.getElementById(&#34;range&#34;).value;
 document.getElementById(&#34;slider2-value&#34;).innerHTML = document.getElementById(&#34;range2&#34;).value;

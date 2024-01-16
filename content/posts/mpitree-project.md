@@ -43,7 +43,6 @@ $\text{Train/Test Accuracy}$ = <output id="accuracy"></output>
 </figure>
 
 <script type="text/javascript">
-// MODIFIED FROM: http://vision.stanford.edu/teaching/cs231n-demos/knn/knn.js
 
 document.getElementById("slider1-value").innerHTML = document.getElementById("range").value;
 document.getElementById("slider2-value").innerHTML = document.getElementById("range2").value;
