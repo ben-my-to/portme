@@ -3,22 +3,34 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/decision-trees/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/black/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/distributed-algorithms/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/machine-learning/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/distributed-algorithms/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/git/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/latex/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/machine-learning/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/python/</loc>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/tags/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</loc>
     <lastmod>2024-01-15T10:06:38-08:00</lastmod>
@@ -26,27 +38,29 @@
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</loc>
     <lastmod>2024-01-15T14:09:15-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/figma/</loc>
-    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
-  </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/game-development/</loc>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/game-development/</loc>
     <lastmod>2024-01-15T14:09:15-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/git/</loc>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/object-oriented-programming/</loc>
+    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/software-engineering/</loc>
     <lastmod>2024-01-15T10:06:38-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/jira/</loc>
-    <lastmod>2024-01-15T10:06:38-08:00</lastmod>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/web-development/</loc>
+    <lastmod>2024-01-15T11:44:12-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</loc>
     <lastmod>2024-01-15T11:44:12-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/tags/turing-machines/</loc>
+    <loc>https://michaelneuper.github.io/hugo-texify3/categories/theoretical-computer-science/</loc>
     <lastmod>2024-01-15T11:44:12-08:00</lastmod>
   </url><url>
     <loc>https://michaelneuper.github.io/hugo-texify3/</loc>
-    <lastmod>2024-01-15T14:09:15-08:00</lastmod>
+    <lastmod>2024-01-15T15:01:32-08:00</lastmod>
   </url><url>
-    <loc>https://michaelneuper.github.io/hugo-texify3/categories/</loc>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/html/css/js/</loc>
+  </url><url>
+    <loc>https://michaelneuper.github.io/hugo-texify3/tags/jira/figma/</loc>
   </url>
 </urlset>

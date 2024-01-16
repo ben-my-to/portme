@@ -5,7 +5,11 @@ date: "2021-09-25"
 description: "A 2D Cellular Automaton expanded from Turks and Prop Ants [1944]."
 math: true
 tags: [
-    "Turing Machines",
+    "HTML/CSS/JS"
+]
+categories: [
+  "Theoretical Computer Science",
+  "Web Development",
 ]
 ---
 

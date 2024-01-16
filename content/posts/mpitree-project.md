@@ -5,9 +5,14 @@ date: "2023-05-16"
 description: "A Parallel Decision Tree Classifier"
 math: true
 tags: [
+    "Python",
+    "LaTeX",
+    "Black",
+    "Git",
+]
+categories: [
     "Machine Learning",
-    "Decision Trees",
-    "Distributed Algorithms"
+    "Distributed Algorithms",
 ]
 ---
 
@@ -29,26 +34,31 @@ The __Parallel Decision Tree__ algorithm aims to _reduce_ the time taken by a gr
 
 [^3]: Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor's identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers.
 
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png" alt="Cyclic Distribution Example" style="width:50%;display:block;margin-left:auto;margin-right:auto;">
-
+<figure class="image">
+  <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png" alt="Cyclic Distribution Example" style="width:35%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 2: Cyclic Distribution Example</figcaption>
+</figure>
 
 A terminated routine call results in a sub-tree on a particular path from the root, and the _local_ communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.
 
 ### Mathematical Modelling
 
-A cyclic distribution function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as
+A _cyclic distribution_ function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as
 
 $$
-\begin{equation}
 f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
 \begin{cases}
     \emptyset & k=1 \\\
     \bigcup_{j\in\left[n\right]}f_{mn+j+1}(p_i\mapsto\lfloor i/n \rfloor : i\bmod n=j) & \text{otherwise}.
 \end{cases}
-\end{equation}
 $$
 
 for some initial natural numbers $k\ge n\ge 2$ and $m$.
+
+```python
+for i in range(10):
+  print(i)
+```
 
 ## Model Evaluation and Analysis
 
@@ -58,7 +68,10 @@ As the decision tree grows deeper, overfitting becomes evident because predictio
 
 [^4]: Figure 3 illustrates decision boundaries for different values of the `max_depth` hyperparameter on the iris dataset provided by _scikit-learn_. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.
 
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tre.png" alt="Decision Boundary Example" style="width:50%;display:block;margin-left:auto;margin-right:auto;">
+<figure class="image">
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png" alt="Decision Boundary Example" style="width:60%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 3: Decision Boundary Example</figcaption>
+</figure>
 
 Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., `max_depth`, `min_samples_split`). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.
 

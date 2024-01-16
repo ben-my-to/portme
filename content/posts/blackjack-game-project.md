@@ -4,7 +4,13 @@ title: "Blackjack Game"
 date: "2022-04-09"
 description: "A Blackjack simulation on the command-line interface."
 tags: [
+    "Python",
+    "Black",
+    "Git",
+]
+categories: [
     "Game Development",
+    "Object-Oriented Programming",
 ]
 ---
 
