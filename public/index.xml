@@ -15,18 +15,32 @@
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
       <description>&lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
+&lt;input type=&#34;range&#34; id=&#34;range&#34; min=&#34;0&#34; max=&#34;10&#34; value=&#34;10&#34; oninput=&#34;update_max_depth(this.value);&#34;&gt;
+max_depth = &lt;output id=&#34;slider1-value&#34;&gt;&lt;/output&gt;
+&lt;input type=&#34;range&#34; id=&#34;range2&#34; min=&#34;1&#34; max=&#34;50&#34; value=&#34;40&#34; oninput=&#34;update_n_samples(this.value);&#34;&gt;
+n_samples = &lt;output id=&#34;slider2-value&#34;&gt;&lt;/output&gt;
+&lt;input type=&#34;range&#34; id=&#34;range3&#34; min=&#34;1&#34; max=&#34;4&#34; value=&#34;3&#34; oninput=&#34;update_n_classes(this.value);&#34;&gt;
+n_classes = &lt;output id=&#34;slider3-value&#34;&gt;&lt;/output&gt;
+&lt;p&gt;$\text{Train/Test Accuracy}$ = &lt;output id=&#34;accuracy&#34;&gt;&lt;/output&gt;&lt;/p&gt;
+&lt;p&gt;&lt;button type=&#34;button&#34; onclick=&#34;gen_points(); redraw()&#34; style=&#34;height: 40px; width: 200px;&#34;&gt;Generate New Training Data&lt;/button&gt;&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;dt.js&#34;&gt;&lt;/script&gt;
+&lt;figure&gt;
+    &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;boundary&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
+    &lt;figurecaption&gt;Fig. 1: Decision Tree Classifier Demo&lt;/figurecaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(&lt;strong&gt;split features&lt;/strong&gt; &amp;ndash; the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes &lt;em&gt;(multi-classification)&lt;/em&gt;. Given some observed data, examples of classification-type problems is: whether an incoming patient has cancer, an email is spam or not, or a fruit is an apple, banana, or orange.&lt;/p&gt;
 &lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt; algorithm aims to &lt;em&gt;reduce&lt;/em&gt; the time taken by a greedy search across all feature. It schedules processes in a cyclic distribution&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;; distributing processes in a &lt;em&gt;cyclical&lt;/em&gt; manner, roughly evenly across levels of a split feature. Processes in each sub-communicator concurrently participate in calculating the split feature and await completion at their original &lt;em&gt;(parent)&lt;/em&gt; communicator for all other processes in that communicator. Let $k$ be the total number of processes and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processes, and at least $[1\ldots n)$ processes. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i^m = \lfloor i/n \rfloor$.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt; algorithm aims to reduce the time taken by a greedy search across all feature. It schedules processes in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;; distributing processes in a cyclical manner, roughly evenly across levels of a split feature. Processes in each sub-communicator concurrently participate in calculating the split feature and await completion at their original &lt;em&gt;(parent)&lt;/em&gt; communicator for all other processes in that communicator. Let $k$ be the total number of processes and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processes, and at least $[1\ldots n)$ processes. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i^m = \lfloor i/n \rfloor$.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
   &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png&#34; alt=&#34;Cyclic Distribution Example&#34; style=&#34;width:35%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 2: Cyclic Distribution Example&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;A terminated routine call results in a sub-tree on a particular path from the root, and the &lt;em&gt;local&lt;/em&gt; communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.&lt;/p&gt;
 &lt;h3 id=&#34;mathematical-modelling&#34;&gt;Mathematical Modelling&lt;/h3&gt;
-&lt;p&gt;A &lt;em&gt;cyclic distribution&lt;/em&gt; function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as&lt;/p&gt;
+&lt;div class=definition&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: A &lt;em&gt;cyclic distribution&lt;/em&gt; function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as&lt;/p&gt;
 &lt;p&gt;$$
 f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
 \begin{cases}
@@ -35,16 +49,15 @@ f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
 \end{cases}
 $$&lt;/p&gt;
 &lt;p&gt;for some initial natural numbers $k\ge n\ge 2$ and $m$.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;):
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  print(i)
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;model-evaluation-and-analysis&#34;&gt;Model Evaluation and Analysis&lt;/h2&gt;
+&lt;/div &gt;
+&lt;h2 id=&#34;model-evaluation-and-analysis&#34;&gt;Model Evaluation and Analysis&lt;/h2&gt;
 &lt;h3 id=&#34;decision-boundaries-varying-values-for-the-max_depth-hyperparameter&#34;&gt;Decision Boundaries varying values for the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter&lt;/h3&gt;
 &lt;p&gt;As the decision tree grows deeper, overfitting becomes evident because predictions rely on increasingly smaller regions of the feature space. In a way, the decision tree model tends to bias toward &lt;em&gt;singleton nodes&lt;/em&gt;, potentially resulting in mispredictions, especially when dealing with noisy data&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt;). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundary Example&#34; style=&#34;width:60%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 3: Decision Boundary Example&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt;). Additionally, validation methodology (e.g., $k$-fold Cross-Validation) can be applied to both pruning techniques.&lt;/p&gt;
 &lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
 &lt;p&gt;Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.&lt;/p&gt;
 &lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
@@ -57,7 +70,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Information gain quantifies the increase in confidence about the response variable after querying some feature. A higher value for information gain implies a greater likelihood of achieving purer splits &lt;em&gt;(no uncertainty on a prediction)&lt;/em&gt;.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor&amp;rsquo;s identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, and processes $p_1,p_3,p_5,p_7$ are scheduled to communicator $m_2$ as each processor&amp;rsquo;s identifier is odd. Communicator $m_i$ represent left subtrees of even process identifiers. Communicator $m_j$ represents right subtrees of odd process identifiers. A terminated routine call results in a sub-tree on a particular path from the root, and the &lt;em&gt;local&lt;/em&gt; communicator is de-allocated. The algorithm terminates when the root process recursively gathers all sub-trees.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34;&gt;
 &lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
@@ -89,7 +102,7 @@ $$&lt;/p&gt;
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players competes against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
 &lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;The dealer deals cards to the players from their left to their right. Each player receives one card face up. The dealer deals themself a face-up card and then deals another card to each player. Finally, the dealer deals one face-down card to themself.&lt;/p&gt;
 &lt;p&gt;Once the cards are dealt, each player has a turn. Starting with the first player, the player must first decide if she would like to &lt;em&gt;double down&lt;/em&gt; or &lt;em&gt;split&lt;/em&gt; her hand. If the dealer&amp;rsquo;s face-up card has a value of 10 or higher, then the player may also buy &lt;em&gt;insurance&lt;/em&gt; as a side bet. Some versions of Blackjack allow a player to &lt;em&gt;surrender&lt;/em&gt;, however, our version will not have this rule.&lt;/p&gt;
@@ -171,24 +184,38 @@ $$&lt;/p&gt;
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
       <description>&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;$q_t$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$\theta$ = &lt;output id=&#34;theta&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$\text{counter}$ = &lt;output id=&#34;counter&#34;&gt;&lt;/output&gt;&lt;/p&gt;
+&lt;figure&gt;
+    &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;game&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
+    &lt;figurecaption&gt;Fig. 1: Larks Ant Demo&lt;/figurecaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
+&lt;div class=&#34;definition&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
 &lt;p&gt;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.$$
 $$\Sigma\in(\text{Black, Blue, Yellow, Red}).$$
 $$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
 &lt;p&gt;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, $\mathcal{A}(0)$ has an initial state $q_0=\text{Normal}$, is located at color cell $T_{ij}$ for some initial $i,j\in\mathbb{Z}$ and is oriented at $\mathbf{v}=\begin{bmatrix}0 &amp;amp; 1\end{bmatrix}$, the north direction. Then, at every time step $t&amp;gt;0$, the cellular automaton $\mathcal{A}(t)$ computes as follows:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/li&gt;
-&lt;li&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; $\theta=0\implies R=\mathbb{I}$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/li&gt;
-&lt;li&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;where $\alpha\in\mathbb{N}_+$ is the grid scale.&lt;/p&gt;
+&lt;/div &gt;
 &lt;hr&gt;
 &lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as&lt;/p&gt;
 &lt;div class=&#34;mermaid&#34;&gt;stateDiagram-v2
@@ -203,7 +230,8 @@ $$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
-&lt;p&gt;We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
+&lt;div class=&#34;example&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Example 1&lt;/strong&gt;: We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Sets ($\text{Normal}$, $0$, $\text{Left})\leftarrow\delta_{\mathcal{A}}(\text{Normal},\text{Black})$ and $\text{counter}\leftarrow 0$.&lt;/p&gt;
@@ -221,7 +249,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&amp;amp;200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&amp;amp;0\end{bmatrix}=\begin{bmatrix}390&amp;amp;200\end{bmatrix}$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;/div &gt;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;

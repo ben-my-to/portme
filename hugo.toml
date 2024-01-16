@@ -26,12 +26,12 @@ Powered by  <a class=link href=https://gohugo.io target=_blank rel=noopener>Hugo
 Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_blank rel=noopener>TeXify3</a>
 """
 customCSS = ["css/styles.css"]
-customJS = []
+customJS = ["js/ant.js", "js/dt.js"]
 dateFormat = "2 January 2006"
 emphasisWithDots = true
 toc = true
-rootFontSize = "105%"
 math = true
+rootFontSize = "105%"
 enableDuckDuckGoSearchBox = false
 numberedSubtitles = true
 

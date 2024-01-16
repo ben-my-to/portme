@@ -5,3 +5,26 @@ figure, figcaption {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* CREDITS TO: resmisc.css */
+/* CREDITS TO: https://xyquadrat.ch/2022/04/04/latex-boxes/ */
+.definition, .example {
+    box-shadow: 2px 2px 2px grey;
+    padding: 5px 19px 5px 20px;
+    display: block;
+    margin: 12px 0;
+    font-style: normal;
+}
+.definition {
+    border-left: 6px solid #0091a4;
+    background-color: #dcf0f2;
+}
+.example {
+    border-left: 6px solid #40409f;
+    background-color: #fef2f2;
+}
+canvas:not(#boundary) {
+    overflow-x: auto;
+    border: 1px solid black;
+    box-shadow: 2px 2px 2px grey;
+}

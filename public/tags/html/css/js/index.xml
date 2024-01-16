@@ -30,24 +30,38 @@
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
       <description>&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;$q_t$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$\theta$ = &lt;output id=&#34;theta&#34;&gt;&lt;/output&gt;&lt;br&gt;
+$\text{counter}$ = &lt;output id=&#34;counter&#34;&gt;&lt;/output&gt;&lt;/p&gt;
+&lt;figure&gt;
+    &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;game&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
+    &lt;figurecaption&gt;Fig. 1: Larks Ant Demo&lt;/figurecaption&gt;
+&lt;/figure&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
+&lt;div class=&#34;definition&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
 &lt;p&gt;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.$$
 $$\Sigma\in(\text{Black, Blue, Yellow, Red}).$$
 $$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
 &lt;p&gt;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, $\mathcal{A}(0)$ has an initial state $q_0=\text{Normal}$, is located at color cell $T_{ij}$ for some initial $i,j\in\mathbb{Z}$ and is oriented at $\mathbf{v}=\begin{bmatrix}0 &amp;amp; 1\end{bmatrix}$, the north direction. Then, at every time step $t&amp;gt;0$, the cellular automaton $\mathcal{A}(t)$ computes as follows:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/li&gt;
-&lt;li&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; $\theta=0\implies R=\mathbb{I}$.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/li&gt;
-&lt;li&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;where $\alpha\in\mathbb{N}_+$ is the grid scale.&lt;/p&gt;
+&lt;/div &gt;
 &lt;hr&gt;
 &lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as&lt;/p&gt;
 &lt;div class=&#34;mermaid&#34;&gt;stateDiagram-v2
@@ -62,7 +76,8 @@ $$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
-&lt;p&gt;We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
+&lt;div class=&#34;example&#34;&gt;
+&lt;p&gt;&lt;strong&gt;Example 1&lt;/strong&gt;: We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;Sets ($\text{Normal}$, $0$, $\text{Left})\leftarrow\delta_{\mathcal{A}}(\text{Normal},\text{Black})$ and $\text{counter}\leftarrow 0$.&lt;/p&gt;
@@ -80,7 +95,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&amp;amp;200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&amp;amp;0\end{bmatrix}=\begin{bmatrix}390&amp;amp;200\end{bmatrix}$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;/div &gt;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;

@@ -3,7 +3,7 @@
 
 ---
 
-Jason Duong _(Jay-suhn You-oong)_ received his __Bachelor of Science, Computer Science__ degree from __California State University, Fullerton 2023__. His research interests are _Machine Learning_, _Distributed Algorithms_, and _Theoretical Computer Science_. Apart from his professional interests, he enjoys watching K-dramas, video games, and spending time with family and friends.
+Jason Duong _(Jay-suhn You-oong)_ received his __Bachelor of Science, Computer Science__ degree from __California State University, Fullerton 2023__. His research interests are _Machine Learning_, _Theoretical Computer Science_, and _Distributed Algorithms_. Apart from his professional interests, he enjoys watching K-dramas, video games, and spending time with family and friends.
 
 <br/>
 
