@@ -546,6 +546,13 @@ Pre-and-post-pruning techniques are some solutions to reduce the likelihood of a
   <figcaption>Fig. 3: Decision Boundary Example</figcaption>
 </figure>
 
+### Parallelization Execution Times
+
+<figure class="image">
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:70%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 4: Parallel Execution Times Example</figcaption>
+</figure>
+
 ## Future Works
 
 Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.
