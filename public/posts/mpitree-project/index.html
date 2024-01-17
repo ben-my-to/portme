@@ -76,7 +76,7 @@
   <meta itemprop="name" content="A Parallel Decision Tree Classifier">
 <meta itemprop="description" content="A Parallel Decision Tree Classifier implementation using MPI (Message Passing Interface)"><meta itemprop="datePublished" content="2023-05-16T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2024-01-16T18:02:27-08:00" />
-<meta itemprop="wordCount" content="754">
+<meta itemprop="wordCount" content="808">
 <meta itemprop="keywords" content="Python,LaTeX,Black,Git," />
 
   
@@ -183,7 +183,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          754 words
+          808 words
         </span>
       
       
@@ -234,7 +234,7 @@
     <li><a href="#model-evaluation-and-analysis">Model Evaluation and Analysis</a>
       <ul>
         <li><a href="#decision-boundaries-varying-values-for-the-max_depth-hyperparameter">Decision Boundaries varying values for the <code>max_depth</code> hyperparameter</a></li>
-        <li><a href="#parallelization-execution-times">Parallelization Execution Times</a></li>
+        <li><a href="#parallel-execution-times">Parallel Execution Times</a></li>
       </ul>
     </li>
     <li><a href="#future-works">Future Works</a></li>
@@ -256,12 +256,12 @@ n_samples = <output id="slider2-value"></output>
 n_classes = <output id="slider3-value"></output>
 <p>$\text{Train/Test Accuracy}$ = <output id="accuracy"></output></p>
 <p><button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button></p>
-<!-- <script type="text/javascript" src="dt.js"></script> -->
+<script type="text/javascript" src="dt.js"></script>
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
     <figurecaption>Fig. 1: Decision Tree Classifier Demo</figurecaption>
 </figure>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 document.getElementById("slider1-value").innerHTML = document.getElementById("range").value;
 document.getElementById("slider2-value").innerHTML = document.getElementById("range2").value;
@@ -709,7 +709,7 @@ function draw_boundaries(ctx, state, step) {
     }
     document.getElementById("accuracy").innerHTML = accuracy_score(clf, state.points).toString() + "/" + accuracy_score(clf, state.test);
 }
-</script>
+</script> -->
 <h2 id="introduction">Introduction</h2>
 <p>A <strong>Decision Tree</strong> is an $n$-nary tree where each node represents a feature <em>(interior nodes)</em> or response <em>(terminal/leaf nodes)</em> value, and each branch represents a condition on some feature. Decision Trees are intuitive <em>supervised</em> machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is <em>generalization</em> &ndash; the model&rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &ldquo;good&rdquo; questions <em>(<strong>split features</strong> &ndash; the features that maximize the information gain<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)</em> about the data that leads to the most certainty about the response variable each time.</p>
 <p>A <strong>Decision Tree Classifier</strong> is a decision tree whose prediction of a response variable is from a set of finite classes <em>(multi-classification)</em>. Given some observed data, examples of classification-type problems is: whether an incoming patient has cancer, an email is spam or not, or a fruit is an apple, banana, or orange.</p>
@@ -739,10 +739,11 @@ $$</p>
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png" alt="Decision Boundary Example" style="width:70%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 3: Decision Boundary Example</figcaption>
 </figure>
-<h3 id="parallelization-execution-times">Parallelization Execution Times</h3>
+<h3 id="parallel-execution-times">Parallel Execution Times</h3>
+<p>Figure 4 below shows a plot of the number of training samples versus the time taken <em>(ms)</em> to train four decision tree models <em>(one sequential and three parallel)</em>. All decision tree models were trained with the same training examples, sampled over a uniform distribution, across all epochs. Our experiment yields an average speedup of $\bar{S}=1.7$.</p>
 <figure class="image">
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:70%;display:block;margin-left:auto;margin-right:auto;">
-  <figcaption>Fig. 4: Parallel Execution Times Example</figcaption>
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 4: Parallel Execution Times</figcaption>
 </figure>
 <h2 id="future-works">Future Works</h2>
 <p>Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.</p>
@@ -851,6 +852,10 @@ Theme <a class=link href=https://github.com/michaelneuper/hugo-texify3 target=_b
   
 
   
+  
+  <script src="https://michaelneuper.github.io/hugo-texify3/js/dt.js"></script>
+  
+  <script src="https://michaelneuper.github.io/hugo-texify3/js/ant.js"></script>
   
 
   

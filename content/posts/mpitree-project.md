@@ -35,14 +35,14 @@ $\text{Train/Test Accuracy}$ = <output id="accuracy"></output>
 
 <button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button>
 
-<!-- <script type="text/javascript" src="dt.js"></script> -->
+<script type="text/javascript" src="dt.js"></script>
 
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
     <figurecaption>Fig. 1: Decision Tree Classifier Demo</figurecaption>
 </figure>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 document.getElementById("slider1-value").innerHTML = document.getElementById("range").value;
 document.getElementById("slider2-value").innerHTML = document.getElementById("range2").value;
@@ -490,7 +490,7 @@ function draw_boundaries(ctx, state, step) {
     }
     document.getElementById("accuracy").innerHTML = accuracy_score(clf, state.points).toString() + "/" + accuracy_score(clf, state.test);
 }
-</script>
+</script> -->
 
 [^1]: Figure 1 provides an online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/knn/).
 
@@ -546,11 +546,13 @@ Pre-and-post-pruning techniques are some solutions to reduce the likelihood of a
   <figcaption>Fig. 3: Decision Boundary Example</figcaption>
 </figure>
 
-### Parallelization Execution Times
+### Parallel Execution Times
+
+Figure 4 below shows a plot of the number of training samples versus the time taken _(ms)_ to train four decision tree models _(one sequential and three parallel)_. All decision tree models were trained with the same training examples, sampled over a uniform distribution, across all epochs. Our experiment yields an average speedup of $\bar{S}=1.7$.
 
 <figure class="image">
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:70%;display:block;margin-left:auto;margin-right:auto;">
-  <figcaption>Fig. 4: Parallel Execution Times Example</figcaption>
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 4: Parallel Execution Times</figcaption>
 </figure>
 
 ## Future Works
