@@ -25,6 +25,7 @@ figure, figcaption {
 }
 canvas:not(#boundary) {
     overflow-x: auto;
+    background-color: #ded7b7fb;
     border: 1px solid black;
     box-shadow: 2px 2px 2px grey;
 }

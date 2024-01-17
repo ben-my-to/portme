@@ -4,8 +4,8 @@ title: "An Algorithm Vizualizer"
 date: "2022-04-09"
 description: "A visualizer comparing three common algorithms of different time complexities."
 tags: [
-    "Jira/Figma",
-    "HTML/CSS/JS",
+    "Jira·Figma",
+    "HTML·CSS·JS",
     "Git",
 ]
 categories: [

@@ -5,7 +5,7 @@ date: "2021-09-25"
 description: "A 2D Cellular Automaton expanded from Turks and Prop Ants [1944]."
 math: true
 tags: [
-    "HTML/CSS/JS"
+    "HTML·CSS·JS"
 ]
 categories: [
   "Theoretical Computer Science",
@@ -17,7 +17,7 @@ categories: [
 
 ## Online Demo[^1]
 
-<!-- <script type="text/javascript" src="/js/ant.js"></script> -->
+<script type="text/javascript" src="/js/ant.js"></script>
 
 $q_t$ = <output id="qt"></output><br>
 $T_{ij}$ = <output id="tij"></output><br>
@@ -210,20 +210,15 @@ where $\alpha\in\mathbb{N}_+$ is the grid scale.
 
 ---
 
-Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume _without loss of generality_, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as
+Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume _without loss of generality_, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be represented as
 
 ```mermaid
-stateDiagram-v2
-    a : Normal Mode
-    c : Countdown Mode
-    state if_state <<choice>>
-    [*] --> a
-    a --> a : Black·0·Left ∨ Blue | Red·1·Right
-    a --> c : Yellow·2·Straight
-    c --> if_state
-    if_state --> c: if counter > 0
-    if_state --> a: if counter <= 0
-    note right of if_state : ☐·☐·Straight ∧ counter ← counter - 1
+flowchart LR
+    A(Normal) -->|Yellow/2/Straight| B(Countdown)
+    A --> |Black/0/Left<br>Blue,Red/1/Right| A
+    B --> |☐/☐/Straight<br>counter = counter - 1| C{Decision}
+    C -->|if counter > 0| B
+    C -->|if counter <= 0| A
 ```
 
 ## Examples

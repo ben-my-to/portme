@@ -638,7 +638,7 @@ $$&lt;/p&gt;
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-335/tree/main/Project%201&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt; --&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt;
 &lt;p&gt;$q_t$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
 $T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;
 $\theta$ = &lt;output id=&#34;theta&#34;&gt;&lt;/output&gt;&lt;br&gt;
@@ -825,18 +825,13 @@ $$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
 &lt;p&gt;where $\alpha\in\mathbb{N}_+$ is the grid scale.&lt;/p&gt;
 &lt;/div &gt;
 &lt;hr&gt;
-&lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be defined as&lt;/p&gt;
-&lt;div class=&#34;mermaid&#34;&gt;stateDiagram-v2
-    a : Normal Mode
-    c : Countdown Mode
-    state if_state &lt;&lt;choice&gt;&gt;
-    [*] --&gt; a
-    a --&gt; a : Black·0·Left ∨ Blue | Red·1·Right
-    a --&gt; c : Yellow·2·Straight
-    c --&gt; if_state
-    if_state --&gt; c: if counter &gt; 0
-    if_state --&gt; a: if counter &lt;= 0
-    note right of if_state : ☐·☐·Straight ∧ counter ← counter - 1
+&lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be represented as&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;flowchart LR
+    A(Normal) --&gt;|Yellow/2/Straight| B(Countdown)
+    A --&gt; |Black/0/Left&lt;br&gt;Blue,Red/1/Right| A
+    B --&gt; |☐/☐/Straight&lt;br&gt;counter = counter - 1| C{Decision}
+    C --&gt;|if counter &gt; 0| B
+    C --&gt;|if counter &lt;= 0| A
 &lt;/div&gt;
 
 &lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;

@@ -44,7 +44,7 @@ Maintained weekly communication and updates under [Ph.D Professor Lakhanpal](htt
 
 ---
 
-Python, C/C++, Git, Vi
+Python·C/C++·Git·Vi
 
 <br/>
 
