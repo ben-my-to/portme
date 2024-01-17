@@ -29,13 +29,13 @@ GPA: 3.49/4.00
 
 __Undergraduate Research Assistant__
 
-Conducted a research project under Ph.D Professor Wang to design and implement a web-based carpool application using MySQL and PHP.
+Conducted a research project under Ph.D Professor Wang to design and implement a web-based carpool application using _MySQL_ and _PHP_.
 
 <br/>
 
 __Instructional Student Assistant__
 
-Accessed students performance on relavant coursework from Data Structures and Operating Systems courses.
+Accessed students performance on relavant coursework from _Data Structures_ and _Operating Systems_ courses.
 Maintained weekly communication and updates under [Ph.D Professor Lakhanpal](https://www.linkedin.com/in/shilpa-lakhanpal).
 
 <br/>
