@@ -17,20 +17,27 @@
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;a href=&#34;https://jsfiddle.net/nbkLudma/1/&#34;&gt;jsfiddle&lt;/a&gt;&lt;/p&gt;
+&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
+
 &lt;input type=&#34;range&#34; id=&#34;range&#34; min=&#34;0&#34; max=&#34;10&#34; value=&#34;10&#34; oninput=&#34;update_max_depth(this.value);&#34;&gt;
 max_depth = &lt;output id=&#34;slider1-value&#34;&gt;&lt;/output&gt;
+
 &lt;input type=&#34;range&#34; id=&#34;range2&#34; min=&#34;1&#34; max=&#34;50&#34; value=&#34;40&#34; oninput=&#34;update_n_samples(this.value);&#34;&gt;
 n_samples = &lt;output id=&#34;slider2-value&#34;&gt;&lt;/output&gt;
+
 &lt;input type=&#34;range&#34; id=&#34;range3&#34; min=&#34;1&#34; max=&#34;4&#34; value=&#34;3&#34; oninput=&#34;update_n_classes(this.value);&#34;&gt;
 n_classes = &lt;output id=&#34;slider3-value&#34;&gt;&lt;/output&gt;
-&lt;p&gt;$\text{Train/Test Accuracy}$ = &lt;output id=&#34;accuracy&#34;&gt;&lt;/output&gt;&lt;/p&gt;
-&lt;p&gt;&lt;button type=&#34;button&#34; onclick=&#34;gen_points(); redraw()&#34; style=&#34;height: 40px; width: 200px;&#34;&gt;Generate New Training Data&lt;/button&gt;&lt;/p&gt;
-&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;js/dt.js&#34;&gt;&lt;/script&gt; --&gt;
+
+$\text{Train/Test Accuracy}$ = &lt;output id=&#34;accuracy&#34;&gt;&lt;/output&gt;
+
+&lt;button type=&#34;button&#34; onclick=&#34;gen_points(); redraw()&#34; style=&#34;height: 40px; width: 200px;&#34;&gt;Generate New Training Data&lt;/button&gt;
+
 &lt;figure&gt;
     &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;boundary&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
     &lt;figurecaption&gt;Fig. 1: Decision Tree Classifier Demo&lt;/figurecaption&gt;
 &lt;/figure&gt;
+
 &lt;script type=&#34;text/javascript&#34;&gt;
 // MODIFIED FROM: http://vision.stanford.edu/teaching/cs231n-demos/knn/knn.js
 
@@ -483,7 +490,7 @@ function draw_boundaries(ctx, state, step) {
   }
   document.getElementById(&#34;accuracy&#34;).innerHTML = accuracy_score(clf, state.points).toString() + &#34;/&#34; + accuracy_score(clf, state.test);
 }
-&lt;/script&gt;
+&lt;/script&gt; --&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for both classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(&lt;strong&gt;split features&lt;/strong&gt; &amp;ndash; the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes &lt;em&gt;(multi-classification)&lt;/em&gt;. Given some observed data, examples of classification-type problems is: whether an incoming patient has cancer, an email is spam or not, or a fruit is an apple, banana, or orange.&lt;/p&gt;
@@ -526,10 +533,10 @@ $$&lt;/p&gt;
 &lt;p&gt;Proof by Induction.&lt;/p&gt;
 &lt;p&gt;At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
-&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:45%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
+&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:55%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 5: Message Exchanges Example&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathbf{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\lbrace 0,\ldots,\lceil\log_n k\rceil\rbrace$, be the number of splits; each performed by &lt;code&gt;MPI.Split&lt;/code&gt;. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathbf{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\left[0,\ldots,\lceil\log_n k\rceil\right)$, be the number of splits; each performed by &lt;code&gt;MPI.Split&lt;/code&gt;. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as&lt;/p&gt;
 &lt;p&gt;$$
 \mathcal{M}(k)=
 \begin{cases}
@@ -544,16 +551,16 @@ $$&lt;/p&gt;
 &amp;amp;= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\
 &amp;amp;= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\
 &amp;amp;\ \ \vdots&amp;amp; \\
-&amp;amp;= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-1})\\
+&amp;amp;= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\
 &amp;amp;= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\lceil\log_n(k)\rceil-2} + 0\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n(k)\rceil)-2} + 0\\
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2\\
 &amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{blue}kn}.
 \end{align}
 $$&lt;/p&gt;
 &lt;p&gt;Thus, the worst-case message complexity of $\mathcal{T}$ is&lt;/p&gt;
 &lt;p&gt;$$
-O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-1} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-2} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
 $$&lt;/p&gt;
 &lt;p style=&#34;float:right&#34;&gt;$\blacksquare$&lt;/p&gt;
 &lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
@@ -574,7 +581,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34;&gt;
-&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree ($n=2$). Each split $c$ reduces the number of processes by two until the remaining nodes are singletons ($c=h$). &lt;strong&gt;NOTE&lt;/strong&gt;: we consider integer division throughout the proof.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree ($n=2$). Each split $c$ reduces the number of processes by two until all remaining nodes are singletons, when $c=h$. &lt;strong&gt;NOTE&lt;/strong&gt;: we consider integer division throughout the proof.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;

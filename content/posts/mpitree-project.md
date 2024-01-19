@@ -20,7 +20,9 @@ categories: [
 
 ## Try it Out![^1]
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+[jsfiddle](https://jsfiddle.net/nbkLudma/1/)
+
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <input type="range" id="range" min="0" max="10" value="10" oninput="update_max_depth(this.value);">
 max_depth = <output id="slider1-value"></output>
@@ -34,8 +36,6 @@ n_classes = <output id="slider3-value"></output>
 $\text{Train/Test Accuracy}$ = <output id="accuracy"></output>
 
 <button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button>
-
-<!-- <script type="text/javascript" src="js/dt.js"></script> -->
 
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
@@ -494,7 +494,7 @@ function draw_boundaries(ctx, state, step) {
   }
   document.getElementById("accuracy").innerHTML = accuracy_score(clf, state.points).toString() + "/" + accuracy_score(clf, state.test);
 }
-</script>
+</script> -->
 
 [^1]: Figure 1 provides an online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/knn/).
 
@@ -572,13 +572,13 @@ Proof by Induction.
 At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png" alt="Message Exchanges" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png" alt="Message Exchanges" style="width:55%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 5: Message Exchanges Example</figcaption>
 </figure>
 
-__Definition 1__ constructs a full $n$-nary communicator tree $\mathbf{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\lbrace 0,\ldots,\lceil\log_n k\rceil\rbrace$, be the number of splits; each performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
+__Definition 1__ constructs a full $n$-nary communicator tree $\mathbf{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\left[0,\ldots,\lceil\log_n k\rceil\right)$, be the number of splits; each performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
 
-[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree ($n=2$). Each split $c$ reduces the number of processes by two until the remaining nodes are singletons ($c=h$). __NOTE__: we consider integer division throughout the proof.
+[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree ($n=2$). Each split $c$ reduces the number of processes by two until all remaining nodes are singletons, when $c=h$. __NOTE__: we consider integer division throughout the proof.
 
 $$
 \mathcal{M}(k)=
@@ -596,10 +596,10 @@ $$
                &= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\\
                &= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\\
                &\ \ \vdots& \\\
-               &= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-1})\\\
+               &= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\\
                &= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\\
-               &= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\lceil\log_n(k)\rceil-2} + 0\\\
-               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\\
+               &= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n(k)\rceil)-2} + 0\\\
+               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2\\\
                &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{blue}kn}.
 \end{align}
 $$
@@ -607,7 +607,7 @@ $$
 Thus, the worst-case message complexity of $\mathcal{T}$ is
 
 $$
-O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-1} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-2} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
 $$
 
 <p style="float:right">$\blacksquare$</p>
