@@ -90,6 +90,9 @@ function findMode(array) {
   return biggestValuesKey;
 }
 
+var info_gains = [];
+var thresholds = [];
+
 class Node {
   constructor(value, threshold = null) {
     this.value = value;
@@ -190,8 +193,8 @@ class DecisionTreeClassifier {
       return new Node(findMode(y));
     }
 
-    var info_gains = [];
-    var thresholds = [];
+    info_gains = [];
+    thresholds = [];
 
     for (var i = 0; i < this.n_features; i++) {
       var result = this.information_gain(X, y, i);
@@ -566,16 +569,16 @@ __Theorem 1__: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the _Parallel D
 
 Proof by Induction.
 
-At every terminated recursive call from a parent communicator ($|m|\ge 2$), each process must exchange $k$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains the sub-tree computed by every other process.
+At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png" alt="Message Exchanges" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 5: Message Exchanges Example</figcaption>
 </figure>
 
-__Definition 1__ constructs a _full_ communicator tree $\mathbf{M}$ of height $\log_n k$. As a result, each split $c<\log_n k$ performed by `MPI.Split` requires $n^c\cdot(k/n)^2$ messages[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
+__Definition 1__ constructs a full $n$-nary communicator tree $\mathbf{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\lbrace 0,\ldots,\lceil\log_n k\rceil\rbrace$, be the number of splits; each performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
 
-[^5]: Figure 5 shows the total number of messages exchanged at each level of a binary tree $\mathcal{T}$ with height $h=\log_2(k)$. Each split reduces the number of processes by 2.
+[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree ($n=2$). Each split $c$ reduces the number of processes by two until the remaining nodes are singletons ($c=h$). __NOTE__: we consider integer division throughout the proof.
 
 $$
 \mathcal{M}(k)=
@@ -593,18 +596,18 @@ $$
                &= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\\
                &= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\\
                &\ \ \vdots& \\\
-               &= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(1)\\\
-               &= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\log_n(k)-1}\cdot (k/n^{\log_n(k)-1})^2 + \mathcal{M}(1)\right]\\\
-               &= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\log_n(k)-2} + 0\\\
+               &= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-1})\\\
+               &= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\\
+               &= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\lceil\log_n(k)\rceil-2} + 0\\\
                &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\\
-               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn.
+               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{blue}kn}.
 \end{align}
 $$
 
 Thus, the worst-case message complexity of $\mathcal{T}$ is
 
 $$
-O(\mathcal{M}(k))=O\left(\sum_{c=0}^{\log_n(k)-1} \frac{k^2}{n^c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-1} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
 $$
 
 <p style="float:right">$\blacksquare$</p>

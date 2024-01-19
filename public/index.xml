@@ -78,6 +78,9 @@ function findMode(array) {
   return biggestValuesKey;
 }
 
+var info_gains = [];
+var thresholds = [];
+
 class Node {
   constructor(value, threshold = null) {
     this.value = value;
@@ -178,8 +181,8 @@ class DecisionTreeClassifier {
       return new Node(findMode(y));
     }
 
-    var info_gains = [];
-    var thresholds = [];
+    info_gains = [];
+    thresholds = [];
 
     for (var i = 0; i &lt; this.n_features; i++) {
       var result = this.information_gain(X, y, i);
@@ -520,12 +523,12 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 1&lt;/strong&gt;: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the &lt;em&gt;Parallel Decision Tree&lt;/em&gt; classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.&lt;/p&gt;
 &lt;/div &gt;
 &lt;p&gt;Proof by Induction.&lt;/p&gt;
-&lt;p&gt;At every terminated recursive call from a parent communicator ($|m|\ge 2$), each process must exchange $k$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains the sub-tree computed by every other process.&lt;/p&gt;
+&lt;p&gt;At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:45%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 5: Message Exchanges Example&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a &lt;em&gt;full&lt;/em&gt; communicator tree $\mathbf{M}$ of height $\log_n k$. As a result, each split $c&amp;lt;\log_n k$ performed by &lt;code&gt;MPI.Split&lt;/code&gt; requires $n^c\cdot(k/n)^2$ messages&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathbf{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Let $c\in[h]$, where $[h]=\lbrace 0,\ldots,\lceil\log_n k\rceil\rbrace$, be the number of splits; each performed by &lt;code&gt;MPI.Split&lt;/code&gt;. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as&lt;/p&gt;
 &lt;p&gt;$$
 \mathcal{M}(k)=
 \begin{cases}
@@ -540,16 +543,16 @@ $$&lt;/p&gt;
 &amp;amp;= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\
 &amp;amp;= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\
 &amp;amp;\ \ \vdots&amp;amp; \\
-&amp;amp;= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(1)\\
-&amp;amp;= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\log_n(k)-1}\cdot (k/n^{\log_n(k)-1})^2 + \mathcal{M}(1)\right]\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\log_n(k)-2} + 0\\
+&amp;amp;= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-1})\\
+&amp;amp;= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\lceil\log_n(k)\rceil-2} + 0\\
 &amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn.
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{blue}kn}.
 \end{align}
 $$&lt;/p&gt;
 &lt;p&gt;Thus, the worst-case message complexity of $\mathcal{T}$ is&lt;/p&gt;
 &lt;p&gt;$$
-O(\mathcal{M}(k))=O\left(\sum_{c=0}^{\log_n(k)-1} \frac{k^2}{n^c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-1} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
 $$&lt;/p&gt;
 &lt;p style=&#34;float:right&#34;&gt;$\blacksquare$&lt;/p&gt;
 &lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
@@ -570,7 +573,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34;&gt;
-&lt;p&gt;Figure 5 shows the total number of messages exchanged at each level of a binary tree $\mathcal{T}$ with height $h=\log_2(k)$. Each split reduces the number of processes by 2.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree ($n=2$). Each split $c$ reduces the number of processes by two until the remaining nodes are singletons ($c=h$). &lt;strong&gt;NOTE&lt;/strong&gt;: we consider integer division throughout the proof.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
