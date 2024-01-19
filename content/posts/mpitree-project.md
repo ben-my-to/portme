@@ -35,7 +35,7 @@ $\text{Train/Test Accuracy}$ = <output id="accuracy"></output>
 
 <button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button>
 
-<script type="text/javascript" src="js/dt.js"></script>
+<!-- <script type="text/javascript" src="js/dt.js"></script> -->
 
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
@@ -555,6 +555,59 @@ Figure 4 below shows a plot of the number of training samples versus the time ta
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 4: Parallel Execution Times</figcaption>
 </figure>
+
+### Message Complexity
+
+<div class="theorem">
+
+__Theorem 1__: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the _Parallel Decision Tree_ classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.
+
+</div >
+
+Proof by Induction.
+
+At every terminated recursive call from a parent communicator ($|m|\ge 2$), each process must exchange $k$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains the sub-tree computed by every other process.
+
+<figure class="image">
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png" alt="Message Exchanges" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 5: Message Exchanges Example</figcaption>
+</figure>
+
+__Definition 1__ constructs a _full_ communicator tree $\mathbf{M}$ of height $\log_n k$. As a result, each split $c<\log_n k$ performed by `MPI.Split` requires $n^c\cdot(k/n)^2$ messages[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
+
+[^5]: Figure 5 shows the total number of messages exchanged at each level of a binary tree $\mathcal{T}$ with height $h=\log_2(k)$. Each split reduces the number of processes by 2.
+
+$$
+\mathcal{M}(k)=
+\begin{cases}
+  0 & k=1\\\
+  n^c\cdot k^2+\mathcal{M}(k/n) & \text{otherwise}.
+\end{cases}
+$$
+
+Solving the recurrence relation, we obtain the general formula
+
+$$
+\begin{align}
+\mathcal{M}(k) &= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\\
+               &= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\\
+               &= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\\
+               &\ \ \vdots& \\\
+               &= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(1)\\\
+               &= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\log_n(k)-1}\cdot (k/n^{\log_n(k)-1})^2 + \mathcal{M}(1)\right]\\\
+               &= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\log_n(k)-2} + 0\\\
+               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\\
+               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn.
+\end{align}
+$$
+
+Thus, the worst-case message complexity of $\mathcal{T}$ is
+
+$$
+O(\mathcal{M}(k))=O\left(\sum_{c=0}^{\log_n(k)-1} \frac{k^2}{n^c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+$$
+
+<p style="float:right">$\blacksquare$</p>
 
 ## Future Works
 

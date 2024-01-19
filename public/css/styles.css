@@ -1,5 +1,6 @@
 figure, figcaption {
     font-size: 12px;
+    font-style: italic;
     text-align: center;
     display: block;
     margin-left: auto;
@@ -8,7 +9,7 @@ figure, figcaption {
 
 /* CREDITS TO: resmisc.css */
 /* CREDITS TO: https://xyquadrat.ch/2022/04/04/latex-boxes/ */
-.definition, .example {
+.definition, .theorem, .example {
     box-shadow: 2px 2px 2px grey;
     padding: 5px 19px 5px 20px;
     display: block;
@@ -19,9 +20,13 @@ figure, figcaption {
     border-left: 6px solid #0091a4;
     background-color: #dcf0f2;
 }
+.theorem{
+    border-left: 6px solid #590100;
+    background-color: #ffe5e6;
+}
 .example {
-    border-left: 6px solid #40409f;
-    background-color: #fef2f2;
+    border-left: 6px solid #005a00;
+    background-color: #e5ffe4;
 }
 canvas:not(#boundary) {
     overflow-x: auto;

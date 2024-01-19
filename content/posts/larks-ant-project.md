@@ -17,7 +17,7 @@ categories: [
 
 ## Online Demo[^1]
 
-$q_t$ = <output id="qt"></output><br>
+$q$ = <output id="qt"></output><br>
 $T_{ij}$ = <output id="tij"></output><br>
 $\theta$ = <output id="theta"></output><br>
 $\text{counter}$ = <output id="counter"></output>
@@ -182,17 +182,17 @@ document.addEventListener("keydown", (e) => {
 requestAnimationFrame(loop);
 </script>
 
-[^1]: Figure 1 provides an online demonstration of the computations performed by the Larks Ant starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press the `[h]` to stop/run the demo. Press `[a/d]` to increase/decrease the speed by a factor of 10. Note that since $T$ is finite, the Larks Ant will wrap around when necessary to prevent overflow. The script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/).
+[^1]: Figure 1 provides an online demonstration of the computations performed by the _Larks Ant_ starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press `[h]` to stop/run the demo. Press `[a/d]` to increase/decrease the speed by a factor of 10. Note that since $T$ is finite, the _Larks Ant_ will wrap around when necessary to prevent overflow. The script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/).
 
 ## Introduction
 
 <div class="definition">
 
-__Definition 1__: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_t\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where
+__Definition 1__: _Larks Ant_ is a 2D cellular automaton $\mathcal{A}$ that consists of a pair set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_0\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where
 
-$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.$$
-$$\Sigma\in(\text{Black, Blue, Yellow, Red}).$$
-$$-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$
+$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.\\\
+\Sigma\in(\text{Black, Blue, Yellow, Red}).\\\
+-\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$
 
 Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, $\mathcal{A}(0)$ has an initial state $q_0=\text{Normal}$, is located at color cell $T_{ij}$ for some initial $i,j\in\mathbb{Z}$ and is oriented at $\mathbf{v}=\begin{bmatrix}0 & 1\end{bmatrix}$, the north direction. Then, at every time step $t>0$, the cellular automaton $\mathcal{A}(t)$ computes as follows:
 
@@ -212,18 +212,18 @@ Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text
 
 ```mermaid
 flowchart LR
-    A(Normal) -->|Yellow/2/Straight| B(Countdown)
-    A --> |Black/0/Left<br>Blue,Red/1/Right| A
-    B --> |☐/☐/Straight<br>counter = counter - 1| C{Decision}
-    C -->|if counter > 0| B
-    C -->|if counter <= 0| A
+    A(Normal) -->|Yellow,2,Straight| B(Countdown)
+    A --> |Black,0,Left<br>Blue or Red,1,Right| A
+    B --> |☐,☐,Straight| C{counter <= 0?}
+    C -->|False<br>counter = counter - 1| B
+    C -->|True| A
 ```
 
 ## Examples
 
 <div class="example">
 
-__Example 1__: We now provide a worked example for the first iteration computed by the Larks Ant. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:
+__Example 1__: We now provide a worked example for the first iteration computed by the _Larks Ant_. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:
 
 1. Sets ($\text{Normal}$, $0$, $\text{Left})\leftarrow\delta_{\mathcal{A}}(\text{Normal},\text{Black})$ and $\text{counter}\leftarrow 0$.
 2. Changes orientation:

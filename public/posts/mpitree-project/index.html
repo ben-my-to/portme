@@ -64,7 +64,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-01-16T20:47:58-08:00" /><meta property="og:site_name" content="Jason Duong" />
+<meta property="article:modified_time" content="2024-01-17T13:19:33-08:00" /><meta property="og:site_name" content="Jason Duong" />
 
 
 
@@ -75,8 +75,8 @@
   
   <meta itemprop="name" content="A Parallel Decision Tree Classifier">
 <meta itemprop="description" content="A Parallel Decision Tree Classifier implementation using MPI (Message Passing Interface)"><meta itemprop="datePublished" content="2023-05-16T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2024-01-16T20:47:58-08:00" />
-<meta itemprop="wordCount" content="808">
+<meta itemprop="dateModified" content="2024-01-17T13:19:33-08:00" />
+<meta itemprop="wordCount" content="1091">
 <meta itemprop="keywords" content="Python,LaTeX,Black,Git," />
 
   
@@ -183,7 +183,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          808 words
+          1091 words
         </span>
       
       
@@ -196,7 +196,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12 7V12L14.5 13.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          ~4 mins
+          ~6 mins
         </span>
       
     </div>
@@ -235,6 +235,7 @@
       <ul>
         <li><a href="#decision-boundaries-varying-values-for-the-max_depth-hyperparameter">Decision Boundaries varying values for the <code>max_depth</code> hyperparameter</a></li>
         <li><a href="#parallel-execution-times">Parallel Execution Times</a></li>
+        <li><a href="#message-complexity">Message Complexity</a></li>
       </ul>
     </li>
     <li><a href="#future-works">Future Works</a></li>
@@ -256,7 +257,7 @@ n_samples = <output id="slider2-value"></output>
 n_classes = <output id="slider3-value"></output>
 <p>$\text{Train/Test Accuracy}$ = <output id="accuracy"></output></p>
 <p><button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button></p>
-<script type="text/javascript" src="js/dt.js"></script>
+<!-- <script type="text/javascript" src="js/dt.js"></script> -->
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
     <figurecaption>Fig. 1: Decision Tree Classifier Demo</figurecaption>
@@ -746,6 +747,43 @@ $$</p>
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 4: Parallel Execution Times</figcaption>
 </figure>
+<h3 id="message-complexity">Message Complexity</h3>
+<div class="theorem">
+<p><strong>Theorem 1</strong>: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the <em>Parallel Decision Tree</em> classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.</p>
+</div >
+<p>Proof by Induction.</p>
+<p>At every terminated recursive call from a parent communicator ($|m|\ge 2$), each process must exchange $k$ messages for a total of $k^2$ messages through the <code>MPI.allgather</code> function. As such, each process obtains the sub-tree computed by every other process.</p>
+<figure class="image">
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/num_mess_exchange.png" alt="Message Exchanges" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
+  <figcaption>Fig. 5: Message Exchanges Example</figcaption>
+</figure>
+<p><strong>Definition 1</strong> constructs a <em>full</em> communicator tree $\mathbf{M}$ of height $\log_n k$. As a result, each split $c&lt;\log_n k$ performed by <code>MPI.Split</code> requires $n^c\cdot(k/n)^2$ messages<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as</p>
+<p>$$
+\mathcal{M}(k)=
+\begin{cases}
+0 &amp; k=1\\
+n^c\cdot k^2+\mathcal{M}(k/n) &amp; \text{otherwise}.
+\end{cases}
+$$</p>
+<p>Solving the recurrence relation, we obtain the general formula</p>
+<p>$$
+\begin{align}
+\mathcal{M}(k) &amp;= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\
+&amp;= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\
+&amp;= {\color{blue}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\
+&amp;\ \ \vdots&amp; \\
+&amp;= k^2 + {\color{blue}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(1)\\
+&amp;= k^2 + k^2/n + {\color{blue}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\log_n(k)-1}\cdot (k/n^{\log_n(k)-1})^2 + \mathcal{M}(1)\right]\\
+&amp;= k^2 + k^2/n + k^2/n^2 + {\color{blue}k^2/n^3} + \dots + kn^{-1}\cdot k^2/n^{2\log_n(k)-2} + 0\\
+&amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn^{-1}\cdot k^2/k^2n^{-2}\\
+&amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + kn.
+\end{align}
+$$</p>
+<p>Thus, the worst-case message complexity of $\mathcal{T}$ is</p>
+<p>$$
+O(\mathcal{M}(k))=O\left(\sum_{c=0}^{\log_n(k)-1} \frac{k^2}{n^c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+$$</p>
+<p style="float:right">$\blacksquare$</p>
 <h2 id="future-works">Future Works</h2>
 <p>Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.</p>
 <div class="footnotes" role="doc-endnotes">
@@ -762,6 +800,9 @@ $$</p>
 </li>
 <li id="fn:4">
 <p>Figure 3 illustrates decision boundaries for different values of the <code>max_depth</code> hyperparameter on the iris dataset provided by <em>scikit-learn</em>. The figure showcases how noisy instances may negatively impact the performance of the decision tree model as the depth increases.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Figure 5 shows the total number of messages exchanged at each level of a binary tree $\mathcal{T}$ with height $h=\log_2(k)$. Each split reduces the number of processes by 2.&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </div>
