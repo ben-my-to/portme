@@ -231,7 +231,7 @@ $$
 \mathbf{v}\leftarrow\begin{bmatrix}\cos\left(\frac{\pi}{2}\right) & -\sin\left(\frac{\pi}{2}\right) \\\ \sin\left(\frac{\pi}{2}\right) & \cos\left(\frac{\pi}{2}\right)\end{bmatrix}\begin{bmatrix}0 \\\ 1\end{bmatrix}=\begin{bmatrix}0 & -1 \\\ 1 & 0\end{bmatrix}\begin{bmatrix}0 \\\ 1\end{bmatrix}=\begin{bmatrix}(0)\cdot(0)+(-1)\cdot(1) \\\ (1)\cdot(0)+(0)\cdot(1)\end{bmatrix}=\begin{bmatrix}-1 \\\ 0\end{bmatrix}.
 $$
 
-3. Increments the cell color $c\leftarrow((0)+1)\bmod (4)=1$.
+3. Increments the cell color $c\leftarrow(0+1)\bmod 4=1$.
 4. Moves to coordinate $\begin{bmatrix}i&j\end{bmatrix}\leftarrow\begin{bmatrix}i&j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&0\end{bmatrix}=\begin{bmatrix}390&200\end{bmatrix}$.
 
 </div >

@@ -9,7 +9,7 @@ figure, figcaption {
 
 /* CREDITS TO: resmisc.css */
 /* CREDITS TO: https://xyquadrat.ch/2022/04/04/latex-boxes/ */
-.definition, .theorem, .example {
+.definition, .theorem, .example, .remark {
     box-shadow: 2px 2px 2px grey;
     padding: 5px 19px 5px 20px;
     display: block;
@@ -28,9 +28,37 @@ figure, figcaption {
     border-left: 6px solid #005a00;
     background-color: #e5ffe4;
 }
+.remark {
+    border-left: 6px solid #c8c8c8;
+    background-color: #f2f2f2;
+}
 canvas:not(#boundary) {
     overflow-x: auto;
     background-color: #ded7b7fb;
     border: 1px solid black;
     box-shadow: 2px 2px 2px grey;
+}
+.darkmode {
+    .definition {
+        border-left: 6px solid #0091a4;
+        background-color: #273434;
+    }
+    .theorem{
+        border-left: 6px solid #590100;
+        background-color: #4a3132
+    }
+    .example {
+        border-left: 6px solid #005a00;
+        background-color: #2d362d
+    }
+    .remark {
+        border-left: 6px solid #c8c8c8;
+        background-color: #383838 
+    }
+    canvas:not(#boundary) {
+        overflow-x: auto;
+        background-color: #3e3c34fb;
+        border: 1px solid black;
+        box-shadow: 2px 2px 2px grey;
+    }
 }

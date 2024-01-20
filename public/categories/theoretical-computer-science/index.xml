@@ -225,7 +225,7 @@ $$
 $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Increments the cell color $c\leftarrow((0)+1)\bmod (4)=1$.&lt;/p&gt;
+&lt;p&gt;Increments the cell color $c\leftarrow(0+1)\bmod 4=1$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&amp;amp;200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&amp;amp;0\end{bmatrix}=\begin{bmatrix}390&amp;amp;200\end{bmatrix}$.&lt;/p&gt;
