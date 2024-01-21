@@ -521,7 +521,7 @@ $$&lt;/p&gt;
   &lt;figcaption&gt;Fig. 3: Decision Boundaries on the Iris Dataset&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h3 id=&#34;parallel-execution-times&#34;&gt;Parallel Execution Times&lt;/h3&gt;
-&lt;p&gt;Figure 4 below shows a plot of the number of training samples versus the time taken &lt;em&gt;(ms)&lt;/em&gt; to train four decision tree models &lt;em&gt;(one sequential and three in-parallel)&lt;/em&gt;. All decision tree models were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.&lt;/p&gt;
+&lt;p&gt;Figure 4 below shows a plot of the number of training samples versus the time taken &lt;em&gt;(ms)&lt;/em&gt; to train four decision tree classifiers &lt;em&gt;(one sequential and three in-parallel)&lt;/em&gt;. All decision tree classifiers were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png&#34; alt=&#34;Parallel Execution Time&#34; style=&#34;width:45%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 4: Parallel Execution Times&lt;/figcaption&gt;
@@ -531,7 +531,7 @@ $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 1&lt;/strong&gt;: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the &lt;em&gt;Parallel Decision Tree&lt;/em&gt; classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.&lt;/p&gt;
 &lt;/div &gt;
 &lt;p&gt;Proof by Induction.&lt;/p&gt;
-&lt;p&gt;At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
+&lt;p&gt;For each $m\in\mathbf{M}$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:55%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
   &lt;figcaption&gt;Fig. 5: Communication Costs for Binary Trees&lt;/figcaption&gt;
@@ -553,10 +553,10 @@ $$&lt;/p&gt;
 \mathcal{M}(k) &amp;amp;= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\
 &amp;amp;= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\
 &amp;amp;= {\color{red}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\
-&amp;amp;= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\
-&amp;amp;= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n(k)\rceil)-2} + 0\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2\\
+&amp;amp;= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2}) = {\color{blue}\mathcal{M}(n)}\\
+&amp;amp;= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n k\rceil-1}\cdot (k/n^{\lceil\log_n k\rceil-1})^2 + \mathcal{M}(k/n^{\lceil\log_n k\rceil})\right]\\
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n k\rceil)-2} + \mathbf{M}(1)\\
+&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2+0\\
 &amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{red}kn}.
 \end{align}
 $$&lt;/p&gt;
@@ -583,7 +583,7 @@ $$&lt;/p&gt;
 &lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree classifier as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34;&gt;
-&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree. Each split $c$ reduces the number of processes by two until all remaining nodes are singletons, when $c=h-1$.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree. Each split $c$ reduces the number of processes by two until all remaining nodes are singletons.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;

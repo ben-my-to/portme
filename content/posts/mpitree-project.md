@@ -554,7 +554,7 @@ Pre-and-post-pruning techniques are some solutions to reduce the likelihood of a
 
 ### Parallel Execution Times
 
-Figure 4 below shows a plot of the number of training samples versus the time taken _(ms)_ to train four decision tree models _(one sequential and three in-parallel)_. All decision tree models were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.
+Figure 4 below shows a plot of the number of training samples versus the time taken _(ms)_ to train four decision tree classifiers _(one sequential and three in-parallel)_. All decision tree classifiers were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png" alt="Parallel Execution Time" style="width:45%;display:block;margin-left:auto;margin-right:auto;">
@@ -571,7 +571,7 @@ __Theorem 1__: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the _Parallel D
 
 Proof by Induction.
 
-At every terminated recursive call from a parent communicator $|m|\ge 2$, each process must exchange $k$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
+For each $m\in\mathbf{M}$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png" alt="Message Exchanges" style="width:55%;display:block;margin-left:auto;margin-right:auto;">
@@ -586,7 +586,7 @@ __Remark__: We will use _integer division_ throughout the proof.
 
 __Definition 1__ constructs a full $n$-nary communicator tree $\mathbf{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Let $c\in\lbrace 0,\ldots,h-2\rbrace$ be a split performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
 
-[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree. Each split $c$ reduces the number of processes by two until all remaining nodes are singletons, when $c=h-1$.
+[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree. Each split $c$ reduces the number of processes by two until all remaining nodes are singletons.
 
 $$
 \mathcal{M}(k)=
@@ -603,10 +603,10 @@ $$
 \mathcal{M}(k) &= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\\
                &= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\\
                &= {\color{red}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\\
-               &= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\\
-               &= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n(k)\rceil-1}\cdot (k/n^{\lceil\log_n(k)\rceil-1})^2 + \mathcal{M}(1)\right]\\\
-               &= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n(k)\rceil)-2} + 0\\\
-               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2\\\
+               &= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2}) = {\color{blue}\mathcal{M}(n)}\\\
+               &= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n k\rceil-1}\cdot (k/n^{\lceil\log_n k\rceil-1})^2 + \mathcal{M}(k/n^{\lceil\log_n k\rceil})\right]\\\
+               &= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n k\rceil)-2} + \mathbf{M}(1)\\\
+               &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2+0\\\
                &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{red}kn}.
 \end{align}
 $$

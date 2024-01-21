@@ -182,7 +182,7 @@ document.addEventListener("keydown", (e) => {
 requestAnimationFrame(loop);
 </script>
 
-[^1]: Figure 1 provides an online demonstration of the computations performed by the _Larks Ant_ starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press `[h]` to stop/run the demo. Press `[a/d]` to increase/decrease the speed by a factor of 10. Note that since $T$ is finite, the _Larks Ant_ will wrap around when necessary to prevent overflow. The script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/).
+[^1]: Figure 1 provides an online demonstration of the computations performed by the _Larks Ant_ starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press `[h]` to stop/run the demo. Press `[a/d]` to increase or decrease the speed by a factor of 10. Note that since $T$ is finite, the _Larks Ant_ will wrap around when necessary to prevent overflow. The script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/).
 
 ## Introduction
 
