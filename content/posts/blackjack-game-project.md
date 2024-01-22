@@ -42,9 +42,9 @@ A player may also choose to _split_. A player may be dealt two cards with identi
 
 Can a player buy _insurance_, _split_, and _double down_ in one game? Yes, this is possible. Consider the scenario where the dealer has an Ace showing and the player has two Aces. The player may choose to buy _insurance_, next _split_ her hand, and then decide to _double down_ on one or both of the hands derived from the _split_.
 
-All bets are _two-to-one_ payout. In other words, if a player wagers $5 and wins, then the casino pays the player $5 and the player keeps the original wager thus pocketing a total of $10.
+All bets are _two-to-one_ payout. In other words, if a player wagers 5 dollars and wins, then the casino pays the player 5 dollars and the player keeps the original wager thus pocketing a total of $10.
 
-In our game, the dealer shall be played by a game AI. All players start with $10,000.00 in their bank balance. The minimum bet is $1 and the maximum bet is the player's bank balance. When a player goes broke (loses all of her money), then the player is offered $10,000.00 from an anonymous donor.
+In our game, the dealer shall be played by a game AI. All players start with 10,000 dollars in their bank balance. The minimum bet is 1 dollar and the maximum bet is the player's bank balance. When a player goes broke (loses all of her money), then the player is offered 10,000 dollars from an anonymous donor.
 
 The player can exit the game and restart the game and have the same bank balance when the game is restarted. This means that players must use a unique identifier to start the game which can be a name, handle, email address, etc. The identifier is used to track the player's progress such that their bank balance from previous games can be reused.
 

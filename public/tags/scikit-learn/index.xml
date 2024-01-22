@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Machine Learning on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/categories/machine-learning/</link>
-    <description>Recent content in Machine Learning on Jason Duong</description>
+    <title>scikit-learn on Jason Duong</title>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/scikit-learn/</link>
+    <description>Recent content in scikit-learn on Jason Duong</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Tue, 16 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/scikit-learn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Parallel Decision Tree Classifier</title>
       <link>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</link>

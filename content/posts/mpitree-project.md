@@ -7,10 +7,11 @@ math: true
 tags: [
     "Python",
     "NumPy",
+    "scikit-learn",
     "Matplotlib",
-    "LaTeX",
-    "Black",
     "Git",
+    "Black",
+    "LaTeX",
 ]
 categories: [
     "Machine Learning",
@@ -502,20 +503,20 @@ function draw_boundaries(ctx, state, step) {
 
 ## Introduction
 
-A __Decision Tree__ is an $n$-nary tree where each node represents a feature _(interior nodes)_ or response _(terminal/leaf nodes)_ value, and each branch represents a condition on some feature. Decision Trees are intuitive _supervised_ machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is _generalization_ -- the model's ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking "good" questions _(__split features__ -- the features that maximize the information gain[^2])_ about the data that leads to the most certainty about the response variable each time.
+A __Decision Tree__ is an $n$-nary tree where each node represents a feature _(interior nodes)_ or response _(terminal/leaf nodes)_ value, and each branch represents a condition on some feature. Decision Trees are intuitive _supervised_ machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is _generalization_ -- the model's ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking "good" questions _(the features that maximize the information gain[^2])_ about the data that leads to the most certainty about the response variable each time.
 
-[^2]: Information gain quantifies _(bits)_ the increase in confidence about a response variable after querying a feature. A higher value for information gain implies a greater likelihood of achieving purer splits _(no uncertainty on a prediction)_.
+[^2]: Information gain quantifies the increase in confidence about a response variable after querying a feature. A higher value _(bits)_ for information gain implies a greater likelihood of achieving purer splits _(no uncertainty on a prediction)_.
 
-A __Decision Tree Classifier__ is a decision tree whose prediction of a response variable is from a set of finite classes _(multi-classification)_. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange.
+A __Decision Tree Classifier__ is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange _(multi-classification)_.
 
 ## Methodology
 
-The __Parallel Decision Tree__ algorithm exploits [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism) and aims to reduce the time taken by a _greedy_  search across all features. It schedules processes to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processes in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processes in that communicator. Let $k$ be the total number of processes and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processes, and at least $[1\ldots n)$ processes. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
+The __Parallel Decision Tree__ algorithm exploits [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism) and aims to reduce the time taken by a _greedy_  search across all features. It schedules processors to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
 
-[^3]: Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processes $k=8$. Processes $p_0,p_2,p_4,p_6$ are scheduled to sub-communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, and processes $p_1,p_3,p_5,p_7$ are scheduled to sub-communicator $m_2$ as each processor's identifier is odd. Sub-communicator $m_i$ represent left subtrees of even process identifiers, and sub-communicator $m_j$ represents right subtrees of odd process identifiers.
+[^3]: Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processors $k=8$. Processors $p_0,p_2,p_4,p_6$ are scheduled to sub-communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, and processors $p_1,p_3,p_5,p_7$ are scheduled to sub-communicator $m_2$ as each processor's identifier is odd. Sub-communicator $m_i$ represent left subtrees of even process identifiers, and sub-communicator $m_j$ represents right subtrees of odd process identifiers.
 
 <figure class="image">
-  <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png" alt="Cyclic Distribution Example" style="width:40%;display:block;margin-left:auto;margin-right:auto;">
+  <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png" alt="Cyclic Distribution Example" style="width:35%;display:block;margin-left:auto;margin-right:auto;">
   <figcaption>Fig. 2: Cyclic Distribution</figcaption>
 </figure>
 
@@ -523,7 +524,7 @@ The __Parallel Decision Tree__ algorithm exploits [_data parallelism_](https://e
 
 <div class="definition">
 
-__Definition 1__: A _cyclic distribution_ function $f_m:\left[k\right]\to\mathbf M$ takes as input a $k$-tuple of processes and outputs a set of communicators $\mathbf M$ is defined as
+__Definition 1__: A _cyclic distribution_ function $f_m:\left[k\right]\to\mathcal{M}$ takes as input a $k$-tuple of processors and outputs a set of communicators $\mathcal{M}$ is defined as
 
 $$
 f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
@@ -565,13 +566,13 @@ Figure 4 below shows a plot of the number of training samples versus the time ta
 
 <div class="theorem">
 
-__Theorem 1__: Given $n,k\in\mathbb{N}$ such that $k\ge n\ge 2$, the _Parallel Decision Tree_ classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.
+__Theorem 1__: The _Parallel Decision Tree_ classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.
 
 </div >
 
-Proof by Induction.
+Proof.
 
-For each $m\in\mathbf{M}$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
+__Definition 1__ constructs a full $n$-nary communicator tree $\mathcal{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png" alt="Message Exchanges" style="width:55%;display:block;margin-left:auto;margin-right:auto;">
@@ -584,37 +585,37 @@ __Remark__: We will use _integer division_ throughout the proof.
 
 </div >
 
-__Definition 1__ constructs a full $n$-nary communicator tree $\mathbf{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Let $c\in\lbrace 0,\ldots,h-2\rbrace$ be a split performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^4)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathcal{M}(k)$, the total number of exchanged messages by $k$ processors, as
+Let $0\le c\le h-2$ be a split performed by `MPI.Split`. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^2)^2$ and so on and so forth[^5]. Therefore, we can define the recurrence relation $\mathbf{M}(k)$, the total number of exchanged messages by $k$ processors, as
 
-[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree. Each split $c$ reduces the number of processes by two until all remaining nodes are singletons.
+[^5]: Figure 5 shows the number of messages exchanged at each level of a perfect _(although not necessary)_ binary tree. Each successive split reduces the number of processors by two until all remaining nodes are singletons.
 
 $$
-\mathcal{M}(k)=
+\mathbf{M}(k)=
 \begin{cases}
   0 & k=1\\\
-  n^c\cdot k^2+\mathcal{M}(k/n) & \text{otherwise}.
+  n^c\cdot k^2+\mathbf{M}(k/n) & \text{otherwise}.
 \end{cases}
 $$
 
-Solving the recurrence relation, we obtain the general formula
+Solving the recurrence relation using the _iteration_ method, we obtain the closed formula
 
 $$
 \begin{align}
-\mathcal{M}(k) &= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\\
+\mathbf{M}(k) &= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\\
                &= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\\
                &= {\color{red}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\\
-               &= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2}) = {\color{blue}\mathcal{M}(n)}\\\
+               &= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\\
                &= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n k\rceil-1}\cdot (k/n^{\lceil\log_n k\rceil-1})^2 + \mathcal{M}(k/n^{\lceil\log_n k\rceil})\right]\\\
-               &= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n k\rceil)-2} + \mathbf{M}(1)\\\
+               &= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n k\rceil)-2} + \mathcal{M}(1)\\\
                &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2+0\\\
                &= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{red}kn}.
 \end{align}
 $$
 
-Thus, the worst-case message complexity of $\mathcal{T}$ is
+Noting that $n^c\cdot(k/n^c)^2 = k^2n^{-c}$, the worst-case message complexity of $\mathcal{T}$ is
 
 $$
-O\left(\mathcal{M}(k)\right)=O\left(\sum_{c=0}^{h-2} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
+O\left(\mathbf{M}(k)\right)=O\left(\sum_{c=0}^{h-2} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
 $$
 
 <p style="float:right">$\blacksquare$</p>
