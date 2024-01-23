@@ -11,13 +11,21 @@ Jason Duong _(pronounced Jay-sun You-oong)_ earned his __Bachelor of Science__ i
 
 <br/>
 
+## Resume
+
+---
+
+[$\rightarrow$ Link to Google Drive](https://drive.google.com/file/d/1imrL88B0bvfBUH59iGTk_KTdM6lT04Xl/view?usp=sharing)
+
+<br />
+
 ## Education
 
 ---
 
 __California State University, Fullerton $|$ 2019--2023__
 
-GPA: 3.86 (3.94 Weighted)/4.0 
+GPA: 3.86 (3.94 Weighted)/4.0
 
 <br/>
 
