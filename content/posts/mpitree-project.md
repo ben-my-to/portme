@@ -513,12 +513,53 @@ A __Decision Tree Classifier__ is a decision tree whose prediction of a response
 
 The __Parallel Decision Tree__ algorithm exploits [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism) and aims to reduce the time taken by a _greedy_  search across all features. It schedules processors to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
 
-[^3]: Figure 2 demonstrates the partitioning of communicator $m_0$ where the number of levels $n=2$ and number of processors $k=8$. Processors $p_0,p_2,p_4,p_6$ are scheduled to sub-communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, and processors $p_1,p_3,p_5,p_7$ are scheduled to sub-communicator $m_2$ as each processor's identifier is odd. Sub-communicator $m_i$ represent left subtrees of even process identifiers, and sub-communicator $m_j$ represents right subtrees of odd process identifiers.
+[^3]: Figure 2 demonstrates the partitioning from communicator $m_0$ where the number of levels $n=2$ and number of processors $k=5$. Processors $p_0,p_2,p_4$ are scheduled to sub-communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, processors $p_1,p_3$ are scheduled to sub-communicator $m_2$ as each processor's identifier is odd, etc.
 
-<figure class="image">
-  <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/cyclic_distribution.png" alt="Cyclic Distribution Example" style="width:35%;display:block;margin-left:auto;margin-right:auto;">
-  <figcaption>Fig. 2: Cyclic Distribution</figcaption>
-</figure>
+```mermaid
+%%{init: { "theme": "neutral"} }%%
+flowchart TB
+  subgraph j[$m_0$]
+    direction TB
+    a[$p_0,\ldots,p_4$] --> k
+    a[$p_0,\ldots,p_4$] --> p
+    subgraph k[$m_1$]
+        direction TB
+        b[$p_0,p_2,p_4$] --> l
+        b[$p_0,p_2,p_4$] --> o
+        subgraph l[$m_3$]
+            direction TB
+            c[$p_0,p_4$] --> m
+            c[$p_0,p_4$] --> n
+            subgraph m[$m_7$]
+                direction TB
+                e[$p_0$]
+            end
+            subgraph n[$m_8$]
+                direction TB
+                f[$p_4$]
+            end
+        end
+        subgraph o[$m_4$]
+          direction TB
+          d[$p_2$]
+        end
+    end
+    subgraph p[$m_2$]
+        direction TB
+        g[$p_1,p_3$] --> q
+        g[$p_1,p_3$] --> r
+        subgraph q[$m_5$]
+          direction TB
+          h[$p_1$]
+        end
+        subgraph r[$m_6$]
+          direction TB
+          i[$p_3$]
+        end
+    end
+  end
+```
+<figcaption>Fig. 2: Cyclic Distribution</figcaption>
 
 ### Mathematical Modelling
 
@@ -572,7 +613,7 @@ __Theorem 1__: The _Parallel Decision Tree_ classifier $\mathcal{T}$ exchanges a
 
 Proof.
 
-__Definition 1__ constructs a full $n$-nary communicator tree $\mathcal{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
+__Definition 1__ constructs a full $n$-nary communicator tree $\mathcal{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M},\ |m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png" alt="Message Exchanges" style="width:55%;display:block;margin-left:auto;margin-right:auto;">

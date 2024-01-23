@@ -15,7 +15,7 @@ Jason Duong _(pronounced Jay-sun You-oong)_ earned his __Bachelor of Science__ i
 
 ---
 
-[$\rightarrow$ Link to Google Drive](https://drive.google.com/file/d/1imrL88B0bvfBUH59iGTk_KTdM6lT04Xl/view?usp=sharing)
+[$\rightarrow$ Link to OverLeaf](https://www.overleaf.com/read/cyqtmtqxnshf#ed0803)
 
 <br />
 

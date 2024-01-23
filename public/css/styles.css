@@ -62,3 +62,6 @@ canvas:not(#boundary) {
         box-shadow: 2px 2px 2px grey;
     }
 }
+.mermaid {
+    text-align: center;
+ }

@@ -208,9 +208,10 @@ where $\alpha\in\mathbb{N}_+$ is the grid scale.
 
 ---
 
-Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume _without loss of generality_, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$ can be represented as
+Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume _without loss of generality_, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$[^2] can be represented as
 
 ```mermaid
+%%{init: { "theme": "forest"} }%%
 flowchart LR
     A(Normal) -->|Yellow,2,Straight| B(Countdown)
     A --> |Black,0,Left<br>Blue or Red,1,Right| A
@@ -218,6 +219,9 @@ flowchart LR
     C -->|False<br>counter = counter - 1| B
     C -->|True| A
 ```
+<figcaption>Fig. 2: Finite State Machine of the Larks Ant transition function.</figcaption>
+
+[^2]: Figure 2 shows a _Finite State Machine_ representation of the _Larks Ant_ transition function. Each arrow from a state is labeled by the cell color, color index, and direction. The ☐ symbol represents a wildcard character.
 
 ## Examples
 
