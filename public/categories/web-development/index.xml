@@ -41,7 +41,6 @@ $\text{counter}$ = &lt;output id=&#34;counter&#34;&gt;&lt;/output&gt;&lt;/p&gt;
     &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;game&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
     &lt;figurecaption&gt;Fig. 1: Larks Ant Demo&lt;/figurecaption&gt;
 &lt;/figure&gt;
-&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;https://michaelneuper.github.io/hugo-texify3/js/ant.js&#34;&gt;&lt;/script&gt; --&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;
 var canvas = document.getElementById(&#34;game&#34;);
 var context = canvas.getContext(&#34;2d&#34;);
@@ -120,7 +119,7 @@ class Ant {
         this.state = 0;
       } else {
         this.counter--;
-      }     
+      }
     }
   }
 

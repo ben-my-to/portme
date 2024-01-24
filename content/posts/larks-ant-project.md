@@ -27,8 +27,6 @@ $\text{counter}$ = <output id="counter"></output>
     <figurecaption>Fig. 1: Larks Ant Demo</figurecaption>
 </figure>
 
-<!-- <script type="text/javascript" src="/js/ant.js"></script> -->
-
 <script type="text/javascript">
 var canvas = document.getElementById("game");
 var context = canvas.getContext("2d");
@@ -107,7 +105,7 @@ class Ant {
         this.state = 0;
       } else {
         this.counter--;
-      }     
+      }
     }
   }
 
