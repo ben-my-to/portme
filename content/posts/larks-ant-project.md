@@ -13,7 +13,7 @@ categories: [
 ]
 ---
 
-[Source Code](https://github.com/ben-my-to/CPSC-335/tree/main/Project%201)
+[Link to Source Code](https://github.com/ben-my-to/CPSC-335/tree/main/Project%201)
 
 ## Online Demo[^1]
 

@@ -14,7 +14,7 @@ categories: [
 ]
 ---
 
-[Source Code](https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack)
+[Link to Source Code](https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack)
 
 ## Introduction
 

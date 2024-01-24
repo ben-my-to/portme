@@ -15,7 +15,7 @@
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
 &lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;

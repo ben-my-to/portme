@@ -14,29 +14,22 @@
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://jsfiddle.net/nbkLudma/1/&#34;&gt;jsfiddle&lt;/a&gt;&lt;/p&gt;
-&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
-
+&lt;!-- [Link to jsfiddle](https://jsfiddle.net/nbkLudma/1/) --&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;https://code.jquery.com/jquery-1.7.1.min.js&#34;&gt;&lt;/script&gt;
 &lt;input type=&#34;range&#34; id=&#34;range&#34; min=&#34;0&#34; max=&#34;10&#34; value=&#34;10&#34; oninput=&#34;update_max_depth(this.value);&#34;&gt;
 max_depth = &lt;output id=&#34;slider1-value&#34;&gt;&lt;/output&gt;
-
 &lt;input type=&#34;range&#34; id=&#34;range2&#34; min=&#34;1&#34; max=&#34;50&#34; value=&#34;40&#34; oninput=&#34;update_n_samples(this.value);&#34;&gt;
 n_samples = &lt;output id=&#34;slider2-value&#34;&gt;&lt;/output&gt;
-
 &lt;input type=&#34;range&#34; id=&#34;range3&#34; min=&#34;1&#34; max=&#34;4&#34; value=&#34;3&#34; oninput=&#34;update_n_classes(this.value);&#34;&gt;
 n_classes = &lt;output id=&#34;slider3-value&#34;&gt;&lt;/output&gt;
-
-$\text{Train/Test Accuracy}$ = &lt;output id=&#34;accuracy&#34;&gt;&lt;/output&gt;
-
-&lt;button type=&#34;button&#34; onclick=&#34;gen_points(); redraw()&#34; style=&#34;height: 40px; width: 200px;&#34;&gt;Generate New Training Data&lt;/button&gt;
-
+&lt;p&gt;$\text{Train/Test Accuracy}$ = &lt;output id=&#34;accuracy&#34;&gt;&lt;/output&gt;&lt;/p&gt;
+&lt;p&gt;&lt;button type=&#34;button&#34; onclick=&#34;gen_points(); redraw()&#34; style=&#34;height: 40px; width: 200px;&#34;&gt;Generate New Training Data&lt;/button&gt;&lt;/p&gt;
 &lt;figure&gt;
     &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;boundary&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
     &lt;figurecaption&gt;Fig. 1: Decision Tree Classifier Demo&lt;/figurecaption&gt;
 &lt;/figure&gt;
-
 &lt;script type=&#34;text/javascript&#34;&gt;
 // MODIFIED FROM: http://vision.stanford.edu/teaching/cs231n-demos/knn/knn.js
 
@@ -489,12 +482,13 @@ function draw_boundaries(ctx, state, step) {
   }
   document.getElementById(&#34;accuracy&#34;).innerHTML = accuracy_score(clf, state.points).toString() + &#34;/&#34; + accuracy_score(clf, state.test);
 }
-&lt;/script&gt; --&gt;
+&lt;/script&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange &lt;em&gt;(multi-classification)&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
-&lt;p&gt;The &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt; algorithm exploits &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt; and aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
+&lt;p&gt;Most well-known algorithms &lt;em&gt;(such as the ID3 or CART)&lt;/em&gt; for learning a decision tree requires a &lt;em&gt;greedy&lt;/em&gt; search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is an &lt;strong&gt;NP-Complete&lt;/strong&gt;. We propose a &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt;, a distributed decision tree algorithm using MPI &lt;em&gt;(Message Passing Interface)&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The Parallel Decision Tree algorithm aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features through &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt;. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
 &lt;div class=&#34;mermaid&#34;&gt;%%{init: { &#34;theme&#34;: &#34;neutral&#34;} }%%
 flowchart TB
   subgraph j[$m_0$]
@@ -636,13 +630,13 @@ $$&lt;/p&gt;
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/duong-jason/binary-bros&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/duong-jason/binary-bros&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
 &lt;iframe style=&#34;border: 1px solid rgba(0, 0, 0, 0.1);&#34; width=&#34;800&#34; height=&#34;450&#34; src=&#34;https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Ffile%2FqihsKn3iY99zQqTtMatn8Z%2FLanding-Page%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DsFSbak2BwHFp1aCv-1&#34; allowfullscreen&gt;&lt;/iframe&gt;
 &lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link to Google Sheets&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link to Google Docs&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -652,7 +646,7 @@ $$&lt;/p&gt;
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
 &lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
@@ -735,7 +729,7 @@ $$&lt;/p&gt;
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
       <author>my.toe.ben@gmail.com (Jason Duong)</author>
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-335/tree/main/Project%201&#34;&gt;Source Code&lt;/a&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-335/tree/main/Project%201&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
 &lt;p&gt;$q$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
 $T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;

@@ -5,7 +5,7 @@
 
 <div style="text-align: justify">
 
-Jason Duong _(pronounced Jay-sun You-oong)_ earned his __Bachelor of Science__ in __Computer Science__ from __California State University, Fullerton__. His research interests include _Machine Learning_, _Theoretical Computer Science_, and _Distributed Algorithms_. Apart from his professional interests, he enjoys watching K-dramas, playing video games, and spending time with friends and family.
+Jason Duong _(pronounced Jay-sun You-oong)_ earned his __Bachelor of Science__ in __Computer Science__ from __California State University, Fullerton__. His research interests include _Machine Learning_, _Theoretical Computer Science_, and _Distributed Computing_. Apart from his professional interests, he enjoys watching K-dramas, playing video games, and spending time with friends and family.
 
 </div>
 
@@ -15,7 +15,7 @@ Jason Duong _(pronounced Jay-sun You-oong)_ earned his __Bachelor of Science__ i
 
 ---
 
-[$\rightarrow$ Link to OverLeaf](https://www.overleaf.com/read/cyqtmtqxnshf#ed0803)
+[$\rightarrow$ Link to Google Drive](https://drive.google.com/file/d/1imrL88B0bvfBUH59iGTk_KTdM6lT04Xl/view)
 
 <br />
 
@@ -31,7 +31,7 @@ GPA: 3.86 (3.94 Weighted)/4.0
 
 __La Quinta High School $|$ 2015--2019__
 
-GPA: 3.49/4.00
+GPA: 3.49/4.0
 
 <br/>
 

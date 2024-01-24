@@ -15,17 +15,17 @@ tags: [
 ]
 categories: [
     "Machine Learning",
-    "Distributed Algorithms",
+    "Distributed Computing",
 ]
 ---
 
-[Source Code](https://github.com/ben-my-to/mpitree)
+[Link to Source Code](https://github.com/ben-my-to/mpitree)
 
 ## Try it Out![^1]
 
-[jsfiddle](https://jsfiddle.net/nbkLudma/1/)
+<!-- [Link to jsfiddle](https://jsfiddle.net/nbkLudma/1/) -->
 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 <input type="range" id="range" min="0" max="10" value="10" oninput="update_max_depth(this.value);">
 max_depth = <output id="slider1-value"></output>
@@ -497,7 +497,7 @@ function draw_boundaries(ctx, state, step) {
   }
   document.getElementById("accuracy").innerHTML = accuracy_score(clf, state.points).toString() + "/" + accuracy_score(clf, state.test);
 }
-</script> -->
+</script>
 
 [^1]: Figure 1 provides an online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/knn/).
 
@@ -511,7 +511,9 @@ A __Decision Tree Classifier__ is a decision tree whose prediction of a response
 
 ## Methodology
 
-The __Parallel Decision Tree__ algorithm exploits [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism) and aims to reduce the time taken by a _greedy_  search across all features. It schedules processors to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
+Most well-known algorithms _(such as the ID3 or CART)_ for learning a decision tree requires a _greedy_ search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is an __NP-Complete__. We propose a __Parallel Decision Tree__, a distributed decision tree algorithm using MPI _(Message Passing Interface)_.
+
+The Parallel Decision Tree algorithm aims to reduce the time taken by a _greedy_  search across all features through [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism). It schedules processors to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
 
 [^3]: Figure 2 demonstrates the partitioning from communicator $m_0$ where the number of levels $n=2$ and number of processors $k=5$. Processors $p_0,p_2,p_4$ are scheduled to sub-communicator $m_1$ as each processor's identifier is even _(divisible by 2)_, processors $p_1,p_3$ are scheduled to sub-communicator $m_2$ as each processor's identifier is odd, etc.
 

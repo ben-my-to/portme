@@ -64,7 +64,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-05-16T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-01-22T12:57:16-08:00" /><meta property="og:site_name" content="Jason Duong" />
+<meta property="article:modified_time" content="2024-01-23T11:46:42-08:00" /><meta property="og:site_name" content="Jason Duong" />
 
 
 
@@ -75,8 +75,8 @@
   
   <meta itemprop="name" content="A Parallel Decision Tree Classifier">
 <meta itemprop="description" content="A Parallel Decision Tree Classifier implementation using MPI (Message Passing Interface)"><meta itemprop="datePublished" content="2023-05-16T00:00:00+00:00" />
-<meta itemprop="dateModified" content="2024-01-22T12:57:16-08:00" />
-<meta itemprop="wordCount" content="1189">
+<meta itemprop="dateModified" content="2024-01-23T11:46:42-08:00" />
+<meta itemprop="wordCount" content="1259">
 <meta itemprop="keywords" content="Python,NumPy,scikit-learn,Matplotlib,Git,Black,LaTeX," />
 
   
@@ -183,7 +183,7 @@
           <svg width="0.75em" height="0.75em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M15.4998 5.49994L18.3282 8.32837M3 20.9997L3.04745 20.6675C3.21536 19.4922 3.29932 18.9045 3.49029 18.3558C3.65975 17.8689 3.89124 17.4059 4.17906 16.9783C4.50341 16.4963 4.92319 16.0765 5.76274 15.237L17.4107 3.58896C18.1918 2.80791 19.4581 2.80791 20.2392 3.58896C21.0202 4.37001 21.0202 5.63634 20.2392 6.41739L8.37744 18.2791C7.61579 19.0408 7.23497 19.4216 6.8012 19.7244C6.41618 19.9932 6.00093 20.2159 5.56398 20.3879C5.07171 20.5817 4.54375 20.6882 3.48793 20.9012L3 20.9997Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          1189 words
+          1259 words
         </span>
       
       
@@ -252,29 +252,22 @@
   
   <article class="content numbered-subtitles">
     
-    <p><a href="https://github.com/ben-my-to/mpitree">Source Code</a></p>
+    <p><a href="https://github.com/ben-my-to/mpitree">Link to Source Code</a></p>
 <h2 id="try-it-out1">Try it Out!<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></h2>
-<p><a href="https://jsfiddle.net/nbkLudma/1/">jsfiddle</a></p>
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
-
+<!-- [Link to jsfiddle](https://jsfiddle.net/nbkLudma/1/) -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 <input type="range" id="range" min="0" max="10" value="10" oninput="update_max_depth(this.value);">
 max_depth = <output id="slider1-value"></output>
-
 <input type="range" id="range2" min="1" max="50" value="40" oninput="update_n_samples(this.value);">
 n_samples = <output id="slider2-value"></output>
-
 <input type="range" id="range3" min="1" max="4" value="3" oninput="update_n_classes(this.value);">
 n_classes = <output id="slider3-value"></output>
-
-$\text{Train/Test Accuracy}$ = <output id="accuracy"></output>
-
-<button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button>
-
+<p>$\text{Train/Test Accuracy}$ = <output id="accuracy"></output></p>
+<p><button type="button" onclick="gen_points(); redraw()" style="height: 40px; width: 200px;">Generate New Training Data</button></p>
 <figure>
     <canvas width="800" height="400" id="boundary"></canvas><br>
     <figurecaption>Fig. 1: Decision Tree Classifier Demo</figurecaption>
 </figure>
-
 <script type="text/javascript">
 // MODIFIED FROM: http://vision.stanford.edu/teaching/cs231n-demos/knn/knn.js
 
@@ -727,12 +720,13 @@ function draw_boundaries(ctx, state, step) {
   }
   document.getElementById("accuracy").innerHTML = accuracy_score(clf, state.points).toString() + "/" + accuracy_score(clf, state.test);
 }
-</script> -->
+</script>
 <h2 id="introduction">Introduction</h2>
 <p>A <strong>Decision Tree</strong> is an $n$-nary tree where each node represents a feature <em>(interior nodes)</em> or response <em>(terminal/leaf nodes)</em> value, and each branch represents a condition on some feature. Decision Trees are intuitive <em>supervised</em> machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is <em>generalization</em> &ndash; the model&rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &ldquo;good&rdquo; questions <em>(the features that maximize the information gain<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>)</em> about the data that leads to the most certainty about the response variable each time.</p>
 <p>A <strong>Decision Tree Classifier</strong> is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange <em>(multi-classification)</em>.</p>
 <h2 id="methodology">Methodology</h2>
-<p>The <strong>Parallel Decision Tree</strong> algorithm exploits <a href="https://en.wikipedia.org/wiki/Data_parallelism"><em>data parallelism</em></a> and aims to reduce the time taken by a <em>greedy</em>  search across all features. It schedules processors to a number of sub-communicators in a <em>cyclic distribution</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.</p>
+<p>Most well-known algorithms <em>(such as the ID3 or CART)</em> for learning a decision tree requires a <em>greedy</em> search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is an <strong>NP-Complete</strong>. We propose a <strong>Parallel Decision Tree</strong>, a distributed decision tree algorithm using MPI <em>(Message Passing Interface)</em>.</p>
+<p>The Parallel Decision Tree algorithm aims to reduce the time taken by a <em>greedy</em>  search across all features through <a href="https://en.wikipedia.org/wiki/Data_parallelism"><em>data parallelism</em></a>. It schedules processors to a number of sub-communicators in a <em>cyclic distribution</em><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.</p>
 <div class="mermaid">%%{init: { "theme": "neutral"} }%%
 flowchart TB
   subgraph j[$m_0$]

@@ -14,7 +14,7 @@ categories: [
 ]
 ---
 
-[Source Code](https://github.com/duong-jason/binary-bros)
+[Link to Source Code](https://github.com/duong-jason/binary-bros)
 
 ## Figma Design Prototypes
 
@@ -22,8 +22,8 @@ categories: [
 
 ## User Stories and Burndown Chart
 
-[Link](https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml)
+[Link to Google Sheets](https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml)
 
 ## Stand Up Meetings and Retrospectives
 
-[Link](https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub)
+[Link to Google Docs](https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub)
