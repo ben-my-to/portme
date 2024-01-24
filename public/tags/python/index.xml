@@ -81,6 +81,14 @@ function findMode(array) {
 
 var info_gains = [];
 var thresholds = [];
+var counts = {};
+var n_unique_classes = [];
+var proba = [];
+var result = 0;
+var X_left, X_right, y_left, y_right, weight_left, weight_right;
+var left_indices, right_indices, impurity_left, impurity_right;
+var possible_thresholds, costs;
+var n_classes;
 
 class Node {
   constructor(value, threshold = null) {
@@ -106,22 +114,22 @@ class DecisionTreeClassifier {
   }
 
   entropy(x) {
-    var counts = {};
+    counts = {};
     x.forEach(function (x) {
       counts[x] = (counts[x] || 0) + 1;
     });
 
-    var n_unique_classes = [];
+    n_unique_classes = [];
     for (var key in counts) {
       n_unique_classes.push(counts[key]);
     }
 
-    var proba = [];
+    proba = [];
     for (var i = 0; i &lt; n_unique_classes.length; i++) {
       proba.push(n_unique_classes[i] / x.length);
     }
 
-    var result = 0;
+    result = 0;
     for (var i = 0; i &lt; n_unique_classes.length; i++) {
       result += proba[i] * Math.log2(proba[i]);
     }
@@ -130,32 +138,33 @@ class DecisionTreeClassifier {
   }
 
   cond_entropy(X, y, t, feature_idx) {
-    var X_left = X.filter((x) =&gt; x[feature_idx] &lt;= t);
-    var X_right = X.filter((x) =&gt; x[feature_idx] &gt; t);
+    X_left = X.filter((x) =&gt; x[feature_idx] &lt;= t);
+    X_right = X.filter((x) =&gt; x[feature_idx] &gt; t);
 
-    var left_indices = [];
-    var right_indices = [];
+    left_indices = [];
+    right_indices = [];
+
     for (var i = 0; i &lt; X.length; i++) {
       if (X[i][feature_idx] &lt;= t) left_indices.push(i);
       else right_indices.push(i);
     }
 
-    var y_left = left_indices.map((x) =&gt; y[x]);
-    var y_right = right_indices.map((x) =&gt; y[x]);
+    y_left = left_indices.map((x) =&gt; y[x]);
+    y_right = right_indices.map((x) =&gt; y[x]);
 
-    var weight_left = X_left.length / X.length;
-    var weight_right = X_right.length / X.length;
+    weight_left = X_left.length / X.length;
+    weight_right = X_right.length / X.length;
 
-    var impurity_left = this.entropy(y_left);
-    var impurity_right = this.entropy(y_right);
+    impurity_left = this.entropy(y_left);
+    impurity_right = this.entropy(y_right);
 
     return weight_left * impurity_left + weight_right * impurity_right;
   }
 
   information_gain(X, y, feature_idx) {
-    var possible_thresholds = getCol(X, feature_idx).filter(this.unique);
+    possible_thresholds = getCol(X, feature_idx).filter(this.unique);
 
-    var costs = [];
+    costs = [];
     for (const t of possible_thresholds) {
       costs.push(this.cond_entropy(X, y, t, feature_idx));
     }
@@ -173,7 +182,7 @@ class DecisionTreeClassifier {
   }
 
   make_tree(X, y, depth = 0) {
-    var n_classes = y.filter(this.unique).length;
+    n_classes = y.filter(this.unique).length;
 
     if (
       n_classes == 1 ||
@@ -488,7 +497,7 @@ function draw_boundaries(ctx, state, step) {
 &lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange &lt;em&gt;(multi-classification)&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
-&lt;p&gt;Most well-known algorithms &lt;em&gt;(such as the ID3 or CART)&lt;/em&gt; for learning a decision tree requires a &lt;em&gt;greedy&lt;/em&gt; search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is an &lt;strong&gt;NP-Complete&lt;/strong&gt;. We propose a &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt;, a distributed decision tree algorithm using MPI &lt;em&gt;(Message Passing Interface)&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Most well-known algorithms &lt;em&gt;(such as the ID3 or CART)&lt;/em&gt; for learning a decision tree require a &lt;em&gt;greedy&lt;/em&gt; search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is &lt;strong&gt;NP-Complete&lt;/strong&gt;. We propose a &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt;, a distributed decision tree algorithm using MPI &lt;em&gt;(Message Passing Interface)&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;The Parallel Decision Tree algorithm aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features through &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt;. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
 &lt;div class=&#34;mermaid&#34;&gt;%%{init: { &#34;theme&#34;: &#34;neutral&#34;} }%%
 flowchart TB

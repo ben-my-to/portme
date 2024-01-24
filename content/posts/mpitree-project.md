@@ -95,6 +95,14 @@ function findMode(array) {
 
 var info_gains = [];
 var thresholds = [];
+var counts = {};
+var n_unique_classes = [];
+var proba = [];
+var result = 0;
+var X_left, X_right, y_left, y_right, weight_left, weight_right;
+var left_indices, right_indices, impurity_left, impurity_right;
+var possible_thresholds, costs;
+var n_classes;
 
 class Node {
   constructor(value, threshold = null) {
@@ -120,22 +128,22 @@ class DecisionTreeClassifier {
   }
 
   entropy(x) {
-    var counts = {};
+    counts = {};
     x.forEach(function (x) {
       counts[x] = (counts[x] || 0) + 1;
     });
 
-    var n_unique_classes = [];
+    n_unique_classes = [];
     for (var key in counts) {
       n_unique_classes.push(counts[key]);
     }
 
-    var proba = [];
+    proba = [];
     for (var i = 0; i < n_unique_classes.length; i++) {
       proba.push(n_unique_classes[i] / x.length);
     }
 
-    var result = 0;
+    result = 0;
     for (var i = 0; i < n_unique_classes.length; i++) {
       result += proba[i] * Math.log2(proba[i]);
     }
@@ -144,32 +152,33 @@ class DecisionTreeClassifier {
   }
 
   cond_entropy(X, y, t, feature_idx) {
-    var X_left = X.filter((x) => x[feature_idx] <= t);
-    var X_right = X.filter((x) => x[feature_idx] > t);
+    X_left = X.filter((x) => x[feature_idx] <= t);
+    X_right = X.filter((x) => x[feature_idx] > t);
 
-    var left_indices = [];
-    var right_indices = [];
+    left_indices = [];
+    right_indices = [];
+
     for (var i = 0; i < X.length; i++) {
       if (X[i][feature_idx] <= t) left_indices.push(i);
       else right_indices.push(i);
     }
 
-    var y_left = left_indices.map((x) => y[x]);
-    var y_right = right_indices.map((x) => y[x]);
+    y_left = left_indices.map((x) => y[x]);
+    y_right = right_indices.map((x) => y[x]);
 
-    var weight_left = X_left.length / X.length;
-    var weight_right = X_right.length / X.length;
+    weight_left = X_left.length / X.length;
+    weight_right = X_right.length / X.length;
 
-    var impurity_left = this.entropy(y_left);
-    var impurity_right = this.entropy(y_right);
+    impurity_left = this.entropy(y_left);
+    impurity_right = this.entropy(y_right);
 
     return weight_left * impurity_left + weight_right * impurity_right;
   }
 
   information_gain(X, y, feature_idx) {
-    var possible_thresholds = getCol(X, feature_idx).filter(this.unique);
+    possible_thresholds = getCol(X, feature_idx).filter(this.unique);
 
-    var costs = [];
+    costs = [];
     for (const t of possible_thresholds) {
       costs.push(this.cond_entropy(X, y, t, feature_idx));
     }
@@ -187,7 +196,7 @@ class DecisionTreeClassifier {
   }
 
   make_tree(X, y, depth = 0) {
-    var n_classes = y.filter(this.unique).length;
+    n_classes = y.filter(this.unique).length;
 
     if (
       n_classes == 1 ||
@@ -511,7 +520,7 @@ A __Decision Tree Classifier__ is a decision tree whose prediction of a response
 
 ## Methodology
 
-Most well-known algorithms _(such as the ID3 or CART)_ for learning a decision tree requires a _greedy_ search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is an __NP-Complete__. We propose a __Parallel Decision Tree__, a distributed decision tree algorithm using MPI _(Message Passing Interface)_.
+Most well-known algorithms _(such as the ID3 or CART)_ for learning a decision tree require a _greedy_ search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is __NP-Complete__. We propose a __Parallel Decision Tree__, a distributed decision tree algorithm using MPI _(Message Passing Interface)_.
 
 The Parallel Decision Tree algorithm aims to reduce the time taken by a _greedy_  search across all features through [_data parallelism_](https://en.wikipedia.org/wiki/Data_parallelism). It schedules processors to a number of sub-communicators in a _cyclic distribution_[^3], roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process's identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.
 
