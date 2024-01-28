@@ -17,13 +17,13 @@
       <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://jsfiddle.net/nbkLudma/1/&#34;&gt;Link to jsfiddle&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width=&#34;800&#34; height=&#34;600&#34; src=&#34;//jsfiddle.net/benmyto/rywL0bvn/1/embedded/result/?menuColor=ded7b7&#34; allowfullscreen=&#34;allowfullscreen&#34; allowpaymentrequest frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
 &lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange &lt;em&gt;(multi-classification)&lt;/em&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
 &lt;p&gt;Most well-known algorithms &lt;em&gt;(such as the ID3 or CART)&lt;/em&gt; for learning a decision tree require a &lt;em&gt;greedy&lt;/em&gt; search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is &lt;strong&gt;NP-Complete&lt;/strong&gt;. We propose a &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt;, a distributed decision tree algorithm using MPI &lt;em&gt;(Message Passing Interface)&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;The Parallel Decision Tree algorithm aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features through &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt;. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
+&lt;p&gt;The Parallel Decision Tree algorithm aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features through &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt;. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors in some communicator and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
 &lt;div class=&#34;mermaid&#34;&gt;%%{init: { &#34;theme&#34;: &#34;neutral&#34;} }%%
 flowchart TB
   subgraph j[$m_0$]
@@ -68,7 +68,7 @@ flowchart TB
   end
 &lt;/div&gt;
 
-&lt;figcaption&gt;Fig. 2: Cyclic Distribution&lt;/figcaption&gt;
+&lt;figcaption&gt;Fig. 1: Cyclic Distribution&lt;/figcaption&gt;
 &lt;h3 id=&#34;mathematical-modelling&#34;&gt;Mathematical Modelling&lt;/h3&gt;
 &lt;div class=&#34;definition&#34;&gt;
 &lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: A &lt;em&gt;cyclic distribution&lt;/em&gt; function $f_m:\left[k\right]\to\mathcal{M}$ takes as input a $k$-tuple of processors and outputs a set of communicators $\mathcal{M}$ is defined as&lt;/p&gt;
@@ -79,7 +79,7 @@ f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
 \bigcup_{j\in\left[n\right]}f_{mn+j+1}(p_i\mapsto\lfloor i/n \rfloor : i\bmod n=j) &amp;amp; \text{otherwise}.
 \end{cases}
 $$&lt;/p&gt;
-&lt;p&gt;for some initial natural numbers $k\ge n\ge 2$ and $m$.&lt;/p&gt;
+&lt;p&gt;for some natural numbers $k\ge n\ge 2$ and $m$.&lt;/p&gt;
 &lt;/div &gt;
 &lt;h2 id=&#34;model-evaluation-and-analysis&#34;&gt;Model Evaluation and Analysis&lt;/h2&gt;
 &lt;h3 id=&#34;decision-boundaries-varying-values-for-the-max_depth-hyperparameter&#34;&gt;Decision Boundaries varying values for the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter&lt;/h3&gt;
@@ -87,23 +87,23 @@ $$&lt;/p&gt;
 &lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt; hyperparameters). In conjunction, validation methodologies such as $k$-fold Cross-Validation can be applied select optimal values for such hyperparameters.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundary Example&#34; style=&#34;width:70%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 3: Decision Boundaries on the Iris Dataset&lt;/figcaption&gt;
+  &lt;figcaption&gt;Fig. 2: Decision Boundaries on the Iris Dataset&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h3 id=&#34;parallel-execution-times&#34;&gt;Parallel Execution Times&lt;/h3&gt;
-&lt;p&gt;Figure 4 below shows a plot of the number of training samples versus the time taken &lt;em&gt;(ms)&lt;/em&gt; to train four decision tree classifiers &lt;em&gt;(one sequential and three in-parallel)&lt;/em&gt;. All decision tree classifiers were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.&lt;/p&gt;
+&lt;p&gt;Figure 3 below shows a plot of the number of training samples versus the time taken &lt;em&gt;(ms)&lt;/em&gt; to train four decision tree classifiers &lt;em&gt;(one sequential and three in-parallel)&lt;/em&gt;. All decision tree classifiers were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png&#34; alt=&#34;Parallel Execution Time&#34; style=&#34;width:45%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 4: Parallel Execution Times&lt;/figcaption&gt;
+  &lt;figcaption&gt;Fig. 3: Parallel Execution Times&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;h3 id=&#34;message-complexity&#34;&gt;Message Complexity&lt;/h3&gt;
 &lt;div class=&#34;theorem&#34;&gt;
 &lt;p&gt;&lt;strong&gt;Theorem 1&lt;/strong&gt;: The &lt;em&gt;Parallel Decision Tree&lt;/em&gt; classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.&lt;/p&gt;
 &lt;/div &gt;
 &lt;p&gt;Proof.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathcal{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M},\ |m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathcal{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$ with $|m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
 &lt;figure class=&#34;image&#34;&gt;
 &lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:55%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 5: Communication Costs for Binary Trees&lt;/figcaption&gt;
+  &lt;figcaption&gt;Fig. 4: Communication Costs for Binary Trees&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;div class=&#34;remark&#34;&gt;
 &lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;: We will use &lt;em&gt;integer division&lt;/em&gt; throughout the proof.&lt;/p&gt;
@@ -140,19 +140,19 @@ $$&lt;/p&gt;
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;Figure 1 provides an online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/knn/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;An online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/knn/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34;&gt;
 &lt;p&gt;Information gain quantifies the increase in confidence about a response variable after querying a feature. A higher value &lt;em&gt;(bits)&lt;/em&gt; for information gain implies a greater likelihood of achieving purer splits &lt;em&gt;(no uncertainty on a prediction)&lt;/em&gt;.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;Figure 2 demonstrates the partitioning from communicator $m_0$ where the number of levels $n=2$ and number of processors $k=5$. Processors $p_0,p_2,p_4$ are scheduled to sub-communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, processors $p_1,p_3$ are scheduled to sub-communicator $m_2$ as each processor&amp;rsquo;s identifier is odd, etc.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 1 demonstrates the partitioning from communicator $m_0$ where the number of levels $n=2$ and number of processors $k=5$. Processors $p_0,p_2,p_4$ are scheduled to sub-communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, processors $p_1,p_3$ are scheduled to sub-communicator $m_2$ as each processor&amp;rsquo;s identifier is odd, etc.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:4&#34;&gt;
-&lt;p&gt;Figure 3 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree classifier as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 2 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree classifier as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:5&#34;&gt;
-&lt;p&gt;Figure 5 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree. Each successive split reduces the number of processors by two until all remaining nodes are singletons.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Figure 4 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree. Each successive split reduces the number of processors by two until all remaining nodes are singletons.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
