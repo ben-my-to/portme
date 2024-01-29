@@ -23,7 +23,7 @@ categories: [
 
 ## Try it Out![^1]
 
-<iframe width="800" height="600" src="//jsfiddle.net/benmyto/rywL0bvn/1/embedded/result/?menuColor=ded7b7" allowfullscreen="allowfullscreen" allowpaymentrequest frameborder="0"></iframe>
+<iframe width="804" height="446" src="https://editor.p5js.org/ben-my-to/full/BhAJPmrSD"></iframe>
 
 [^1]: An online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/knn/).
 
@@ -141,7 +141,7 @@ __Theorem 1__: The _Parallel Decision Tree_ classifier $\mathcal{T}$ exchanges a
 
 Proof.
 
-__Definition 1__ constructs a full $n$-nary communicator tree $\mathcal{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$ with $|m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
+__Definition 1__ constructs a full $n$-nary communicator tree $\mathcal{M}$  _(each node has 0 or $n$ children)_ of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$ subject to $|m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the `MPI.allgather` function. As such, each process obtains a sub-tree computed by every other process.
 
 <figure class="image">
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png" alt="Message Exchanges" style="width:55%;display:block;margin-left:auto;margin-right:auto;">
