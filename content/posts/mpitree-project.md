@@ -23,7 +23,7 @@ categories: [
 
 ## Try it Out![^1]
 
-<iframe width="804" height="446" src="https://editor.p5js.org/ben-my-to/full/BhAJPmrSD"></iframe>
+<iframe width="82.5%" height="446" src="https://editor.p5js.org/ben-my-to/full/BhAJPmrSD"></iframe>
 
 [^1]: An online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from [CS231n-demos](http://vision.stanford.edu/teaching/cs231n-demos/knn/).
 
