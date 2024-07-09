@@ -2,261 +2,34 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/tags/git/</link>
+    <link>http://localhost:1313/hugo-texify3/tags/git/</link>
     <description>Recent content in Git on Jason Duong</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Tue, 16 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Feb 2024 13:21:36 -0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/hugo-texify3/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Parallel Decision Tree Classifier</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</link>
-      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/mpitree&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;try-it-out1&#34;&gt;Try it Out!&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;iframe width=&#34;82.5%&#34; height=&#34;446&#34; src=&#34;https://editor.p5js.org/ben-my-to/full/BhAJPmrSD&#34;&gt;&lt;/iframe&gt;
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;A &lt;strong&gt;Decision Tree&lt;/strong&gt; is an $n$-nary tree where each node represents a feature &lt;em&gt;(interior nodes)&lt;/em&gt; or response &lt;em&gt;(terminal/leaf nodes)&lt;/em&gt; value, and each branch represents a condition on some feature. Decision Trees are intuitive &lt;em&gt;supervised&lt;/em&gt; machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions. The fundamental procedure for a decision tree involves recursively querying each feature and partitioning the dataset and feature space into disjoint subsets and regions until there is no ambiguity about the response variable. The primary goal of any machine learning model is &lt;em&gt;generalization&lt;/em&gt; &amp;ndash; the model&amp;rsquo;s ability to perform well on future, unseen data. Therefore, the general approach to learning an optimal decision tree involves asking &amp;ldquo;good&amp;rdquo; questions &lt;em&gt;(the features that maximize the information gain&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;)&lt;/em&gt; about the data that leads to the most certainty about the response variable each time.&lt;/p&gt;
-&lt;p&gt;A &lt;strong&gt;Decision Tree Classifier&lt;/strong&gt; is a decision tree whose prediction of a response variable is from a set of finite classes. Given some observed data, examples of classification-type problems are whether an incoming patient has cancer, whether an email is spam or not spam, or whether a fruit is an apple, banana, or orange &lt;em&gt;(multi-classification)&lt;/em&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;methodology&#34;&gt;Methodology&lt;/h2&gt;
-&lt;p&gt;Most well-known algorithms &lt;em&gt;(such as the ID3 or CART)&lt;/em&gt; for learning a decision tree require a &lt;em&gt;greedy&lt;/em&gt; search across all features. Unfortunately, the problem of finding the best sequence of splitting rules is &lt;strong&gt;NP-Complete&lt;/strong&gt;. We propose a &lt;strong&gt;Parallel Decision Tree&lt;/strong&gt;, a distributed decision tree algorithm using MPI &lt;em&gt;(Message Passing Interface)&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;The Parallel Decision Tree algorithm aims to reduce the time taken by a &lt;em&gt;greedy&lt;/em&gt;  search across all features through &lt;a href=&#34;https://en.wikipedia.org/wiki/Data_parallelism&#34;&gt;&lt;em&gt;data parallelism&lt;/em&gt;&lt;/a&gt;. It schedules processors to a number of sub-communicators in a &lt;em&gt;cyclic distribution&lt;/em&gt;&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, roughly evenly across levels of a split feature. Processors in each sub-communicator concurrently participate in calculating the split feature and await completion at their parent communicator for all other processors in that communicator. Let $k$ be the total number of processors in some communicator and $n$ be the number of levels, where $k,n\in\mathbb{N}$ such that $k\ge n\ge 2$. Then, a sub-communicator $m$ contains at most $\lceil k/n \rceil$ processors, and at least $[1\ldots n)$ processors. Each process&amp;rsquo;s identifier $p_{i\in[k]}$ is then assigned to the sub-communicator $m = i\bmod n$ and receives a unique identifier in that group $p_i = \lfloor i/n \rfloor$.&lt;/p&gt;
-&lt;div class=&#34;mermaid&#34;&gt;%%{init: { &#34;theme&#34;: &#34;neutral&#34;} }%%
-flowchart TB
-  subgraph j[$m_0$]
-    direction TB
-    a[$p_0,\ldots,p_4$] --&gt; k
-    a[$p_0,\ldots,p_4$] --&gt; p
-    subgraph k[$m_1$]
-        direction TB
-        b[$p_0,p_2,p_4$] --&gt; l
-        b[$p_0,p_2,p_4$] --&gt; o
-        subgraph l[$m_3$]
-            direction TB
-            c[$p_0,p_4$] --&gt; m
-            c[$p_0,p_4$] --&gt; n
-            subgraph m[$m_7$]
-                direction TB
-                e[$p_0$]
-            end
-            subgraph n[$m_8$]
-                direction TB
-                f[$p_4$]
-            end
-        end
-        subgraph o[$m_4$]
-          direction TB
-          d[$p_2$]
-        end
-    end
-    subgraph p[$m_2$]
-        direction TB
-        g[$p_1,p_3$] --&gt; q
-        g[$p_1,p_3$] --&gt; r
-        subgraph q[$m_5$]
-          direction TB
-          h[$p_1$]
-        end
-        subgraph r[$m_6$]
-          direction TB
-          i[$p_3$]
-        end
-    end
-  end
-&lt;/div&gt;
-
-&lt;figcaption&gt;Fig. 1: Cyclic Distribution&lt;/figcaption&gt;
-&lt;h3 id=&#34;mathematical-modelling&#34;&gt;Mathematical Modelling&lt;/h3&gt;
-&lt;div class=&#34;definition&#34;&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: A &lt;em&gt;cyclic distribution&lt;/em&gt; function $f_m:\left[k\right]\to\mathcal{M}$ takes as input a $k$-tuple of processors and outputs a set of communicators $\mathcal{M}$ is defined as&lt;/p&gt;
-&lt;p&gt;$$
-f_m(p_0,\ldots, p_{k-1}) = \lbrace m \rbrace\cup
-\begin{cases}
-\emptyset &amp;amp; k=1 \\
-\bigcup_{j\in\left[n\right]}f_{mn+j+1}(p_i\mapsto\lfloor i/n \rfloor : i\bmod n=j) &amp;amp; \text{otherwise}.
-\end{cases}
-$$&lt;/p&gt;
-&lt;p&gt;for some natural numbers $k\ge n\ge 2$ and $m$.&lt;/p&gt;
-&lt;/div &gt;
-&lt;h2 id=&#34;model-evaluation-and-analysis&#34;&gt;Model Evaluation and Analysis&lt;/h2&gt;
-&lt;h3 id=&#34;decision-boundaries-varying-values-for-the-max_depth-hyperparameter&#34;&gt;Decision Boundaries varying values for the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter&lt;/h3&gt;
-&lt;p&gt;As a decision tree grows deeper, overfitting becomes evident because predictions rely on increasingly smaller regions of the feature space. In a way, the decision tree model tends to bias toward &lt;em&gt;singleton nodes&lt;/em&gt;, potentially resulting in mispredictions in the presence of noisy data&lt;sup id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;p&gt;Pre-and-post-pruning techniques are some solutions to reduce the likelihood of an overfitted decision tree. Pre-pruning techniques introduce early stopping criteria (e.g., &lt;code&gt;max_depth&lt;/code&gt;, &lt;code&gt;min_samples_split&lt;/code&gt; hyperparameters). In conjunction, validation methodologies such as $k$-fold Cross-Validation can be applied select optimal values for such hyperparameters.&lt;/p&gt;
-&lt;figure class=&#34;image&#34;&gt;
-&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/iris_decision_tree.png&#34; alt=&#34;Decision Boundary Example&#34; style=&#34;width:70%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 2: Decision Boundaries on the Iris Dataset&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;h3 id=&#34;parallel-execution-times&#34;&gt;Parallel Execution Times&lt;/h3&gt;
-&lt;p&gt;Figure 3 below shows a plot of the number of training samples versus the time taken &lt;em&gt;(ms)&lt;/em&gt; to train four decision tree classifiers &lt;em&gt;(one sequential and three in-parallel)&lt;/em&gt;. All decision tree classifiers were trained with the same examples, sampled over a uniform distribution, across all iterations. Our experiment yields an average speedup of $\bar{S}=1.7$.&lt;/p&gt;
-&lt;figure class=&#34;image&#34;&gt;
-&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/parallel_exec_time.png&#34; alt=&#34;Parallel Execution Time&#34; style=&#34;width:45%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 3: Parallel Execution Times&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;h3 id=&#34;message-complexity&#34;&gt;Message Complexity&lt;/h3&gt;
-&lt;div class=&#34;theorem&#34;&gt;
-&lt;p&gt;&lt;strong&gt;Theorem 1&lt;/strong&gt;: The &lt;em&gt;Parallel Decision Tree&lt;/em&gt; classifier $\mathcal{T}$ exchanges at most $O(k^2)$ messages.&lt;/p&gt;
-&lt;/div &gt;
-&lt;p&gt;Proof.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt; constructs a full $n$-nary communicator tree $\mathcal{M}$  &lt;em&gt;(each node has 0 or $n$ children)&lt;/em&gt; of height $h=\lceil\log_n k\rceil + 1$. Assume $\mathcal{T}\supseteq\mathcal{M}$. Then, for each $m\in\mathcal{M}$ subject to $|m|\ge 2$, processors must exchange $k=|m|$ messages for a total of $k^2$ messages through the &lt;code&gt;MPI.allgather&lt;/code&gt; function. As such, each process obtains a sub-tree computed by every other process.&lt;/p&gt;
-&lt;figure class=&#34;image&#34;&gt;
-&lt;img src=&#34;https://raw.githubusercontent.com/ben-my-to/website/main/static/images/message_complexity.png&#34; alt=&#34;Message Exchanges&#34; style=&#34;width:55%;display:block;margin-left:auto;margin-right:auto;&#34;&gt;
-  &lt;figcaption&gt;Fig. 4: Communication Costs for Binary Trees&lt;/figcaption&gt;
-&lt;/figure&gt;
-&lt;div class=&#34;remark&#34;&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;: We will use &lt;em&gt;integer division&lt;/em&gt; throughout the proof.&lt;/p&gt;
-&lt;/div &gt;
-&lt;p&gt;Let $0\le c\le h-2$ be a split performed by &lt;code&gt;MPI.Split&lt;/code&gt;. At split $c=0$, processors exchange $k^2$ messages. At the successor split $c=1$, processors exchange $n\cdot(k/n)^2$ messages. At split $c=3$, processors exchange $n^2\cdot(k/n^2)^2$ and so on and so forth&lt;sup id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;. Therefore, we can define the recurrence relation $\mathbf{M}(k)$, the total number of exchanged messages by $k$ processors, as&lt;/p&gt;
-&lt;p&gt;$$
-\mathbf{M}(k)=
-\begin{cases}
-0 &amp;amp; k=1\\
-n^c\cdot k^2+\mathbf{M}(k/n) &amp;amp; \text{otherwise}.
-\end{cases}
-$$&lt;/p&gt;
-&lt;p&gt;Solving the recurrence relation using the &lt;em&gt;iteration&lt;/em&gt; method, we obtain the closed formula&lt;/p&gt;
-&lt;p&gt;$$
-\begin{align}
-\mathbf{M}(k) &amp;amp;= n^{(0)} \cdot k^2 + \mathcal{M}(k/n)\\
-&amp;amp;= (1)\cdot k^2 + \left[n^{(1)} \cdot (k/n)^2 + \mathcal{M}(k/n^2)\right]\\
-&amp;amp;= {\color{red}k^2} + nk^2/n^2 + \left[n^{(2)} \cdot (k/n^2)^2 + \mathcal{M}(k/n^3)\right]\\
-&amp;amp;= k^2 + {\color{red}k^2/n} + n^2 k^2/n^4 + \mathcal{M}(k/n^3) + \dots + \mathcal{M}(k/n^{h-2})\\
-&amp;amp;= k^2 + k^2/n + {\color{red}k^2/n^2} + n^3 k^2/n^6 + \dots + \left[n^{\lceil\log_n k\rceil-1}\cdot (k/n^{\lceil\log_n k\rceil-1})^2 + \mathcal{M}(k/n^{\lceil\log_n k\rceil})\right]\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + {\color{red}k^2/n^3} + \dots + (k/n)\cdot k^2/n^{2(\lceil\log_n k\rceil)-2} + \mathcal{M}(1)\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + (k/n)\cdot k^2n^2/k^2+0\\
-&amp;amp;= k^2 + k^2/n + k^2/n^2 + k^2/n^3 + \dots + {\color{red}kn}.
-\end{align}
-$$&lt;/p&gt;
-&lt;p&gt;Noting that $n^c\cdot(k/n^c)^2 = k^2n^{-c}$, the worst-case message complexity of $\mathcal{T}$ is&lt;/p&gt;
-&lt;p&gt;$$
-O\left(\mathbf{M}(k)\right)=O\left(\sum_{c=0}^{h-2} k^2n^{-c}\right) = O\left(k^2+k^2n^{-1}+k^2 n^{-2}+\dots+kn\right) = O(k^2).
-$$&lt;/p&gt;
-&lt;p style=&#34;float:right&#34;&gt;$\blacksquare$&lt;/p&gt;
-&lt;h2 id=&#34;future-works&#34;&gt;Future Works&lt;/h2&gt;
-&lt;p&gt;Our implementation is restricted to binary trees ($n=2$) with numerical data. We plan to extend the functionality to handle categorical, sparse, missing, etc. data and regression problems in the next iteration.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;An online visualization of the decision boundaries decided by a Decision Tree Classifier. Feel free to drag individual data points and sliders to explore how the decision boundary and accuracy of the model changes. This script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/knn/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;
-&lt;p&gt;Information gain quantifies the increase in confidence about a response variable after querying a feature. A higher value &lt;em&gt;(bits)&lt;/em&gt; for information gain implies a greater likelihood of achieving purer splits &lt;em&gt;(no uncertainty on a prediction)&lt;/em&gt;.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:3&#34;&gt;
-&lt;p&gt;Figure 1 demonstrates the partitioning from communicator $m_0$ where the number of levels $n=2$ and number of processors $k=5$. Processors $p_0,p_2,p_4$ are scheduled to sub-communicator $m_1$ as each processor&amp;rsquo;s identifier is even &lt;em&gt;(divisible by 2)&lt;/em&gt;, processors $p_1,p_3$ are scheduled to sub-communicator $m_2$ as each processor&amp;rsquo;s identifier is odd, etc.&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:4&#34;&gt;
-&lt;p&gt;Figure 2 illustrates decision boundaries for different values of the &lt;code&gt;max_depth&lt;/code&gt; hyperparameter on the iris dataset provided by &lt;em&gt;scikit-learn&lt;/em&gt;. The figure showcases how noisy instances may negatively impact the performance of the decision tree classifier as the depth increases.&amp;#160;&lt;a href=&#34;#fnref:4&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:5&#34;&gt;
-&lt;p&gt;Figure 4 shows the number of messages exchanged at each level of a perfect &lt;em&gt;(although not necessary)&lt;/em&gt; binary tree. Each successive split reduces the number of processors by two until all remaining nodes are singletons.&amp;#160;&lt;a href=&#34;#fnref:5&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/mpitree-project/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/mpitree-project/</guid>
+      <description>Link to Source Code&#xA;Try it Out!1 Introduction A Decision Tree is an $n$-nary tree where each node represents a feature (interior nodes) or response (terminal/leaf nodes) value, and each branch represents a condition on some feature. Decision Trees are intuitive supervised machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions.</description>
     </item>
-    
     <item>
       <title>An Algorithm Vizualizer</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/duong-jason/binary-bros&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
-&lt;iframe style=&#34;border: 1px solid rgba(0, 0, 0, 0.1);&#34; width=&#34;800&#34; height=&#34;450&#34; src=&#34;https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Ffile%2FqihsKn3iY99zQqTtMatn8Z%2FLanding-Page%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DsFSbak2BwHFp1aCv-1&#34; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link to Google Sheets&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link to Google Docs&lt;/a&gt;&lt;/p&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <description>Link to Source Code&#xA;Figma Design Prototypes User Stories and Burndown Chart Link to Google Sheets&#xA;Stand Up Meetings and Retrospectives Link to Google Docs</description>
     </item>
-    
     <item>
       <title>Blackjack Game Simulator</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
-&lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;The dealer deals cards to the players from their left to their right. Each player receives one card face up. The dealer deals themself a face-up card and then deals another card to each player. Finally, the dealer deals one face-down card to themself.&lt;/p&gt;
-&lt;p&gt;Once the cards are dealt, each player has a turn. Starting with the first player, the player must first decide if she would like to &lt;em&gt;double down&lt;/em&gt; or &lt;em&gt;split&lt;/em&gt; her hand. If the dealer&amp;rsquo;s face-up card has a value of 10 or higher, then the player may also buy &lt;em&gt;insurance&lt;/em&gt; as a side bet. Some versions of Blackjack allow a player to &lt;em&gt;surrender&lt;/em&gt;, however, our version will not have this rule.&lt;/p&gt;
-&lt;p&gt;Once those initial decisions are made, the player chooses to &lt;em&gt;hit&lt;/em&gt;, take a card, or &lt;em&gt;stand&lt;/em&gt;, to end their turn. The player attempts to reach a sum as close as possible to 21. The sum is calculated by converting the &lt;em&gt;rank&lt;/em&gt; of a card to a numerical value. Number cards (2, 3, 4, 5, 6, 7, 8, 9) have a value equal to their rank. Court cards (Jack, Queen, King) have a value equal to 10. Aces can have a value of 1 or 11; whichever is most advantageous to the player. A special case is a &lt;em&gt;blackjack&lt;/em&gt; or &lt;em&gt;a natural&lt;/em&gt; where a player or dealer has an Ace and a card that has a value of 10 such as a 10, Jack, Queen, or King. The suit of a card (Clubs, Hearts, Spades, Diamonds) does not matter in this game.&lt;/p&gt;
-&lt;p&gt;A player wins when their hand has a higher value than the dealer&amp;rsquo;s yet is not greater than 21. Players that pass 21 are &lt;em&gt;busted&lt;/em&gt; which means they lose their bet regardless of what the dealer does.&lt;/p&gt;
-&lt;p&gt;When a player and the dealer have the same value for their respective hands, then this is a &lt;em&gt;push&lt;/em&gt;. A &lt;em&gt;push&lt;/em&gt; means that no one wins and the player does not lose her wager.&lt;/p&gt;
-&lt;p&gt;The dealer is always last to play. The dealer begins by turning over the face-down card and deciding to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. Unlike the players, the dealer must &lt;em&gt;hit&lt;/em&gt; if their hand value is less than 17. If the value of their hand is 17 or greater, then the dealer &lt;em&gt;stands&lt;/em&gt;. If all the players have already &lt;em&gt;busted&lt;/em&gt; the dealer &lt;em&gt;stands&lt;/em&gt; thus removing the chance that the dealer may &lt;em&gt;bust&lt;/em&gt; as well.&lt;/p&gt;
-&lt;p&gt;The side bets that are available to a player are &lt;em&gt;insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt;. A player may wish to buy &lt;em&gt;insurance&lt;/em&gt; when the dealer appears to have &lt;em&gt;blackjack&lt;/em&gt;. In other words, if the dealer has an Ace, 10, Jack, Queen, or King face up, the player can place a side bet, typically called &lt;em&gt;buying insurance&lt;/em&gt;, on the chance that the dealer has blackjack. If the dealer has blackjack and the player does not have blackjack or 21, then the player loses their initial bet yet wins the &lt;em&gt;insurance&lt;/em&gt; bet. The &lt;em&gt;insurance&lt;/em&gt; wager is a separate wager which means the wagered money is kept track of independently.&lt;/p&gt;
-&lt;p&gt;The player may choose to &lt;em&gt;double down&lt;/em&gt; at the start of their turn. To &lt;em&gt;double down&lt;/em&gt;, the player doubles her bet on her cards and takes one additional card before ending her turn. For example, if the player has a 4 of Diamonds and a King of Hearts, then she may double down believing that she only wants one additional card and that will be enough to beat the dealer. If she is dealt a 7, she has 21. Otherwise, any card less than an 8 will keep her in the game. Should the dealer lose then the player earns winnings on her initial wager and her &lt;em&gt;double-down&lt;/em&gt; bet. The &lt;em&gt;double-down&lt;/em&gt; bet must be equal to the player&amp;rsquo;s initial wager.&lt;/p&gt;
-&lt;p&gt;A player may also choose to &lt;em&gt;split&lt;/em&gt;. A player may be dealt two cards with identical rank, for example, two Kings or two 6s. When this occurs, the player may choose to &lt;em&gt;split&lt;/em&gt; which means the player splits the two cards into two independent hands.&lt;/p&gt;
-&lt;p&gt;Can a player buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt;, and &lt;em&gt;double down&lt;/em&gt; in one game? Yes, this is possible. Consider the scenario where the dealer has an Ace showing and the player has two Aces. The player may choose to buy &lt;em&gt;insurance&lt;/em&gt;, next &lt;em&gt;split&lt;/em&gt; her hand, and then decide to &lt;em&gt;double down&lt;/em&gt; on one or both of the hands derived from the &lt;em&gt;split&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;All bets are &lt;em&gt;two-to-one&lt;/em&gt; payout. In other words, if a player wagers 5 dollars and wins, then the casino pays the player 5 dollars and the player keeps the original wager thus pocketing a total of $10.&lt;/p&gt;
-&lt;p&gt;In our game, the dealer shall be played by a game AI. All players start with 10,000 dollars in their bank balance. The minimum bet is 1 dollar and the maximum bet is the player&amp;rsquo;s bank balance. When a player goes broke (loses all of her money), then the player is offered 10,000 dollars from an anonymous donor.&lt;/p&gt;
-&lt;p&gt;The player can exit the game and restart the game and have the same bank balance when the game is restarted. This means that players must use a unique identifier to start the game which can be a name, handle, email address, etc. The identifier is used to track the player&amp;rsquo;s progress such that their bank balance from previous games can be reused.&lt;/p&gt;
-&lt;h2 id=&#34;rules&#34;&gt;Rules&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;At least one player is playing the game and at most four.&lt;/li&gt;
-&lt;li&gt;To start the game, a player can enter the numbers 1 through 4 to establish how many players there are.&lt;/li&gt;
-&lt;li&gt;All players start with $10,000.00 in their bank balance.&lt;/li&gt;
-&lt;li&gt;The dealer is always a computer AI and has unlimited funds.&lt;/li&gt;
-&lt;li&gt;The game is turn-based.&lt;/li&gt;
-&lt;li&gt;All players have a name, including the &lt;em&gt;computer AI&lt;/em&gt;. Players&amp;rsquo; names may be used as unique identifiers or additional information can be gathered.&lt;/li&gt;
-&lt;li&gt;Unique identifiers are used to serialize the game state to a file so that a player can have their bank balance upon return to the game.&lt;/li&gt;
-&lt;li&gt;The game is played with 8 decks of cards. The cards are typical cards with the ranks Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, and the suits Clubs, Hearts, Spades,  and Diamonds. There are no jokers.&lt;/li&gt;
-&lt;li&gt;The value of the cards is the rank of the card except for Ace, Jack, Queen, and King. An Ace&amp;rsquo;s value is either 1 or 11 depending on what is most advantageous to the hand in question. Jacks, Queens, and Kings have a value of 10.&lt;/li&gt;
-&lt;li&gt;Before playing, the cards must be shuffled and cut.&lt;/li&gt;
-&lt;li&gt;A cut card is placed randomly between the 60th and 80th card from the bottom of the deck.&lt;/li&gt;
-&lt;li&gt;The players play in the order their names are entered when the program starts. The dealer always goes last.&lt;/li&gt;
-&lt;li&gt;Once each player has had a turn in ascending order, the turn returns to the first player. (The process is a circular queue.)&lt;/li&gt;
-&lt;li&gt;The game is made up of many games. The players continue playing games of blackjack. At the end of every game, the game prompts the first player if they would like to play again. An answer of &lt;em&gt;yes&lt;/em&gt; means the dealer will deal cards out to the same players who played previously. With multiple players, should one choose to leave then the first player must answer &lt;em&gt;no&lt;/em&gt; to end the game and exit the program.&lt;/li&gt;
-&lt;li&gt;At the start of every game, before cards are dealt, each player must place a wager. A wager can be at least $1 and at most their bank balance.&lt;/li&gt;
-&lt;li&gt;A player may not wager more money than she has in her bank balance.&lt;/li&gt;
-&lt;li&gt;The cards are dealt one by one, starting with the first player and ending with the dealer.&lt;/li&gt;
-&lt;li&gt;The dealer&amp;rsquo;s second card is kept hidden from the players all other cards are dealt face up.&lt;/li&gt;
-&lt;li&gt;At the beginning of every turn, the game displays what cards the current player is holding and what face-up card the dealer has shown.&lt;/li&gt;
-&lt;li&gt;Whenever a card is dealt, it is printed or shown to the players before taking any other action.&lt;/li&gt;
-&lt;li&gt;When it is the dealer&amp;rsquo;s turn, the dealer must turn over (print or show) the face-down card before taking any other action.&lt;/li&gt;
-&lt;li&gt;All bets pay out 2 to 1.&lt;/li&gt;
-&lt;li&gt;When a player&amp;rsquo;s turn begins, they have the option to buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt; (if possible), or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A player may not &lt;em&gt;surrender&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;An &lt;em&gt;insurance&lt;/em&gt; bet is a &lt;em&gt;side bet&lt;/em&gt; and is a separate wager. If a player chooses to buy &lt;em&gt;insurance&lt;/em&gt; then they may wager a minimum of $1 to a maximum of their bank balance minus what they have wagered on their hand.&lt;/li&gt;
-&lt;li&gt;The player must decide to &lt;em&gt;split&lt;/em&gt; before deciding if she wants to buy &lt;em&gt;insurance&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A player may only &lt;em&gt;split&lt;/em&gt; once per game. This means a player&amp;rsquo;s single hand can only double.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt; is per hand, not per player.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;split&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; when her turn starts and never later.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
-&lt;li&gt;A player is prompted to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt; unless they are &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt;. If they have &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt; then a message is shown stating that they have &lt;em&gt;busted&lt;/em&gt; or reached &lt;em&gt;21&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;The dealer must &lt;em&gt;hit&lt;/em&gt; on a hand that is less than 17. The dealer must &lt;em&gt;stand&lt;/em&gt; on a hand that is 17 or greater.&lt;/li&gt;
-&lt;li&gt;The dealer only &lt;em&gt;hits&lt;/em&gt; if there are players who are not &lt;em&gt;busted&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;No one wins or loses when there is a &lt;em&gt;push&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A dealer does not place bets which means the dealer does not buy &lt;em&gt;insurance&lt;/em&gt; or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A dealer may not &lt;em&gt;split&lt;/em&gt; their hand.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;To summarize the order of gameplay operations:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;If needed, cards are shuffled and cut, and a cut card is placed in a position between the 60th and 80th cards from the bottom.&lt;/li&gt;
-&lt;li&gt;For each player, a wager is entered before the cards are dealt.&lt;/li&gt;
-&lt;li&gt;Cards are dealt one at a time starting with the first player, continuing through to the last player, and ending on the dealer. This is done twice such that each player and the dealer have two cards. The dealer&amp;rsquo;s last card is kept face down until it is the dealer&amp;rsquo;s turn.&lt;/li&gt;
-&lt;li&gt;If the dealer has a card valued at 10 or greater showing, then each player offers to purchase &lt;em&gt;insurance&lt;/em&gt; as a side bet.&lt;/li&gt;
-&lt;li&gt;For each player, begin their turn.
-&lt;ol&gt;
-&lt;li&gt;If the player has two cards of identical rank, offer to &lt;em&gt;split&lt;/em&gt; the hand. If the hand is &lt;em&gt;split&lt;/em&gt;, then convert the single hand to two hands dealing one additional card per hand. The player must double her wager.&lt;/li&gt;
-&lt;li&gt;For each hand, offer to &lt;em&gt;double down&lt;/em&gt;. For each &lt;em&gt;double-down&lt;/em&gt; wager, the player&amp;rsquo;s wager is doubled.&lt;/li&gt;
-&lt;li&gt;While the player&amp;rsquo;s hand is less than 21 or is not busted, offer the player to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. When the player &lt;em&gt;hits&lt;/em&gt; deal an additional card. If the player &lt;em&gt;stands&lt;/em&gt;, then the player&amp;rsquo;s turn concludes.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;The dealer plays last. If there exists a player who is not busted, then the dealer must play their hand according to the rules. Otherwise, the dealer stands.&lt;/li&gt;
-&lt;li&gt;For each player, determine if the player has won, lost, or &lt;em&gt;pushed&lt;/em&gt;. Update all the players&amp;rsquo; balances to reflect the outcome of the game.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</guid>
+      <description>Link to Source Code&#xA;Introduction Blackjack is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&#xA;In the game, the dealer represents the house/bank/casino. There must be at least one player.</description>
     </item>
-    
   </channel>
 </rss>

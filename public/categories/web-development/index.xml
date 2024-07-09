@@ -2,265 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Web Development on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/categories/web-development/</link>
+    <link>http://localhost:1313/hugo-texify3/categories/web-development/</link>
     <description>Recent content in Web Development on Jason Duong</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Sat, 09 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/web-development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jan 2024 21:18:37 -0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/hugo-texify3/categories/web-development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An Algorithm Vizualizer</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/duong-jason/binary-bros&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;figma-design-prototypes&#34;&gt;Figma Design Prototypes&lt;/h2&gt;
-&lt;iframe style=&#34;border: 1px solid rgba(0, 0, 0, 0.1);&#34; width=&#34;800&#34; height=&#34;450&#34; src=&#34;https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Ffile%2FqihsKn3iY99zQqTtMatn8Z%2FLanding-Page%3Ftype%3Ddesign%26node-id%3D0%253A1%26mode%3Ddesign%26t%3DsFSbak2BwHFp1aCv-1&#34; allowfullscreen&gt;&lt;/iframe&gt;
-&lt;h2 id=&#34;user-stories-and-burndown-chart&#34;&gt;User Stories and Burndown Chart&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/spreadsheets/d/e/2PACX-1vSezwps9xOk-6Rl4cwyeZoJpvOKecQbakP0JX81jdKlUagxcm1o8KkY7ZCbAMgxGEtCDveL_jR8fIJe/pubhtml&#34;&gt;Link to Google Sheets&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;stand-up-meetings-and-retrospectives&#34;&gt;Stand Up Meetings and Retrospectives&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.google.com/document/d/e/2PACX-1vRfUL42RWWhExU_IpmiscmZg4CCbbjoyhtOksWm0N43jliuOSuNtscRxw2rztDo3DzcLAs7UOS1FAfC/pub&#34;&gt;Link to Google Docs&lt;/a&gt;&lt;/p&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <description>Link to Source Code&#xA;Figma Design Prototypes User Stories and Burndown Chart Link to Google Sheets&#xA;Stand Up Meetings and Retrospectives Link to Google Docs</description>
     </item>
-    
     <item>
       <title>Larks Ant</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</link>
-      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-335/tree/main/Project%201&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;online-demo1&#34;&gt;Online Demo&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/h2&gt;
-&lt;p&gt;$q$ = &lt;output id=&#34;qt&#34;&gt;&lt;/output&gt;&lt;br&gt;
-$T_{ij}$ = &lt;output id=&#34;tij&#34;&gt;&lt;/output&gt;&lt;br&gt;
-$\theta$ = &lt;output id=&#34;theta&#34;&gt;&lt;/output&gt;&lt;br&gt;
-$\text{counter}$ = &lt;output id=&#34;counter&#34;&gt;&lt;/output&gt;&lt;/p&gt;
-&lt;figure&gt;
-    &lt;canvas width=&#34;800&#34; height=&#34;400&#34; id=&#34;game&#34;&gt;&lt;/canvas&gt;&lt;br&gt;
-    &lt;figurecaption&gt;Fig. 1: Larks Ant Demo&lt;/figurecaption&gt;
-&lt;/figure&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;
-var canvas = document.getElementById(&#34;game&#34;);
-var context = canvas.getContext(&#34;2d&#34;);
-context.strokeStyle = &#34;black&#34;;
-var count = 0;
-
-var qt = document.getElementById(&#34;qt&#34;);
-var tij = document.getElementById(&#34;tij&#34;);
-var theta = document.getElementById(&#34;theta&#34;);
-var c = document.getElementById(&#34;counter&#34;);
-
-const r_states = [&#34;Normal&#34;, &#34;Countdown&#34;];
-const r_colors = [&#34;Black&#34;, &#34;Blue&#34;, &#34;Yellow&#34;, &#34;Red&#34;];
-const colors = [&#34;#000000&#34;, &#34;#89CFF0&#34;, &#34;#FFF300&#34;, &#34;#FF6347&#34;];
-const nose = [&#34;N&#34;, &#34;W&#34;, &#34;S&#34;, &#34;E&#34;];
-const action = [0, 1, 2, 1];
-
-class Board {
-  constructor(cell, width, height) {
-    this.cell = cell;
-    this.width = width;
-    this.height = height;
-    this.pixel = new Map();
-  }
-
-  increment_color() {
-    let pos = &#34;@&#34; + ant.x + ant.y;
-    if (this.pixel.has(pos)) {
-      this.pixel.set(pos, (board.pixel.get(pos) + 1) % 4);
-    } else {
-      this.pixel.set(pos, 1);
-    }
-
-    context.fillStyle = colors[board.pixel.get(pos)];
-    context.strokeRect(ant.x, ant.y, this.cell, this.cell);
-    context.fillRect(ant.x, ant.y, this.cell, this.cell);
-  }
-
-  get_color(pos) {
-    return board.pixel.has(pos) ? board.pixel.get(pos) : 0;
-  }
-}
-
-class Ant {
-  constructor(x, y, state, nose, counter) {
-    this.x = x;
-    this.y = y;
-    this.state = state;
-    this.nose = nose;
-    this.counter = counter;
-  }
-
-  fsm(action) {
-    let transition;
-    this.counter = board.get_color(&#34;@&#34; + ant.x + ant.y);
-
-    if (this.state == 0) {
-      if (action == 0) {
-        theta.innerHTML = &#34;Left&#34;;
-        ant.nose = ++ant.nose % 4;
-      }
-      else if (action == 1) {
-        theta.innerHTML = &#34;Right&#34;;
-        if (ant.nose == 0)
-          ant.nose = 3;
-        else
-          ant.nose--;
-      }
-      else {
-        theta.innerHTML = &#34;Straight&#34;;
-        this.state = 1;
-      }
-    }
-    else {
-      if (this.counter &lt;= 0) {
-        this.state = 0;
-      } else {
-        this.counter--;
-      }
-    }
-  }
-
-  move() {
-    let dx = this.x;
-    let dy = this.y;
-    let size = board.cell;
-    let max_width = board.width * size;
-    let max_height = board.height * size;
-
-    switch (nose[ant.nose]) {
-      case &#34;N&#34;: {
-        dy = (dy == 0 ? max_height : dy) - size;
-        break;
-      }
-      case &#34;W&#34;: {
-        dx = (dx == 0 ? max_width : dx) - size;
-        break;
-      }
-      case &#34;S&#34;: {
-        dy = (dy + size) % max_height;
-        break;
-      }
-      case &#34;E&#34;: {
-        dx = (dx + size) % max_width;
-      }
-    }
-
-    this.x = dx; // move ant in x-dir
-    this.y = dy; // move ant in y-dir
-  }
-}
-
-const board = new Board(10, 80, 40);
-const ant = new Ant(400, 200, 0, 0, 0);
-
-var halt = false;
-var speed = 60;
-
-function update() {
-  qt.innerHTML = r_states[ant.state];
-  tij.innerHTML = r_colors[board.get_color(&#34;@&#34; + ant.x + ant.y)];
-  c.innerHTML = ant.counter;
-  ant.fsm(action[board.get_color(&#34;@&#34; + ant.x + ant.y)]);
-  board.increment_color();
-  ant.move();
-}
-
-function loop() {
-  requestAnimationFrame(loop);
-  if (++count &lt; speed) return;
-  if (!halt) {
-    update();
-  }
-  count = 0;
-}
-
-document.addEventListener(&#34;keydown&#34;, (e) =&gt; {
-  switch (e.which) {
-    case 72:
-      halt = !halt;
-      break;
-    case 65:
-      speed = Math.max(1, speed - 10);
-      break;
-    case 68:
-      speed = Math.min(60, speed + 10);
-      break;
-  }
-});
-
-requestAnimationFrame(loop);
-&lt;/script&gt;
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;div class=&#34;definition&#34;&gt;
-&lt;p&gt;&lt;strong&gt;Definition 1&lt;/strong&gt;: &lt;em&gt;Larks Ant&lt;/em&gt; is a 2D cellular automaton $\mathcal{A}$ that consists of a pair set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_0\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&lt;/p&gt;
-&lt;p&gt;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.\\
-\Sigma\in(\text{Black, Blue, Yellow, Red}).\\
--\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&lt;/p&gt;
-&lt;p&gt;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid. Initially at time $t=0$, $\mathcal{A}(0)$ has an initial state $q_0=\text{Normal}$, is located at color cell $T_{ij}$ for some initial $i,j\in\mathbb{Z}$ and is oriented at $\mathbf{v}=\begin{bmatrix}0 &amp;amp; 1\end{bmatrix}$, the north direction. Then, at every time step $t&amp;gt;0$, the cellular automaton $\mathcal{A}(t)$ computes as follows:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Sets $(q_t,c,\theta) \leftarrow \delta_\mathcal{A}(q_{t-1},T_{ij})$ and $\text{counter}\leftarrow c$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Changes orientation $\mathbf{v}\leftarrow R\mathbf{v}=\begin{bmatrix}\cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta\end{bmatrix}\begin{bmatrix}v_0 \\ v_1\end{bmatrix}$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Increments the cell color $c\leftarrow(c+1)\bmod|\Sigma|$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;where $\alpha\in\mathbb{N}_+$ is the grid scale.&lt;/p&gt;
-&lt;/div &gt;
-&lt;hr&gt;
-&lt;p&gt;Let $\text{Left}=\frac{\pi}{2},\ \text{Right}=-\frac{\pi}{2},\ \text{and}\ \text{Straight}=0$ and assume &lt;em&gt;without loss of generality&lt;/em&gt;, every cell color $T_{ij}=\text{Black}$. Then, the function $\delta_\mathcal{A}$&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; can be represented as&lt;/p&gt;
-&lt;div class=&#34;mermaid&#34;&gt;%%{init: { &#34;theme&#34;: &#34;forest&#34;} }%%
-flowchart LR
-    A(Normal) --&gt;|Yellow,2,Straight| B(Countdown)
-    A --&gt; |Black,0,Left&lt;br&gt;Blue or Red,1,Right| A
-    B --&gt; |☐,☐,Straight| C{counter &lt;= 0?}
-    C --&gt;|False&lt;br&gt;counter = counter - 1| B
-    C --&gt;|True| A
-&lt;/div&gt;
-
-&lt;figcaption&gt;Fig. 2: Finite State Machine of the Larks Ant transition function.&lt;/figcaption&gt;
-&lt;h2 id=&#34;examples&#34;&gt;Examples&lt;/h2&gt;
-&lt;div class=&#34;example&#34;&gt;
-&lt;p&gt;&lt;strong&gt;Example 1&lt;/strong&gt;: We now provide a worked example for the first iteration computed by the &lt;em&gt;Larks Ant&lt;/em&gt;. Let $\alpha=10$ and $i,j=(400,200)$. Then at time step $t=1$, $\mathcal{A}(1)$ computes as follows:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Sets ($\text{Normal}$, $0$, $\text{Left})\leftarrow\delta_{\mathcal{A}}(\text{Normal},\text{Black})$ and $\text{counter}\leftarrow 0$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Changes orientation:
-$$
-\mathbf{v}\leftarrow\begin{bmatrix}\cos\left(\frac{\pi}{2}\right) &amp;amp; -\sin\left(\frac{\pi}{2}\right) \\ \sin\left(\frac{\pi}{2}\right) &amp;amp; \cos\left(\frac{\pi}{2}\right)\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix}=\begin{bmatrix}0 &amp;amp; -1 \\ 1 &amp;amp; 0\end{bmatrix}\begin{bmatrix}0 \\ 1\end{bmatrix}=\begin{bmatrix}(0)\cdot(0)+(-1)\cdot(1) \\ (1)\cdot(0)+(0)\cdot(1)\end{bmatrix}=\begin{bmatrix}-1 \\ 0\end{bmatrix}.
-$$&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Increments the cell color $c\leftarrow(0+1)\bmod 4=1$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Moves to coordinate $\begin{bmatrix}i&amp;amp;j\end{bmatrix}\leftarrow\begin{bmatrix}i&amp;amp;j\end{bmatrix}+\alpha\mathbf{v}=\begin{bmatrix}400&amp;amp;200\end{bmatrix}+(10)\cdot\begin{bmatrix}-1&amp;amp;0\end{bmatrix}=\begin{bmatrix}390&amp;amp;200\end{bmatrix}$.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div &gt;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
-&lt;hr&gt;
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;
-&lt;p&gt;Figure 1 provides an online demonstration of the computations performed by the &lt;em&gt;Larks Ant&lt;/em&gt; starting from $i,j=(400,200)$ on $T\in\mathbb{Z}^{800\times 400}$. Press &lt;code&gt;[h]&lt;/code&gt; to stop/run the demo. Press &lt;code&gt;[a/d]&lt;/code&gt; to increase or decrease the speed by a factor of 10. Note that since $T$ is finite, the &lt;em&gt;Larks Ant&lt;/em&gt; will wrap around when necessary to prevent overflow. The script is a modified version from &lt;a href=&#34;http://vision.stanford.edu/teaching/cs231n-demos/linear-classify/&#34;&gt;CS231n-demos&lt;/a&gt;.&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;
-&lt;p&gt;Figure 2 shows a &lt;em&gt;Finite State Machine&lt;/em&gt; representation of the &lt;em&gt;Larks Ant&lt;/em&gt; transition function. Each arrow from a state is labeled by the cell color, color index, and direction. The ☐ symbol represents a wildcard character.&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</link>
+      <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</guid>
+      <description>Link to Source Code&#xA;Online Demo1 $q$ = $T_{ij}$ = $\theta$ = $\text{counter}$ = Fig. 1: Larks Ant Demo Introduction Definition 1: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a pair set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_0\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&#xA;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.\\ \Sigma\in(\text{Black, Blue, Yellow, Red}).\\ -\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&#xA;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid.</description>
     </item>
-    
   </channel>
 </rss>

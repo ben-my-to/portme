@@ -2,12 +2,76 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/tags/</link>
+    <link>http://localhost:1313/hugo-texify3/tags/</link>
     <description>Recent content in Tags on Jason Duong</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Tue, 16 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Feb 2024 13:21:36 -0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/hugo-texify3/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Black</title>
+      <link>http://localhost:1313/hugo-texify3/tags/black/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/black/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>http://localhost:1313/hugo-texify3/tags/git/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/git/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LaTeX</title>
+      <link>http://localhost:1313/hugo-texify3/tags/latex/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/latex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Matplotlib</title>
+      <link>http://localhost:1313/hugo-texify3/tags/matplotlib/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/matplotlib/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NumPy</title>
+      <link>http://localhost:1313/hugo-texify3/tags/numpy/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/numpy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/hugo-texify3/tags/python/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Scikit-Learn</title>
+      <link>http://localhost:1313/hugo-texify3/tags/scikit-learn/</link>
+      <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/scikit-learn/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HTML·CSS·JS</title>
+      <link>http://localhost:1313/hugo-texify3/tags/htmlcssjs/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/htmlcssjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Jira·Figma</title>
+      <link>http://localhost:1313/hugo-texify3/tags/jirafigma/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/tags/jirafigma/</guid>
+      <description></description>
+    </item>
   </channel>
 </rss>

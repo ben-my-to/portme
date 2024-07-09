@@ -2,95 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Game Development on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/categories/game-development/</link>
+    <link>http://localhost:1313/hugo-texify3/categories/game-development/</link>
     <description>Recent content in Game Development on Jason Duong</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Sat, 09 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/game-development/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Jan 2024 16:35:04 -0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/hugo-texify3/categories/game-development/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Blackjack Game Simulator</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</link>
-      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate>
-      <author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/ben-my-to/CPSC-386/tree/main/projects/blackjack&#34;&gt;Link to Source Code&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Blackjack&lt;/strong&gt; is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&lt;/p&gt;
-&lt;p&gt;In the game, the dealer represents the house/bank/casino. There must be at least one player. The dealer shuffles 8 decks of cards and cuts the deck. A &lt;em&gt;cut card&lt;/em&gt; is placed randomly between the 60th and 80th card from the bottom of the deck. All the cards are placed in a &lt;a href=&#34;https://en.wikipedia.org/wiki/Shoe_(cards)&#34;&gt;&lt;em&gt;shoe&lt;/em&gt;&lt;/a&gt; which the dealer uses to deal cards one at a time. When the dealer reaches the &lt;em&gt;cut card&lt;/em&gt;, then, when the game ends, the cards are shuffled, cut, a &lt;em&gt;cut card&lt;/em&gt; is placed and the cards are returned to the &lt;em&gt;shoe&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;The dealer deals cards to the players from their left to their right. Each player receives one card face up. The dealer deals themself a face-up card and then deals another card to each player. Finally, the dealer deals one face-down card to themself.&lt;/p&gt;
-&lt;p&gt;Once the cards are dealt, each player has a turn. Starting with the first player, the player must first decide if she would like to &lt;em&gt;double down&lt;/em&gt; or &lt;em&gt;split&lt;/em&gt; her hand. If the dealer&amp;rsquo;s face-up card has a value of 10 or higher, then the player may also buy &lt;em&gt;insurance&lt;/em&gt; as a side bet. Some versions of Blackjack allow a player to &lt;em&gt;surrender&lt;/em&gt;, however, our version will not have this rule.&lt;/p&gt;
-&lt;p&gt;Once those initial decisions are made, the player chooses to &lt;em&gt;hit&lt;/em&gt;, take a card, or &lt;em&gt;stand&lt;/em&gt;, to end their turn. The player attempts to reach a sum as close as possible to 21. The sum is calculated by converting the &lt;em&gt;rank&lt;/em&gt; of a card to a numerical value. Number cards (2, 3, 4, 5, 6, 7, 8, 9) have a value equal to their rank. Court cards (Jack, Queen, King) have a value equal to 10. Aces can have a value of 1 or 11; whichever is most advantageous to the player. A special case is a &lt;em&gt;blackjack&lt;/em&gt; or &lt;em&gt;a natural&lt;/em&gt; where a player or dealer has an Ace and a card that has a value of 10 such as a 10, Jack, Queen, or King. The suit of a card (Clubs, Hearts, Spades, Diamonds) does not matter in this game.&lt;/p&gt;
-&lt;p&gt;A player wins when their hand has a higher value than the dealer&amp;rsquo;s yet is not greater than 21. Players that pass 21 are &lt;em&gt;busted&lt;/em&gt; which means they lose their bet regardless of what the dealer does.&lt;/p&gt;
-&lt;p&gt;When a player and the dealer have the same value for their respective hands, then this is a &lt;em&gt;push&lt;/em&gt;. A &lt;em&gt;push&lt;/em&gt; means that no one wins and the player does not lose her wager.&lt;/p&gt;
-&lt;p&gt;The dealer is always last to play. The dealer begins by turning over the face-down card and deciding to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. Unlike the players, the dealer must &lt;em&gt;hit&lt;/em&gt; if their hand value is less than 17. If the value of their hand is 17 or greater, then the dealer &lt;em&gt;stands&lt;/em&gt;. If all the players have already &lt;em&gt;busted&lt;/em&gt; the dealer &lt;em&gt;stands&lt;/em&gt; thus removing the chance that the dealer may &lt;em&gt;bust&lt;/em&gt; as well.&lt;/p&gt;
-&lt;p&gt;The side bets that are available to a player are &lt;em&gt;insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt;. A player may wish to buy &lt;em&gt;insurance&lt;/em&gt; when the dealer appears to have &lt;em&gt;blackjack&lt;/em&gt;. In other words, if the dealer has an Ace, 10, Jack, Queen, or King face up, the player can place a side bet, typically called &lt;em&gt;buying insurance&lt;/em&gt;, on the chance that the dealer has blackjack. If the dealer has blackjack and the player does not have blackjack or 21, then the player loses their initial bet yet wins the &lt;em&gt;insurance&lt;/em&gt; bet. The &lt;em&gt;insurance&lt;/em&gt; wager is a separate wager which means the wagered money is kept track of independently.&lt;/p&gt;
-&lt;p&gt;The player may choose to &lt;em&gt;double down&lt;/em&gt; at the start of their turn. To &lt;em&gt;double down&lt;/em&gt;, the player doubles her bet on her cards and takes one additional card before ending her turn. For example, if the player has a 4 of Diamonds and a King of Hearts, then she may double down believing that she only wants one additional card and that will be enough to beat the dealer. If she is dealt a 7, she has 21. Otherwise, any card less than an 8 will keep her in the game. Should the dealer lose then the player earns winnings on her initial wager and her &lt;em&gt;double-down&lt;/em&gt; bet. The &lt;em&gt;double-down&lt;/em&gt; bet must be equal to the player&amp;rsquo;s initial wager.&lt;/p&gt;
-&lt;p&gt;A player may also choose to &lt;em&gt;split&lt;/em&gt;. A player may be dealt two cards with identical rank, for example, two Kings or two 6s. When this occurs, the player may choose to &lt;em&gt;split&lt;/em&gt; which means the player splits the two cards into two independent hands.&lt;/p&gt;
-&lt;p&gt;Can a player buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt;, and &lt;em&gt;double down&lt;/em&gt; in one game? Yes, this is possible. Consider the scenario where the dealer has an Ace showing and the player has two Aces. The player may choose to buy &lt;em&gt;insurance&lt;/em&gt;, next &lt;em&gt;split&lt;/em&gt; her hand, and then decide to &lt;em&gt;double down&lt;/em&gt; on one or both of the hands derived from the &lt;em&gt;split&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;All bets are &lt;em&gt;two-to-one&lt;/em&gt; payout. In other words, if a player wagers 5 dollars and wins, then the casino pays the player 5 dollars and the player keeps the original wager thus pocketing a total of $10.&lt;/p&gt;
-&lt;p&gt;In our game, the dealer shall be played by a game AI. All players start with 10,000 dollars in their bank balance. The minimum bet is 1 dollar and the maximum bet is the player&amp;rsquo;s bank balance. When a player goes broke (loses all of her money), then the player is offered 10,000 dollars from an anonymous donor.&lt;/p&gt;
-&lt;p&gt;The player can exit the game and restart the game and have the same bank balance when the game is restarted. This means that players must use a unique identifier to start the game which can be a name, handle, email address, etc. The identifier is used to track the player&amp;rsquo;s progress such that their bank balance from previous games can be reused.&lt;/p&gt;
-&lt;h2 id=&#34;rules&#34;&gt;Rules&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;At least one player is playing the game and at most four.&lt;/li&gt;
-&lt;li&gt;To start the game, a player can enter the numbers 1 through 4 to establish how many players there are.&lt;/li&gt;
-&lt;li&gt;All players start with $10,000.00 in their bank balance.&lt;/li&gt;
-&lt;li&gt;The dealer is always a computer AI and has unlimited funds.&lt;/li&gt;
-&lt;li&gt;The game is turn-based.&lt;/li&gt;
-&lt;li&gt;All players have a name, including the &lt;em&gt;computer AI&lt;/em&gt;. Players&amp;rsquo; names may be used as unique identifiers or additional information can be gathered.&lt;/li&gt;
-&lt;li&gt;Unique identifiers are used to serialize the game state to a file so that a player can have their bank balance upon return to the game.&lt;/li&gt;
-&lt;li&gt;The game is played with 8 decks of cards. The cards are typical cards with the ranks Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King, and the suits Clubs, Hearts, Spades,  and Diamonds. There are no jokers.&lt;/li&gt;
-&lt;li&gt;The value of the cards is the rank of the card except for Ace, Jack, Queen, and King. An Ace&amp;rsquo;s value is either 1 or 11 depending on what is most advantageous to the hand in question. Jacks, Queens, and Kings have a value of 10.&lt;/li&gt;
-&lt;li&gt;Before playing, the cards must be shuffled and cut.&lt;/li&gt;
-&lt;li&gt;A cut card is placed randomly between the 60th and 80th card from the bottom of the deck.&lt;/li&gt;
-&lt;li&gt;The players play in the order their names are entered when the program starts. The dealer always goes last.&lt;/li&gt;
-&lt;li&gt;Once each player has had a turn in ascending order, the turn returns to the first player. (The process is a circular queue.)&lt;/li&gt;
-&lt;li&gt;The game is made up of many games. The players continue playing games of blackjack. At the end of every game, the game prompts the first player if they would like to play again. An answer of &lt;em&gt;yes&lt;/em&gt; means the dealer will deal cards out to the same players who played previously. With multiple players, should one choose to leave then the first player must answer &lt;em&gt;no&lt;/em&gt; to end the game and exit the program.&lt;/li&gt;
-&lt;li&gt;At the start of every game, before cards are dealt, each player must place a wager. A wager can be at least $1 and at most their bank balance.&lt;/li&gt;
-&lt;li&gt;A player may not wager more money than she has in her bank balance.&lt;/li&gt;
-&lt;li&gt;The cards are dealt one by one, starting with the first player and ending with the dealer.&lt;/li&gt;
-&lt;li&gt;The dealer&amp;rsquo;s second card is kept hidden from the players all other cards are dealt face up.&lt;/li&gt;
-&lt;li&gt;At the beginning of every turn, the game displays what cards the current player is holding and what face-up card the dealer has shown.&lt;/li&gt;
-&lt;li&gt;Whenever a card is dealt, it is printed or shown to the players before taking any other action.&lt;/li&gt;
-&lt;li&gt;When it is the dealer&amp;rsquo;s turn, the dealer must turn over (print or show) the face-down card before taking any other action.&lt;/li&gt;
-&lt;li&gt;All bets pay out 2 to 1.&lt;/li&gt;
-&lt;li&gt;When a player&amp;rsquo;s turn begins, they have the option to buy &lt;em&gt;insurance&lt;/em&gt;, &lt;em&gt;split&lt;/em&gt; (if possible), or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A player may not &lt;em&gt;surrender&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;An &lt;em&gt;insurance&lt;/em&gt; bet is a &lt;em&gt;side bet&lt;/em&gt; and is a separate wager. If a player chooses to buy &lt;em&gt;insurance&lt;/em&gt; then they may wager a minimum of $1 to a maximum of their bank balance minus what they have wagered on their hand.&lt;/li&gt;
-&lt;li&gt;The player must decide to &lt;em&gt;split&lt;/em&gt; before deciding if she wants to buy &lt;em&gt;insurance&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A player may only &lt;em&gt;split&lt;/em&gt; once per game. This means a player&amp;rsquo;s single hand can only double.&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Insurance&lt;/em&gt; and &lt;em&gt;doubling down&lt;/em&gt; is per hand, not per player.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;split&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; when her turn starts and never later.&lt;/li&gt;
-&lt;li&gt;The player may &lt;em&gt;double down&lt;/em&gt; if and only if there are sufficient funds in her balance to double her wager.&lt;/li&gt;
-&lt;li&gt;A player is prompted to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt; unless they are &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt;. If they have &lt;em&gt;busted&lt;/em&gt; or have &lt;em&gt;21&lt;/em&gt; then a message is shown stating that they have &lt;em&gt;busted&lt;/em&gt; or reached &lt;em&gt;21&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;The dealer must &lt;em&gt;hit&lt;/em&gt; on a hand that is less than 17. The dealer must &lt;em&gt;stand&lt;/em&gt; on a hand that is 17 or greater.&lt;/li&gt;
-&lt;li&gt;The dealer only &lt;em&gt;hits&lt;/em&gt; if there are players who are not &lt;em&gt;busted&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;No one wins or loses when there is a &lt;em&gt;push&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A dealer does not place bets which means the dealer does not buy &lt;em&gt;insurance&lt;/em&gt; or &lt;em&gt;double down&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;A dealer may not &lt;em&gt;split&lt;/em&gt; their hand.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;To summarize the order of gameplay operations:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;If needed, cards are shuffled and cut, and a cut card is placed in a position between the 60th and 80th cards from the bottom.&lt;/li&gt;
-&lt;li&gt;For each player, a wager is entered before the cards are dealt.&lt;/li&gt;
-&lt;li&gt;Cards are dealt one at a time starting with the first player, continuing through to the last player, and ending on the dealer. This is done twice such that each player and the dealer have two cards. The dealer&amp;rsquo;s last card is kept face down until it is the dealer&amp;rsquo;s turn.&lt;/li&gt;
-&lt;li&gt;If the dealer has a card valued at 10 or greater showing, then each player offers to purchase &lt;em&gt;insurance&lt;/em&gt; as a side bet.&lt;/li&gt;
-&lt;li&gt;For each player, begin their turn.
-&lt;ol&gt;
-&lt;li&gt;If the player has two cards of identical rank, offer to &lt;em&gt;split&lt;/em&gt; the hand. If the hand is &lt;em&gt;split&lt;/em&gt;, then convert the single hand to two hands dealing one additional card per hand. The player must double her wager.&lt;/li&gt;
-&lt;li&gt;For each hand, offer to &lt;em&gt;double down&lt;/em&gt;. For each &lt;em&gt;double-down&lt;/em&gt; wager, the player&amp;rsquo;s wager is doubled.&lt;/li&gt;
-&lt;li&gt;While the player&amp;rsquo;s hand is less than 21 or is not busted, offer the player to &lt;em&gt;hit&lt;/em&gt; or &lt;em&gt;stand&lt;/em&gt;. When the player &lt;em&gt;hits&lt;/em&gt; deal an additional card. If the player &lt;em&gt;stands&lt;/em&gt;, then the player&amp;rsquo;s turn concludes.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;li&gt;The dealer plays last. If there exists a player who is not busted, then the dealer must play their hand according to the rules. Otherwise, the dealer stands.&lt;/li&gt;
-&lt;li&gt;For each player, determine if the player has won, lost, or &lt;em&gt;pushed&lt;/em&gt;. Update all the players&amp;rsquo; balances to reflect the outcome of the game.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
+      <link>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</link>
+      <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
+      <guid>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</guid>
+      <description>Link to Source Code&#xA;Introduction Blackjack is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&#xA;In the game, the dealer represents the house/bank/casino. There must be at least one player.</description>
     </item>
-    
   </channel>
 </rss>
