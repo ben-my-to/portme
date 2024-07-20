@@ -22,10 +22,11 @@ categories: [
 - [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/tag/Ghidra_11.1.2_build)
 - [GNU ARM Embedded Toolchain](https://developer.arm.com/downloads/-/gnu-rm)
 
-
-`desmume spectrobes.nds --arm9gdb 3000 --load-slot 1`
-`arm-none-eabi-gdb -ex "set arch armv5t' -ex "target remote :3000"`
-`(gdb) x/8i 0x020a0cc8`
+```bash
+desmume spectrobes.nds --arm9gdb 3000 --load-slot 1
+arm-none-eabi-gdb -ex "set arch armv5t' -ex "target remote :3000"
+(gdb) x/8i 0x020a0cc8
+```
 
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/test.png" alt="test">
 
