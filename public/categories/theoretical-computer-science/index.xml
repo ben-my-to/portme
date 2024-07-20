@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Theoretical Computer Science on Jason Duong</title>
-    <link>http://localhost:1313/hugo-texify3/categories/theoretical-computer-science/</link>
+    <link>https://michaelneuper.github.io/hugo-texify3/categories/theoretical-computer-science/</link>
     <description>Recent content in Theoretical Computer Science on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
     <lastBuildDate>Tue, 23 Jan 2024 21:18:37 -0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/hugo-texify3/categories/theoretical-computer-science/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/theoretical-computer-science/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Larks Ant</title>
-      <link>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</link>
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
       <description>Link to Source Code&#xA;Online Demo1 $q$ = $T_{ij}$ = $\theta$ = $\text{counter}$ = Fig. 1: Larks Ant Demo Introduction Definition 1: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a pair set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_0\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&#xA;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.\\ \Sigma\in(\text{Black, Blue, Yellow, Red}).\\ -\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&#xA;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid.</description>
     </item>
   </channel>

@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jira·Figma on Jason Duong</title>
-    <link>http://localhost:1313/hugo-texify3/tags/jirafigma/</link>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/jirafigma/</link>
     <description>Recent content in Jira·Figma on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
     <lastBuildDate>Tue, 23 Jan 2024 16:35:04 -0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/hugo-texify3/tags/jirafigma/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/jirafigma/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>An Algorithm Vizualizer</title>
-      <link>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
       <description>Link to Source Code&#xA;Figma Design Prototypes User Stories and Burndown Chart Link to Google Sheets&#xA;Stand Up Meetings and Retrospectives Link to Google Docs</description>
     </item>
   </channel>
