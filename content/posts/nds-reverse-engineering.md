@@ -29,9 +29,9 @@ On a physical console, you would need to use a stylus to 'erase' the debris from
 
 My goal is to permanently disable mineral's health so that it never decreases. Most games design "damage taken" in _decreasing_ order, as it is logical. A player starts with 10 HP, gets hit, and ends up with 9 HP. My first attempt was to scan for the value 16 and work my way down. It did not work. I knew it had to be an `int` data type. Then I realized, what if those sneaky developers keep a running count instead? As such, I scanned in _increasing_ order, and it worked.
 
-Nonetheless, somewhere, there is a _conditional_ branch that checks whether mineral_health equals 16. We basically need to change it to an _unconditional_ branch. Simple enough, right?
+Nonetheless, somewhere, there is a _conditional_ branch that checks whether mineral's health equals 16. We basically need to change it to an _unconditional_ branch. Simple enough, right?
 
-```python
+```text
 if False:  # replaced from `mineral.is_damaged() -> False`
     mineral.health += 1
 
@@ -52,13 +52,13 @@ This article assumes you know basic linux commands (`cd`, `ls`, `echo`, etc.) an
 
 ## Memory and Overlay Scanning
 
+Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., are stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 56 overlays. To find the correct loaded overlay, you would need to check if from the overlay's base address, the following bytes matches.
+
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/memscan.png" alt="memscan">
 
-Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., are stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 55 overlays.
+Since Desmume's RAM search and memory viewer only work on Windows, I have used the tool _PINCE_ to find the mineral's health memory address. I found that the mineral's health address `0x2000000 + 0x2310f0 = 0x22310f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
 
-To find the correct loaded overlay, you would need to check if from the overlay's base address, the following bytes matches. In my case, I found that the mineral's health address `0x2000000 + 0x2310f0 = 0x22310f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
-
-```bash
+```text
 $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
 00000660  33 00 00 00 c0 eb 09 02  00 9d 01 00 40 5c 00 00  |3...........@\..|
 ```
@@ -67,7 +67,7 @@ $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
 
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/test.png" alt="test">
 
-```bash
+```text
 desmume path/to/spectrobes.nds --arm9gdb 3000
 arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
 ```
@@ -92,7 +92,7 @@ arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
     - Observe the instructions below the branch instruction
         - `ldr r1,[r10,#0x14]`
         - `add r1,r1,#0x1`
-    - Clearly, the mineral's health is located at address `[r10+#0x14]` and its being incremented by 1 if the branch condition is false.
+    - Clearly, the mineral's health is located at address `[r10+#0x14]=>DAT_22301f0` and its being incremented by 1 if the branch condition is false.
 
 5. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
@@ -101,6 +101,18 @@ arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
     - Try to trace back from the current label (prefixed with `LAB_`) of those two instructions.
     - What instruction called that label?
     - How does this relate to our previous observation?
+
+6. Make an Action Replay Code
+
+```txt
+220A0CCB 000000EA  ; Change mneumonic `ble` -> 'b'
+```
+
+The first address indicates the memory address to modify. Additionally, the highest-bit `2` means to modify only the first byte. The second address is the value to modify. So at address `020A0CCB`, change the first byte to `EA`. If you want to revert this, change `EA` to `DA`.
+
+```txt
+220A0CCB 000000DA  ; Change mneumonic `b` -> 'ble'
+```
 
 ## Credits
 

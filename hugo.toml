@@ -10,7 +10,7 @@ rssLimit = 10
 theme = "hugo-texify3"
 title = "Jason Duong"
 
-[author]
+[params.author]
 name = "Jason Duong"
 email = "my.toe.ben@gmail.com"
 

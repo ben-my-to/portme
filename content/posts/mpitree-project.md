@@ -87,6 +87,7 @@ flowchart TB
     end
   end
 ```
+
 <figcaption>Fig. 1: Cyclic Distribution</figcaption>
 
 ### Mathematical Modelling

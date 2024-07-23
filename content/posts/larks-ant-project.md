@@ -217,6 +217,7 @@ flowchart LR
     C -->|False<br>counter = counter - 1| B
     C -->|True| A
 ```
+
 <figcaption>Fig. 2: Finite State Machine of the Larks Ant transition function.</figcaption>
 
 [^2]: Figure 2 shows a _Finite State Machine_ representation of the _Larks Ant_ transition function. Each arrow from a state is labeled by the cell color, color index, and direction. The ☐ symbol represents a wildcard character.

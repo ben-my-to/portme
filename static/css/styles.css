@@ -1,4 +1,5 @@
-figure, figcaption {
+figure,
+figcaption {
     font-size: 12px;
     font-style: italic;
     text-align: center;
@@ -9,52 +10,65 @@ figure, figcaption {
 
 /* CREDITS TO: resmisc.css */
 /* CREDITS TO: https://xyquadrat.ch/2022/04/04/latex-boxes/ */
-.definition, .theorem, .example, .remark {
+.definition,
+.theorem,
+.example,
+.remark {
     box-shadow: 2px 2px 2px grey;
     padding: 5px 19px 5px 20px;
     display: block;
     margin: 12px 0;
     font-style: normal;
 }
+
 .definition {
     border-left: 6px solid #0091a4;
     background-color: #dcf0f2;
 }
-.theorem{
+
+.theorem {
     border-left: 6px solid #590100;
     background-color: #ffe5e6;
 }
+
 .example {
     border-left: 6px solid #005a00;
     background-color: #e5ffe4;
 }
+
 .remark {
     border-left: 6px solid #c8c8c8;
     background-color: #f2f2f2;
 }
+
 canvas:not(#boundary) {
     overflow-x: auto;
     background-color: #ded7b7fb;
     border: 1px solid black;
     box-shadow: 2px 2px 2px grey;
 }
+
 .darkmode {
     .definition {
         border-left: 6px solid #0091a4;
         background-color: #273434;
     }
-    .theorem{
+
+    .theorem {
         border-left: 6px solid #590100;
         background-color: #4a3132
     }
+
     .example {
         border-left: 6px solid #005a00;
         background-color: #2d362d
     }
+
     .remark {
         border-left: 6px solid #c8c8c8;
-        background-color: #383838 
+        background-color: #383838
     }
+
     canvas:not(#boundary) {
         overflow-x: auto;
         background-color: #3e3c34fb;
@@ -62,6 +76,7 @@ canvas:not(#boundary) {
         box-shadow: 2px 2px 2px grey;
     }
 }
+
 .mermaid {
     text-align: center;
- }
+}

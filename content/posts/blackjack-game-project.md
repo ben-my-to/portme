@@ -91,6 +91,7 @@ The player can exit the game and restart the game and have the same bank balance
 ---
 
 To summarize the order of gameplay operations:
+
 1. If needed, cards are shuffled and cut, and a cut card is placed in a position between the 60th and 80th cards from the bottom.
 1. For each player, a wager is entered before the cards are dealt.
 1. Cards are dealt one at a time starting with the first player, continuing through to the last player, and ending on the dealer. This is done twice such that each player and the dealer have two cards. The dealer's last card is kept face down until it is the dealer's turn.
@@ -101,4 +102,3 @@ To summarize the order of gameplay operations:
     1. While the player's hand is less than 21 or is not busted, offer the player to _hit_ or _stand_. When the player _hits_ deal an additional card. If the player _stands_, then the player's turn concludes.
 1. The dealer plays last. If there exists a player who is not busted, then the dealer must play their hand according to the rules. Otherwise, the dealer stands.
 1. For each player, determine if the player has won, lost, or _pushed_. Update all the players' balances to reflect the outcome of the game.
-
