@@ -18,21 +18,23 @@ categories: [
 
 ## Intro
 
+<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/game.png" alt="game">
+
 My first gaming console was the _Nintendo DS_, and one of my nostalgic games, besides _Pokémon_, was [_Spectrobes - Beyond the Portal_](https://spectrobes.fandom.com/wiki/Spectrobes_Beyond_the_Portals).
 The game features mechanics similar to _Pokémon_, with a collection of spectrobes. What differentiates them is their combat system. _Pokémon_ is turn-based, while _Spectrobes - Beyond the Portal_ is third-person.
 
-As with _Pokémon_, spectrobes level up through experience points (XP) through battling; however, most of their XP's come from _minerals_. Spectrobes gain more XP if fed minerals of their type and larger size. Anyone who has played this game knows the struggle of farming/grinding _minerals_ (especially during the swamp area).
+As with _Pokémon_, spectrobes level up through experience points (XP) through battling; however, most of their XP's come from _minerals_. Spectrobes gain more XP if fed minerals of their type and larger size. Anyone who has played this game knows the struggle of farming/grinding minerals (especially during the swamp area).
 
-On a physical console, you would need to use a stylus to 'erase' the debris from the mineral by pressing on the bottom screen. Each mineral type has specific threshold points, and if you exceed them, the mineral's health will visually decrease by one. You can recover the mineral if it is above 70%. The amount of XP gained from a mineral depends on the _time taken_, the _percentage recovered_, and the mineral's health. It is either you learn to maintain short/long threshold points or cheese it by one-tap spamming to guarantee perfect health. Either way, at some point, the gameplay becomes tedious and unenjoyable.
+On a physical console, you would need to use a stylus to 'erase' the debris from the mineral by pressing on the bottom screen. Each mineral type has specific threshold pressure points, and if you exceed them, the mineral's health will 'visually' decrease by one. The amount of XP gained from a mineral depends on the _time taken_, the _percentage recovered_, and the _mineral's health_. You either learn to maintain short/long pressure points or cheese it by one-tap spamming to guarantee no damage. Either way, at some point, the gameplay becomes tedious and unenjoyable.
 
 ## Plan
 
-My goal is to permanently disable mineral's health so that it never decreases. Most games design "damage taken" in _decreasing_ order, as it is logical. A player starts with 10 HP, gets hit, and ends up with 9 HP. My first attempt was to scan for the value 16 and work my way down. It did not work. I knew it had to be an `int` data type. Then I realized, what if those sneaky developers keep a running count instead? As such, I scanned in _increasing_ order, and it worked.
+My goal is to permanently prevent mineral health (HP) from ever decreasing. As a result, you can rapidly scribble across the screen without destroying the mineral at all! Most games design "damage taken" in _decreasing_ order, as it is logical. A player starts with 10 HP, gets hit, and ends up with 9 HP. From the image above, my first attempt was to scan for the value 16 and work my way down. It did not work. I knew it had to be an `int` data type. Then I realized, what if those sneaky developers keep a running count instead? As such, I scanned in _increasing_ order, and it worked.
 
-Nonetheless, somewhere, there is a _conditional_ branch that checks whether mineral's health equals 16. We basically need to change it to an _unconditional_ branch. Simple enough, right?
+Nonetheless, somewhere, there is a _conditional_ branch that checks whether you have exceeded the threshold pressure point. We basically need to change it to an _unconditional_ branch. Simple enough, right?
 
 ```text
-if False:  # replaced from `mineral.is_damaged() -> False`
+if False:
     mineral.health += 1
 
 if mineral.health == 16:
@@ -48,15 +50,19 @@ if mineral.health == 16:
 - [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest)
 - [NTRGhidra](https://github.com/pedro-javierf/NTRGhidra/releases/latest)
 
-This article assumes you know basic linux commands (`cd`, `ls`, `echo`, etc.) and assembly. Most of the material presented onward has been condensed from these [sources](#markdown-header-credits).
+This article also assumes you know basic Linux commands (`cd`, `ls`, `echo`, etc.) and assembly.
 
 ## Memory and Overlay Scanning
 
-Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., are stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 56 overlays. To find the correct loaded overlay, you would need to check if from the overlay's base address, the following bytes matches.
+>__NOTE__: You would need to use a tool like `ndstool` to unpack the `.nds` file before proceeding.
+
+Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., is stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 56 overlays. For our purposes, we need only find which overlay holds the functionality for manipulating the mineral's HP.
+
+To find the correct loaded overlay, we first need to find the _static_ memory address for the mineral's HP. Then, check if an overlay's base address is less than what you found. Lastly, go to the memory address and verify the bytes match.
 
 <img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/memscan.png" alt="memscan">
 
-Since Desmume's RAM search and memory viewer only work on Windows, I have used the tool _PINCE_ to find the mineral's health memory address. I found that the mineral's health address `0x2000000 + 0x2310f0 = 0x22310f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
+Since Desmume's RAM search and memory viewer only works on Windows, I have used the tool _PINCE_ to find the mineral's HP memory address. I found that the mineral's HP address `0x2000000 + 0x2310f0 = 0x22310f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
 
 ```text
 $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
@@ -74,7 +80,6 @@ arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
 
 1. Setup NTRGhidra Plugin
     - `wget -P "path/to/ghidra/extensions" "https://github.com/pedro-javierf/NTRGhidra/releases/download/v1.4.4.1-ghidra-11.0.3/ghidra_11.0.3_PUBLIC_20240411_NTRGhidra.zip"`
-    - If you prefer not to use a plugin, you will need to use a tool like `ndstool` to extract the `arm9.bin` and `overlay_0051.bin` files, and choose the appropriate architecture and base addresses.
 
 2. Create a New Project
     - File > New Project (Ctrl+n) > Non-Shared Project > Choose Project Directory and Name
@@ -92,7 +97,7 @@ arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
     - Observe the instructions below the branch instruction
         - `ldr r1,[r10,#0x14]`
         - `add r1,r1,#0x1`
-    - Clearly, the mineral's health is located at address `[r10+#0x14]=>DAT_22301f0` and its being incremented by 1 if the branch condition is false.
+    - Clearly, the mineral's HP is located at address `[r10+#0x14]=>DAT_22301f0` and it is being incremented by 1 if the branch condition is false.
 
 5. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
