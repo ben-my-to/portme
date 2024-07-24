@@ -50,6 +50,24 @@ if mineral.health == 16:
 
 This article also assumes you know basic Linux commands (`cd`, `ls`, `echo`, etc.) and assembly.
 
+## Unpacking the `.nds` file
+
+```bash
+wget "https://github.com/devkitPro/ndstool/releases/download/v2.1.2/ndstool-2.1.2.tar.bz2"
+tar -xvjf "ndstool-2.1.2.tar.bz2"
+rm "ndstool-2.1.2.tar.bz2"
+
+cd "ndstool-2.1.2"
+./configure && make && sudo make install
+
+mkdir "NDS_UNPACK" && cd $_
+
+ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -x path/to/spectrobes.nds
+
+# Save the Original ROM
+mv spectrobes.nds spectrobes.nds.bak
+```
+
 ## Memory and Overlay Scanning
 
 Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., is stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 56 overlays. For our purposes, we need only find which overlay holds the functionality for manipulating the mineral's HP.
@@ -90,9 +108,9 @@ Let us hop into _Ghidra_.
     - File > New Project... (Ctrl+N) > Non-Shared Project > Choose Project Directory and Name
     - File > Import File... (I) > _path/to/arm9.bin_
         - Language: ARM:LE:32:v5t
-        - Options > Base Address: `02000000`
+        - Options... > Base Address: `02000000`
     - Double click on `arm9.bin` and opt to not analyze now
-    - File > Add to Program... > _path/to/overlay_0051.bin_ > Options
+    - File > Add to Program... > _path/to/overlay_0051.bin_ > Options...
         - Block Name: overlay_0051.bin
         - Base Address: `0209ebc0`
 
@@ -110,7 +128,16 @@ Let us hop into _Ghidra_.
 4. Patching the Conditional Branch Statement
     - Highlight the `ble LAB_020a0ce8` instruction > Patch Instruction (Ctrl+Shift+G) > Change `ble` to `b`.
 
-5. Analysis _(Optional)_
+5. Repack the `.nds` file
+    - File > Export Program... (O)
+        - Format: Original File
+        - Output File: path/to/home/dir/out
+        - Options... > Save Multiple File Sources to Directory
+    - This will create an `out` directory at `$HOME` containing two files `out.0` and `out.1` corresponding to `arm9.bin` and `overlay_0051.bin` respectively.
+    - `cp -f ~/out/out.1 ~/ndstool-2.1.2/NDS_UNPACK/overlay/overlay_0051.bin`
+    - `ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -c path/to/spectrobes.nds`
+
+6. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
         - `cmp r0,#0x10`
         - `movgt r0,#0x10`
@@ -118,7 +145,7 @@ Let us hop into _Ghidra_.
     - What instruction called that label?
     - How does this relate to our previous observation?
 
-6. Make an Action Replay Code
+7. Make an Action Replay Code _(Optional)_
 
 ```txt
 220A0CCB 000000EA  ; Change mneumonic `ble` -> 'b'
