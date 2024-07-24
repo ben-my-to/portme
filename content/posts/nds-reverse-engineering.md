@@ -108,7 +108,7 @@ Let us hop into _Ghidra_.
     - Clearly, the mineral's HP is located at address `[r10+#0x14]=>0x22301f0` and it is being incremented by 1 if `ble LAB_020a0ce8` is false.
 
 4. Patching the Conditional Branch Statement
-    - Select the `ble LAB_020a0ce8` instruction > Patch Instruction (Ctrl+Shift+G) > Change `ble` to `b`.
+    - Highlight the `ble LAB_020a0ce8` instruction > Patch Instruction (Ctrl+Shift+G) > Change `ble` to `b`.
 
 5. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
