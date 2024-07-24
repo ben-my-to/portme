@@ -6,7 +6,7 @@ description: "A Basic Game Modding Tutorial for 'Spectrobes - Beyond the Portal'
 tags: [
     "Linux",
     "Ghidra",
-    "GNU Debugger",
+    "Arm GNU Debugger",
 ]
 categories: [
     "Reverse Enginnering",
@@ -45,24 +45,22 @@ if mineral.health == 16:
 
 - A __legitimate__ `.nds` rom for _Spectrobes - Beyond the Portal_
 - Desmume [[Source](https://github.com/TASEmulators/desmume/releases/tag/release_0_9_13), [Manual](https://wiki.desmume.org/index.php?title=Installing_DeSmuME_from_source_on_Linux)]
-- [PINCE](https://github.com/korcankaraokcu/PINCE)
-- [GNU ARM Embedded Toolchain](https://developer.arm.com/downloads/-/gnu-rm)
 - [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest)
-- [NTRGhidra](https://github.com/pedro-javierf/NTRGhidra/releases/latest)
+- [ndstool](https://github.com/devkitPro/ndstool/releases/tag/v2.1.2)
 
 This article also assumes you know basic Linux commands (`cd`, `ls`, `echo`, etc.) and assembly.
 
 ## Memory and Overlay Scanning
 
->__NOTE__: You would need to use a tool like `ndstool` to unpack the `.nds` file before proceeding.
-
 Overlays are loaded during run-time when needed. Information about overlays, including base address, size, etc., is stored in the `y9.bin` file. Different overlays may overlap the same memory regions, but never at the same time. For a game like _Pokémon_, there could be 400+ overlays. Luckily, _Spectrobes - Beyond the Portal_ has only 56 overlays. For our purposes, we need only find which overlay holds the functionality for manipulating the mineral's HP.
 
 To find the correct loaded overlay, we first need to find the _static_ memory address for the mineral's HP. Then, check if an overlay's base address is less than what you found. Lastly, go to the memory address and verify the bytes match.
 
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/memscan.png" alt="memscan">
+![search1](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search1.png) ![search2](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search2.png) ![search3](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search3.png)
 
-Since Desmume's RAM search and memory viewer only works on Windows, I have used the tool _PINCE_ to find the mineral's HP memory address. I found that the mineral's HP address `0x2000000 + 0x2310f0 = 0x22310f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
+>There appears to be a _bug_ from Desmume build on Linux while using [GNU ARM Embedded Toolchain](https://developer.arm.com/downloads/-/gnu-rm) where when you try to set a watchpoint `watch *(int*)0x22301f0`, the process produces a segmentation fault.
+
+I found that the mineral's HP address `0x2000000 + 0x2301f0 = 0x22301f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
 
 ```text
 $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
@@ -71,39 +69,50 @@ $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
 
 ## Debugging and Decompiling using Ghidra
 
-<img src="https://raw.githubusercontent.com/ben-my-to/website/main/static/images/test.png" alt="test">
+- Tools > View Memory > Add Write Breakpoint to `0x22301f0`
 
-```text
-desmume path/to/spectrobes.nds --arm9gdb 3000
-arm-none-eabi-gdb -ex "set arch armv5t" -ex "target remote :3000"
-```
+Since we know where the minerals HP's memory address, we can set a _write breakpoint_ at  `0x22301f0`. Effectively, the program will stop when a new value is re-assigned to that address.
 
-1. Setup NTRGhidra Plugin
-    - `wget -P "path/to/ghidra/extensions" "https://github.com/pedro-javierf/NTRGhidra/releases/download/v1.4.4.1-ghidra-11.0.3/ghidra_11.0.3_PUBLIC_20240411_NTRGhidra.zip"`
+![breakpoint](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/breakpoint.png)
 
-2. Create a New Project
-    - File > New Project (Ctrl+n) > Non-Shared Project > Choose Project Directory and Name
-    - File > Install Extensions > NTRGhidra
-    - File > Import File (I) > _path/to/rom.nds_ > Choose 'ARM9' > Select 'YES' for a commercial game
-    - You see in the 'Program Tree' window that the plugin has automatically extracted the `arm9.bin`, `overlay_{0-55}.bin`, and other binaries.
+To find what instructions changed the value at `0x22301f0`, we have to _disassemble_ it.
 
-3. Analyze the Binaries
-    - Analyze > Auto Analyze (A) > Analyze
-    - This could take several minutes, so please be patient.
+- Tools > Disassembler > ARM9 Disassembler
+- Go to the `PC` register's address
 
-4. Search for Desired Instruction
-    - Go To... (G) > `020A0CCB`
-    - We end up at the branch instruction: `ble LAB_overlay_51__020a0ce8`
+![disassemble](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/disassemble.png)
+
+Let us hop into _Ghidra_.
+
+1. Create a New Project
+    - File > New Project... (Ctrl+N) > Non-Shared Project > Choose Project Directory and Name
+    - File > Import File... (I) > _path/to/arm9.bin_
+        - Language: ARM:LE:32:v5t
+        - Options > Base Address: `02000000`
+    - Double click on `arm9.bin` and opt to not analyze now
+    - File > Add to Program... > _path/to/overlay_0051.bin_ > Options
+        - Block Name: overlay_0051.bin
+        - Base Address: `0209ebc0`
+
+2. Analyze the Binaries
+    - Analysis > Auto Analyze 'arm9.bin'... (A) > Analyze
+
+3. Search for Desired Instruction
+    - Go To... (G) > `020a0ccb`
+    - We end up at the branch instruction: `ble LAB_020a0ce8`
     - Observe the instructions below the branch instruction
         - `ldr r1,[r10,#0x14]`
         - `add r1,r1,#0x1`
-    - Clearly, the mineral's HP is located at address `[r10+#0x14]=>DAT_22301f0` and it is being incremented by 1 if the branch condition is false.
+    - Clearly, the mineral's HP is located at address `[r10+#0x14]=>0x22301f0` and it is being incremented by 1 if `ble LAB_020a0ce8` is false.
+
+4. Patching the Conditional Branch Statement
+    - Right Click (Ctrl+Shift+G) > Change `ble` to `b`.
 
 5. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
         - `cmp r0,#0x10`
         - `movgt r0,#0x10`
-    - Try to trace back from the current label (prefixed with `LAB_`) of those two instructions.
+    - Try to backtrace from the current label (`LAB_020a0ce8`) of those two instructions.
     - What instruction called that label?
     - How does this relate to our previous observation?
 
@@ -122,4 +131,3 @@ The first address indicates the memory address to modify. Additionally, the high
 ## Credits
 
 - [Reverse Engineering a DS Game](https://www.starcubelabs.com/reverse-engineering-ds/)
-- [Using GDB with Ghidra and melonDS](https://bookstack.nsmbcentral.net/books/new-super-mario-bros-ds/page/using-gdb-with-ghidra-and-melonds)

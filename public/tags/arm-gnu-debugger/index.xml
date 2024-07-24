@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Reverse Enginnering on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/categories/reverse-enginnering/</link>
-    <description>Recent content in Reverse Enginnering on Jason Duong</description>
+    <title>Arm GNU Debugger on Jason Duong</title>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/arm-gnu-debugger/</link>
+    <description>Recent content in Arm GNU Debugger on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
     <lastBuildDate>Tue, 23 Jul 2024 01:15:38 -0700</lastBuildDate>
-    <atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/reverse-enginnering/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/arm-gnu-debugger/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nintendo DS Reverse Engineering</title>
       <link>https://michaelneuper.github.io/hugo-texify3/posts/nds-reverse-engineering/</link>
