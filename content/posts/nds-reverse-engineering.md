@@ -58,7 +58,7 @@ To find the correct loaded overlay, we first need to find the _static_ memory ad
 
 ![search1](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search1.png) ![search2](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search2.png) ![search3](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/search3.png)
 
->There appears to be a _bug_ from Desmume build on Linux while using [GNU ARM Embedded Toolchain](https://developer.arm.com/downloads/-/gnu-rm) where when you try to set a watchpoint `watch *(int*)0x22301f0`, the process produces a segmentation fault.
+>There appears to be a _bug_ from the Desmume build on Linux while using the [GNU ARM Embedded Toolchain](https://developer.arm.com/downloads/-/gnu-rm) where when you try to set a watchpoint `watch *(int*)0x22301f0`, the process produces a segmentation fault.
 
 I found that the mineral's HP address `0x2000000 + 0x2301f0 = 0x22301f0` resides in `overlay_0051.bin`. The command below finds the base address of overlay 51, which turns out to be `0209ebc0` (in little-endian format).
 
@@ -71,11 +71,11 @@ $ hexdump -C y9.bin | grep -m 1 '33 00 00 00'
 
 - Tools > View Memory > Add Write Breakpoint to `0x22301f0`
 
-Since we know where the minerals HP's memory address, we can set a _write breakpoint_ at  `0x22301f0`. Effectively, the program will stop when a new value is re-assigned to that address.
+Since we know where the minerals HP's memory address is, we can set a _write breakpoint_ at  `0x22301f0`. Effectively, the program will stop when a new value is re-assigned to that address.
 
 ![breakpoint](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/breakpoint.png)
 
-To find what instructions changed the value at `0x22301f0`, we have to _disassemble_ it.
+To find what instructions changed the value at `0x22301f0`, we must _disassemble_ it.
 
 - Tools > Disassembler > ARM9 Disassembler
 - Go to the `PC` register's address
@@ -83,6 +83,8 @@ To find what instructions changed the value at `0x22301f0`, we have to _disassem
 ![disassemble](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/disassemble.png)
 
 Let us hop into _Ghidra_.
+
+![ghidra](https://raw.githubusercontent.com/ben-my-to/website/main/static/images/ghidra.png)
 
 1. Create a New Project
     - File > New Project... (Ctrl+N) > Non-Shared Project > Choose Project Directory and Name
@@ -106,7 +108,7 @@ Let us hop into _Ghidra_.
     - Clearly, the mineral's HP is located at address `[r10+#0x14]=>0x22301f0` and it is being incremented by 1 if `ble LAB_020a0ce8` is false.
 
 4. Patching the Conditional Branch Statement
-    - Right Click (Ctrl+Shift+G) > Change `ble` to `b`.
+    - Select the `ble LAB_020a0ce8` instruction > Patch Instruction (Ctrl+Shift+G) > Change `ble` to `b`.
 
 5. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
