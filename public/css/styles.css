@@ -80,11 +80,3 @@ canvas:not(#boundary) {
 .mermaid {
     text-align: center;
 }
-
-@import url('https://font/googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
-
-.content code, pre {
-    font-family: "Fira Code";
-    font-size: 11;
-    background-color: #32302f;
-}

@@ -33,7 +33,7 @@ My goal is to permanently prevent mineral health (HP) from ever decreasing. As a
 
 Nonetheless, somewhere, there is a _conditional_ branch that checks whether you have exceeded the threshold pressure point. We basically need to change it to an _unconditional_ branch. Simple enough, right?
 
-```text
+```python
 if False:
     mineral.health += 1
 
@@ -53,14 +53,12 @@ This article also assumes you know basic Linux commands (`cd`, `ls`, `echo`, etc
 ## Unpacking the `.nds` file
 
 ```bash
-wget "https://github.com/devkitPro/ndstool/releases/download/v2.1.2/ndstool-2.1.2.tar.bz2"
-tar -xvjf "ndstool-2.1.2.tar.bz2"
-rm "ndstool-2.1.2.tar.bz2"
+curl -sL https://github.com/devkitPro/ndstool/releases/download/v2.1.2/ndstool-2.1.2.tar.bz2 | tar xvjf - -C $HOME
 
-cd "ndstool-2.1.2"
+cd "$HOME/ndstool-2.1.2"
 ./configure && make && sudo make install
 
-mkdir "NDS_UNPACK" && cd $_
+mkdir "$HOME/ndstool-2.1.2/NDS_UNPACK" && cd $_
 
 # If you `path/to/spectrobes.nds` is in current working directory, be sure to create a backup first
 ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -x path/to/spectrobes.nds
