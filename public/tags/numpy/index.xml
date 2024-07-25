@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>NumPy on Jason Duong</title>
-    <link>http://localhost:1313/hugo-texify3/tags/numpy/</link>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/numpy/</link>
     <description>Recent content in NumPy on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
     <lastBuildDate>Mon, 22 Jul 2024 21:58:31 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/hugo-texify3/tags/numpy/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/numpy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A Parallel Decision Tree Classifier</title>
-      <link>http://localhost:1313/hugo-texify3/posts/mpitree-project/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/posts/mpitree-project/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
       <description>Link to Source Code&#xA;Try it Out!1 Introduction A Decision Tree is an $n$-nary tree where each node represents a feature (interior nodes) or response (terminal/leaf nodes) value, and each branch represents a condition on some feature. Decision Trees are intuitive supervised machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions.</description>
     </item>
   </channel>

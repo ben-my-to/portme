@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Assembly Language on Jason Duong</title>
-    <link>http://localhost:1313/hugo-texify3/categories/assembly-language/</link>
+    <link>https://michaelneuper.github.io/hugo-texify3/categories/assembly-language/</link>
     <description>Recent content in Assembly Language on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Wed, 24 Jul 2024 15:17:39 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/hugo-texify3/categories/assembly-language/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Jul 2024 23:31:57 -0700</lastBuildDate>
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/categories/assembly-language/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nintendo DS Reverse Engineering</title>
-      <link>http://localhost:1313/hugo-texify3/posts/nds-reverse-engineering/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/posts/nds-reverse-engineering/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/posts/nds-reverse-engineering/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/posts/nds-reverse-engineering/</guid>
       <description>I do not support piracy. What I provide in this article is entirely for educational purposes only.&#xA;Intro My first gaming console was the Nintendo DS, and one of my nostalgic games, besides Pokémon, was Spectrobes - Beyond the Portal. The game features mechanics similar to Pokémon, with a collection of spectrobes. What differentiates them is their combat system. Pokémon is turn-based, while Spectrobes - Beyond the Portal is third-person.</description>
     </item>
   </channel>

@@ -2,82 +2,82 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jason Duong</title>
-    <link>http://localhost:1313/hugo-texify3/tags/</link>
+    <link>https://michaelneuper.github.io/hugo-texify3/tags/</link>
     <description>Recent content in Tags on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Wed, 24 Jul 2024 15:17:39 -0700</lastBuildDate>
-    <atom:link href="http://localhost:1313/hugo-texify3/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Jul 2024 23:31:57 -0700</lastBuildDate>
+    <atom:link href="https://michaelneuper.github.io/hugo-texify3/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Arm GNU Debugger</title>
-      <link>http://localhost:1313/hugo-texify3/tags/arm-gnu-debugger/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/arm-gnu-debugger/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/arm-gnu-debugger/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/arm-gnu-debugger/</guid>
       <description></description>
     </item>
     <item>
       <title>Ghidra</title>
-      <link>http://localhost:1313/hugo-texify3/tags/ghidra/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/ghidra/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/ghidra/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/ghidra/</guid>
       <description></description>
     </item>
     <item>
       <title>Linux</title>
-      <link>http://localhost:1313/hugo-texify3/tags/linux/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/linux/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/linux/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/linux/</guid>
       <description></description>
     </item>
     <item>
       <title>Black</title>
-      <link>http://localhost:1313/hugo-texify3/tags/black/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/black/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/black/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/black/</guid>
       <description></description>
     </item>
     <item>
       <title>Git</title>
-      <link>http://localhost:1313/hugo-texify3/tags/git/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/git/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/git/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/git/</guid>
       <description></description>
     </item>
     <item>
       <title>LaTeX</title>
-      <link>http://localhost:1313/hugo-texify3/tags/latex/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/latex/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/latex/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/latex/</guid>
       <description></description>
     </item>
     <item>
       <title>Matplotlib</title>
-      <link>http://localhost:1313/hugo-texify3/tags/matplotlib/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/matplotlib/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/matplotlib/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/matplotlib/</guid>
       <description></description>
     </item>
     <item>
       <title>NumPy</title>
-      <link>http://localhost:1313/hugo-texify3/tags/numpy/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/numpy/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/numpy/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/numpy/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/hugo-texify3/tags/python/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/python/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/python/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Scikit-Learn</title>
-      <link>http://localhost:1313/hugo-texify3/tags/scikit-learn/</link>
+      <link>https://michaelneuper.github.io/hugo-texify3/tags/scikit-learn/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>http://localhost:1313/hugo-texify3/tags/scikit-learn/</guid>
+      <guid>https://michaelneuper.github.io/hugo-texify3/tags/scikit-learn/</guid>
       <description></description>
     </item>
   </channel>
