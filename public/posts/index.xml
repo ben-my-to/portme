@@ -2,47 +2,47 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jason Duong</title>
-    <link>https://michaelneuper.github.io/hugo-texify3/posts/</link>
+    <link>http://localhost:1313/hugo-texify3/posts/</link>
     <description>Recent content in Posts on Jason Duong</description>
     <generator>Hugo</generator>
     <language>en</language>
     <managingEditor>my.toe.ben@gmail.com (Jason Duong)</managingEditor>
     <webMaster>my.toe.ben@gmail.com (Jason Duong)</webMaster>
-    <lastBuildDate>Wed, 24 Jul 2024 00:02:39 -0700</lastBuildDate>
-    <atom:link href="https://michaelneuper.github.io/hugo-texify3/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Jul 2024 15:17:39 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/hugo-texify3/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Nintendo DS Reverse Engineering</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/nds-reverse-engineering/</link>
+      <link>http://localhost:1313/hugo-texify3/posts/nds-reverse-engineering/</link>
       <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/nds-reverse-engineering/</guid>
+      <guid>http://localhost:1313/hugo-texify3/posts/nds-reverse-engineering/</guid>
       <description>I do not support piracy. What I provide in this article is entirely for educational purposes only.&#xA;Intro My first gaming console was the Nintendo DS, and one of my nostalgic games, besides Pokémon, was Spectrobes - Beyond the Portal. The game features mechanics similar to Pokémon, with a collection of spectrobes. What differentiates them is their combat system. Pokémon is turn-based, while Spectrobes - Beyond the Portal is third-person.</description>
     </item>
     <item>
       <title>A Parallel Decision Tree Classifier</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</link>
+      <link>http://localhost:1313/hugo-texify3/posts/mpitree-project/</link>
       <pubDate>Tue, 16 May 2023 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/mpitree-project/</guid>
+      <guid>http://localhost:1313/hugo-texify3/posts/mpitree-project/</guid>
       <description>Link to Source Code&#xA;Try it Out!1 Introduction A Decision Tree is an $n$-nary tree where each node represents a feature (interior nodes) or response (terminal/leaf nodes) value, and each branch represents a condition on some feature. Decision Trees are intuitive supervised machine learning algorithms for classification and regression problems. Decision Trees behave by posing questions about the data to narrow their choices until they are somewhat confident in their predictions.</description>
     </item>
     <item>
       <title>An Algorithm Vizualizer</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</link>
+      <link>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</link>
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
+      <guid>http://localhost:1313/hugo-texify3/posts/algorithm-vizualizer-project/</guid>
       <description>Link to Source Code&#xA;Figma Design Prototypes User Stories and Burndown Chart Link to Google Sheets&#xA;Stand Up Meetings and Retrospectives Link to Google Docs</description>
     </item>
     <item>
       <title>Blackjack Game Simulator</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</link>
+      <link>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</link>
       <pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/blackjack-game-project/</guid>
+      <guid>http://localhost:1313/hugo-texify3/posts/blackjack-game-project/</guid>
       <description>Link to Source Code&#xA;Introduction Blackjack is a casino banking game where players compete against the house or casino to obtain the best hand of cards. Unlike many other familiar card games, the players do not compete against each other or collaborate. The game is played using one or more decks of common playing cards, also known as French decks.&#xA;In the game, the dealer represents the house/bank/casino. There must be at least one player.</description>
     </item>
     <item>
       <title>Larks Ant</title>
-      <link>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</link>
+      <link>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</link>
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><author>my.toe.ben@gmail.com (Jason Duong)</author>
-      <guid>https://michaelneuper.github.io/hugo-texify3/posts/larks-ant-project/</guid>
+      <guid>http://localhost:1313/hugo-texify3/posts/larks-ant-project/</guid>
       <description>Link to Source Code&#xA;Online Demo1 $q$ = $T_{ij}$ = $\theta$ = $\text{counter}$ = Fig. 1: Larks Ant Demo Introduction Definition 1: Larks Ant is a 2D cellular automaton $\mathcal{A}$ that consists of a pair set of states $\mathbf{Q}$, a quadruple of colors $\Sigma$, an initial state $q_0\in\mathbf{Q}$, a local variable $\text{counter}$, and a transition function $\delta_\mathcal{A}:\mathbf{Q}\times\Sigma\to\mathbf{Q}\times\Sigma\times\theta$ where&#xA;$$\mathbf{Q}\in\lbrace\text{Normal, Countdown}\rbrace.\\ \Sigma\in(\text{Black, Blue, Yellow, Red}).\\ -\frac{\pi}{2}\le\theta\le\frac{\pi}{2}.$$&#xA;Let $T=\mathbb{Z}^2$ represent a two-dimensional grid.</description>
     </item>
   </channel>

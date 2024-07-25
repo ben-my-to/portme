@@ -2,7 +2,7 @@
 author: "Jason Duong"
 title: "Nintendo DS Reverse Engineering"
 date: "2024-07-20"
-description: "A Basic Game Modding Tutorial for 'Spectrobes - Beyond the Portal'"
+description: "A Basic Game Modding for 'Spectrobes - Beyond the Portal'"
 tags: [
     "Linux",
     "Ghidra",
@@ -25,7 +25,7 @@ The game features mechanics similar to _Pokémon_, with a collection of spectrob
 
 As with _Pokémon_, spectrobes level up through experience points (XP) through battling; however, most of their XP's come from _minerals_. Spectrobes gain more XP if fed minerals of their type and larger size. Anyone who has played this game knows the struggle of farming/grinding minerals (especially during the swamp area).
 
-On a physical console, you would need to use a stylus to 'erase' the debris from the mineral by pressing on the bottom screen. Each mineral type has specific threshold pressure points, and if you exceed them, the mineral's health will 'visually' decrease by one. The amount of XP gained from a mineral depends on the _time taken_, the _percentage recovered_, and the _mineral's health_. You either learn to maintain short/long pressure points or cheese it by one-tap spamming to guarantee no damage. Either way, at some point, the gameplay becomes tedious and unenjoyable.
+On a physical console, you would need to use a DS stylus to 'erase' the debris from the mineral by pressing on the bottom screen. Each mineral type has specific threshold pressure points, and if you exceed them, the mineral's health will 'visually' decrease by one. The amount of XP gained from a mineral depends on the _time taken_, the _percentage recovered_, and the _mineral's health_. You either learn to maintain short/long pressure points or cheese it by one-tap spamming to guarantee no damage. Either way, at some point, the gameplay becomes tedious and unenjoyable.
 
 ## Plan
 
@@ -62,10 +62,8 @@ cd "ndstool-2.1.2"
 
 mkdir "NDS_UNPACK" && cd $_
 
+# If you `path/to/spectrobes.nds` is in current working directory, be sure to create a backup first
 ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -x path/to/spectrobes.nds
-
-# Save the Original ROM
-mv spectrobes.nds spectrobes.nds.bak
 ```
 
 ## Memory and Overlay Scanning
@@ -133,7 +131,7 @@ Let us hop into _Ghidra_.
         - Format: Original File
         - Output File: path/to/home/dir/out
         - Options... > Save Multiple File Sources to Directory
-    - This will create an `out` directory at `$HOME` containing two files `out.0` and `out.1` corresponding to `arm9.bin` and `overlay_0051.bin` respectively.
+    - This will create an `out` directory in `$HOME` containing two files `out.0` and `out.1` corresponding to `arm9.bin` and `overlay_0051.bin` respectively.
     - `cp -f ~/out/out.1 ~/ndstool-2.1.2/NDS_UNPACK/overlay/overlay_0051.bin`
     - `ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -c path/to/spectrobes.nds`
 
