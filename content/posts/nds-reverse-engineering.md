@@ -35,7 +35,7 @@ Nonetheless, somewhere, there is a _conditional_ branch that checks whether you 
 
 ```python
 if False:
-    mineral.health += 1
+    mineral.health += 1  # This will never execute!
 
 if mineral.health == 16:
     print("YOU DIED")
@@ -44,9 +44,9 @@ if mineral.health == 16:
 ## Prerequisites
 
 - A __legitimate__ `.nds` rom for _Spectrobes - Beyond the Portal_
-- Desmume [[Source](https://github.com/TASEmulators/desmume/releases/tag/release_0_9_13), [Manual](https://wiki.desmume.org/index.php?title=Installing_DeSmuME_from_source_on_Linux)]
-- [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest)
-- [ndstool](https://github.com/devkitPro/ndstool/releases/tag/v2.1.2)
+- Desmume [[Source](https://github.com/TASEmulators/desmume/releases/tag/release_0_9_13), [Manual](https://wiki.desmume.org/index.php?title=Installing_DeSmuME_from_source_on_Linux)] - A Nintendo DS emulator
+- [Ghidra](https://github.com/NationalSecurityAgency/ghidra/releases/latest) - An OSS reverse engineering tool developed by NSA.
+- [ndstool](https://github.com/devkitPro/ndstool/releases/tag/v2.1.2) - Tools to manipulate NDS ROMS
 
 This article also assumes you know basic Linux commands (`cd`, `ls`, `echo`, etc.) and assembly.
 
@@ -60,7 +60,6 @@ cd "$HOME/ndstool-2.1.2"
 
 mkdir "$HOME/ndstool-2.1.2/NDS_UNPACK" && cd $_
 
-# If you `path/to/spectrobes.nds` is in current working directory, be sure to create a backup first
 ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -x path/to/spectrobes.nds
 ```
 
@@ -131,7 +130,7 @@ Let us hop into _Ghidra_.
         - Options... > Save Multiple File Sources to Directory
     - This will create an `out` directory in `$HOME` containing two files `out.0` and `out.1` corresponding to `arm9.bin` and `overlay_0051.bin` respectively.
     - `cp -f ~/out/out.1 ~/ndstool-2.1.2/NDS_UNPACK/overlay/overlay_0051.bin`
-    - `ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -c path/to/spectrobes.nds`
+    - `ndstool -9 arm9.bin -7 arm7.bin -y9 y9.bin -y7 y7.bin -d data -y overlay -t banner.bin -h header.bin -c path/to/spectrobes_modded.nds`
 
 6. Analysis _(Optional)_
     - Following the branch, you will see two other interesting instructions
